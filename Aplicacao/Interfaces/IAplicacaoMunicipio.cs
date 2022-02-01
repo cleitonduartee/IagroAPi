@@ -3,7 +3,7 @@ using Entidades.Entidades;
 
 namespace Aplicacao.Interfaces
 {
-    public interface IMunicipio : ICrudAplicacao<Municipio>
+    public interface IAplicacaoMunicipio : IAplicacaoCrud<Municipio>
     {
     }
 }

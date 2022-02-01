@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.Interfaces.InterfaceCrud
 {
-    public interface ICrudAplicacao<T> where T : class
+    public interface IAplicacaoCrud<T> where T : class
     {
         Task Adicionar(T obj);
         Task Atualizar(T obj);
