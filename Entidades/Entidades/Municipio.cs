@@ -7,7 +7,7 @@ namespace Entidades.Entidades
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; protected set; }
+        public int MunicipioId { get; protected set; }
         public string Nome { get; set; }
 
         public Municipio()
