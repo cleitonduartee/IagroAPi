@@ -342,6 +342,63 @@
         "runtime": {
           "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
         }
+      },
+      "Aplicacao/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Dominio": "1.0.0",
+          "Entidades": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Aplicacao.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Aplicacao.dll": {}
+        }
+      },
+      "Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Entidades": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dominio.dll": {}
+        }
+      },
+      "Entidades/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.13",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10"
+        },
+        "compile": {
+          "bin/placeholder/Entidades.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entidades.dll": {}
+        }
+      },
+      "Infraestrutura/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Dominio": "1.0.0",
+          "Entidades": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "5.0.13",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10"
+        },
+        "compile": {
+          "bin/placeholder/Infraestrutura.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infraestrutura.dll": {}
+        }
       }
     }
   },
@@ -1024,10 +1081,32 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Aplicacao/1.0.0": {
+      "type": "project",
+      "path": "../Aplicacao/Aplicacao.csproj",
+      "msbuildProject": "../Aplicacao/Aplicacao.csproj"
+    },
+    "Dominio/1.0.0": {
+      "type": "project",
+      "path": "../Dominio/Dominio.csproj",
+      "msbuildProject": "../Dominio/Dominio.csproj"
+    },
+    "Entidades/1.0.0": {
+      "type": "project",
+      "path": "../Entidades/Entidades.csproj",
+      "msbuildProject": "../Entidades/Entidades.csproj"
+    },
+    "Infraestrutura/1.0.0": {
+      "type": "project",
+      "path": "../Infraestrutura/Infraestrutura.csproj",
+      "msbuildProject": "../Infraestrutura/Infraestrutura.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Aplicacao >= 1.0.0",
+      "Infraestrutura >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.13",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.13",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.13",
@@ -1066,7 +1145,14 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Pasta Cleiton\\www\\TesteIAGRO\\Oficial\\IagroAPI\\Aplicacao\\Aplicacao.csproj": {
+              "projectPath": "C:\\Pasta Cleiton\\www\\TesteIAGRO\\Oficial\\IagroAPI\\Aplicacao\\Aplicacao.csproj"
+            },
+            "C:\\Pasta Cleiton\\www\\TesteIAGRO\\Oficial\\IagroAPI\\Infraestrutura\\Infraestrutura.csproj": {
+              "projectPath": "C:\\Pasta Cleiton\\www\\TesteIAGRO\\Oficial\\IagroAPI\\Infraestrutura\\Infraestrutura.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

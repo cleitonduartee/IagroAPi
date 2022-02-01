@@ -63,3 +63,11 @@ C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\obj\Debug\net5.0\WebApi.
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\obj\Debug\net5.0\ref\WebApi.dll
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\obj\Debug\net5.0\WebApi.pdb
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\obj\Debug\net5.0\WebApi.genruntimeconfig.cache
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Aplicacao.dll
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Dominio.dll
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Entidades.dll
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Infraestrutura.dll
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Aplicacao.pdb
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Infraestrutura.pdb
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Dominio.pdb
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Entidades.pdb

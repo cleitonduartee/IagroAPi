@@ -6,6 +6,7 @@ namespace Entidades.Entidades
     public class Municipio
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; protected set; }
         public string Nome { get; set; }
 
@@ -13,9 +14,8 @@ namespace Entidades.Entidades
         {
         }
 
-        public Municipio(int id, string nome)
+        public Municipio(string nome)
         {
-            Id = id;
             Nome = nome;
         }
     }
