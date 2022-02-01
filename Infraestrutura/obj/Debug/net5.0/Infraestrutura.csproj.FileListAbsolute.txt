@@ -28,3 +28,5 @@ C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\Infraestrutura\obj\Debug\net5.0
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\Infraestrutura\obj\Debug\net5.0\ref\Infraestrutura.dll
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\Infraestrutura\obj\Debug\net5.0\Infraestrutura.pdb
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\Infraestrutura\obj\Debug\net5.0\Infraestrutura.genruntimeconfig.cache
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\Infraestrutura\bin\Debug\net5.0\Dominio.dll
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\Infraestrutura\bin\Debug\net5.0\Dominio.pdb

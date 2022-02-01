@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "Infraestrutura/1.0.0": {
         "dependencies": {
+          "Dominio": "1.0.0",
           "Entidades": "1.0.0",
           "Microsoft.EntityFrameworkCore": "5.0.13",
           "Microsoft.EntityFrameworkCore.Design": "5.0.13",
@@ -218,6 +219,14 @@
         }
       },
       "System.Runtime.CompilerServices.Unsafe/4.6.0": {},
+      "Dominio/1.0.0": {
+        "dependencies": {
+          "Entidades": "1.0.0"
+        },
+        "runtime": {
+          "Dominio.dll": {}
+        }
+      },
       "Entidades/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.13",
@@ -395,6 +404,11 @@
       "sha512": "sha512-HxozeSlipUK7dAroTYwIcGwKDeOVpQnJlpVaOkBz7CM4TsE5b/tKlQBZecTjh6FzcSbxndYaxxpsBMz+wMJeyw==",
       "path": "system.runtime.compilerservices.unsafe/4.6.0",
       "hashPath": "system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
+    },
+    "Dominio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Entidades/1.0.0": {
       "type": "project",
