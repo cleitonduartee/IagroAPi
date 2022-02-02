@@ -18,5 +18,17 @@ namespace Entidades.Entidades
         public  int Numero { get; set; }
         public  int MunicipioId { get; set; }
         public  Municipio Municipio { get; set; }
+
+        public Endereco(string nomeRua, int numero, int municipioId, Municipio municipio)
+        {
+            NomeRua = nomeRua;
+            Numero = numero;
+            MunicipioId = municipioId;
+            Municipio = municipio;
+        }
+
+        public Endereco()
+        {
+        }
     }
 }

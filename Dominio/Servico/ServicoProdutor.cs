@@ -24,13 +24,17 @@ namespace Dominio.Servico
             return await _IProdutor.BuscarPorCpf(p => p.Cpf.Equals(cpf));
         }
 
+        public async Task<Produtor> BuscarPorId(int id)
+        {
+            return await _IProdutor.BuscarPorId(id);
+        }
+
         public async Task<List<Produtor>> BuscarTodos()
         {
             return await _IProdutor.BuscarTodos();
         }
         public async Task CadastrarProdutor(Produtor produtor)
         {
-           await _IEndereco.Adicionar(produtor.Endereco);
            await _IProdutor.Adicionar(produtor);
         }
 
@@ -42,6 +46,10 @@ namespace Dominio.Servico
 
         public bool ValidarCpf(string cpf)
         {
+            if (!cpf.All(char.IsDigit)) //Verifica se str é Number
+            {
+                return false;
+            }
             string valor = cpf.Replace(".", "");
 
             valor = valor.Replace("-", "");

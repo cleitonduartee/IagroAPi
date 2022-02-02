@@ -13,6 +13,7 @@ namespace Dominio.Interfaces.InterfaceServico
         Task CadastrarProdutor(Produtor produtor);
         Task EditarProdutor(Produtor produtor);
         Task<Produtor> BuscarPorCpf(string cpf);
+        Task<Produtor> BuscarPorId(int id);
         Task<List<Produtor>> BuscarTodos();
         bool ValidarCpf(string cpf);
 

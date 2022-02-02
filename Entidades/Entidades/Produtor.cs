@@ -23,9 +23,8 @@ namespace Entidades.Entidades
         {
         }
 
-        public Produtor(int produtorId, string nome, string cpf, Endereco endereco)
+        public Produtor(string nome, string cpf, Endereco endereco)
         {
-            ProdutorId = produtorId;
             Nome = nome;
             Cpf = cpf;
             Endereco = endereco;

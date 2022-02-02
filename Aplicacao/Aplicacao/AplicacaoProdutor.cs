@@ -20,6 +20,11 @@ namespace Aplicacao.Aplicacao
             return await _IServicoProdutor.BuscarPorCpf(cpf);
         }
 
+        public async Task<Produtor> BuscarPorId(int id)
+        {
+            return await _IServicoProdutor.BuscarPorId(id); 
+        }
+
         public async Task<List<Produtor>> BuscarTodos()
         {
             return await _IServicoProdutor.BuscarTodos();
