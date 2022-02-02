@@ -13,6 +13,12 @@ namespace Aplicacao.Aplicacao
         {
             _IMunicipio = IMunicipio;
         }
+
+        public async Task Adicionar(Municipio municipio)
+        {
+           await _IMunicipio.Adicionar(municipio);
+        }
+
         public async Task<List<Municipio>> BuscarTodos()
         {
             return await _IMunicipio.BuscarTodos();

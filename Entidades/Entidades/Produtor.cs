@@ -13,7 +13,7 @@ namespace Entidades.Entidades
     {
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public  int ProdutorId { get; set; }
+        public virtual int ProdutorId { get; set; }
         public  string Nome { get; set; }
         public  string Cpf { get;  set; }        
         public  int EnderecoId { get;  set; }

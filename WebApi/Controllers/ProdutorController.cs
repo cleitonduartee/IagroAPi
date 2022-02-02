@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dto;
+﻿using Aplicacao.Dto.ProdutorDTO;
 using Aplicacao.Interfaces;
 using Dominio.Interfaces;
 using Entidades.Entidades;
@@ -25,8 +25,8 @@ namespace WebApi.Controllers
             var produtores = await _IAplicacaoProdutor.BuscarTodos();
             return produtores;
         }
-        [HttpGet("{cpf}")]
-        public async Task<ActionResult<Produtor>> BuscarPorCepf(string cpf)
+        [HttpGet("BuscarPorCpf/{cpf}")]
+        public async Task<ActionResult<Produtor>> BuscarPorCpf(string cpf)
         {
             if (_IAplicacaoProdutor.ValidarCpf(cpf))            {
                 var produtor =  await _IAplicacaoProdutor.BuscarPorCpf(cpf);
@@ -38,16 +38,16 @@ namespace WebApi.Controllers
             return BadRequest("CPF Inválido.");
         }
         [HttpPost("CadastrarProdutor")]
-        public async Task<ActionResult> CadastrarProdutor(ProdutorInserDTO produtorDto)
+        public async Task<ActionResult> CadastrarProdutor(ProdutorInsertDTO produtorDto)
         {
-            if (!ModelState.IsValid)            
+            if (!ModelState.IsValid)
                 return null;
 
             if (_IAplicacaoProdutor.ValidarCpf(produtorDto.Cpf))
             {
-                Produtor novoProdutor = ProdutorInserDTO.ToProdutor(produtorDto);
+                Produtor novoProdutor = ProdutorInsertDTO.ToProdutor(produtorDto);
                 await _IAplicacaoProdutor.CadastrarProdutor(novoProdutor);
-                return Ok("Podutor cadastrado com sucesso.");
+                return Ok("Produtor cadastrado com sucesso.");
             }
             else
             {
@@ -68,7 +68,7 @@ namespace WebApi.Controllers
                 Produtor produtor= _IAplicacaoProdutor.BuscarPorId(produtorDto.ProdutorId).Result;
                 ProdutorDTO.AtualizaProdutor(produtorDto, produtor);
                 await _IAplicacaoProdutor.EditarProdutor(produtor);
-                return Ok("Podutor editado com sucesso.");
+                return Ok("Produtor editado com sucesso.");
             }
             else
             {

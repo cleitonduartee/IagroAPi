@@ -8,6 +8,17 @@ namespace Infraestrutura.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "tb_inscricao_estadual",
+                columns: table => new
+                {
+                    IE = table.Column<int>(type: "integer", maxLength: 285999999, nullable: false, defaultValue: 285000000)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_inscricao_estadual", x => x.IE);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tb_municipio",
                 columns: table => new
                 {
@@ -67,7 +78,8 @@ namespace Infraestrutura.Migrations
                 columns: table => new
                 {
                     ProdutorId = table.Column<int>(type: "integer", nullable: false),
-                    PropriedadeId = table.Column<int>(type: "integer", nullable: false),
+                    PropriedadeId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     InscricaoEstadual = table.Column<int>(type: "integer", nullable: false),
                     Nome = table.Column<string>(type: "text", nullable: true),
                     Saldo = table.Column<int>(type: "integer", nullable: false),
@@ -109,6 +121,9 @@ namespace Infraestrutura.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "tb_inscricao_estadual");
+
             migrationBuilder.DropTable(
                 name: "tb_propriedade");
 

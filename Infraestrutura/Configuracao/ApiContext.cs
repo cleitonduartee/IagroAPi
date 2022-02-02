@@ -22,6 +22,8 @@ namespace Infraestrutura.Configuracao
             modelBuilder.ApplyConfiguration(new MunicipioMap());
             modelBuilder.ApplyConfiguration(new PropriedadeMap());
 
+            
+
             //modelBuilder.Entity<Produtor>().Navigation(p => p.Endereco).AutoInclude();
             //modelBuilder.Entity<Endereco>().Navigation(e => e.Municipio).AutoInclude();
             //modelBuilder.Entity<Propriedade>().Navigation(e => e.Municipio).AutoInclude();

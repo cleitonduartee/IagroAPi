@@ -1,5 +1,4 @@
-﻿using Dominio.Interfaces;
-using Entidades.Entidades;
+﻿using Entidades.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,12 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Dto
+namespace Aplicacao.Dto.ProdutorDTO
 {
-    public class ProdutorDTO
-    {        
-        [Required(ErrorMessage = "ProdutorId é obriatório")]
-        public int ProdutorId { get; set; }
+    public class ProdutorInsertDTO
+    {
         [Required(ErrorMessage = "Nome do Produtor obriatório")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "CPF do Produtor obriatório")]
@@ -24,13 +21,10 @@ namespace Aplicacao.Dto
         [Required(ErrorMessage = "Id do municipio obrigatório")]
         public int MunicipioId { get; set; }
 
-        public static void AtualizaProdutor(ProdutorDTO produtorDTO, Produtor produtor)
+        public static Produtor ToProdutor(ProdutorInsertDTO produtorDto)
         {
-            produtor.Nome = produtorDTO.Nome;
-            produtor.Cpf = produtorDTO.Cpf;
-            produtor.Endereco.NomeRua = produtorDTO.NomeRua;
-            produtor.Endereco.Numero = produtorDTO.Numero;
-            produtor.Endereco.MunicipioId = produtorDTO.MunicipioId;
+            Endereco enderecoProdutor = new Endereco( produtorDto.NomeRua, produtorDto.Numero, produtorDto.MunicipioId, null);
+            return new Produtor(produtorDto.Nome, produtorDto.Cpf, enderecoProdutor);
         }
     }
 }

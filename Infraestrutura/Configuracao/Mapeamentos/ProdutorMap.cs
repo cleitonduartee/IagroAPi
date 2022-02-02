@@ -15,6 +15,7 @@ namespace Infraestrutura.Configuracao.Mapeamentos
         {
             builder.ToTable("tb_produtor");
             builder.HasKey(x => x.ProdutorId);
+            builder.Property(x => x.ProdutorId).ValueGeneratedOnAdd();
             builder.Property(x => x.Cpf).IsRequired().HasMaxLength(11);
             builder.HasOne(x=> x.Endereco).WithMany().HasForeignKey(x => x.EnderecoId);               
             

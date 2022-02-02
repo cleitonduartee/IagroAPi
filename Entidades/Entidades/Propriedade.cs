@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,10 @@ namespace Entidades.Entidades
     [Table("tb_propriedade")]
     public class Propriedade
     {
-        public int PropriedadeId { get; protected set; }
-        public int InscricaoEstadual { get; protected set; }
-        public string Nome { get; protected set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PropriedadeId { get; set; }
+        public int InscricaoEstadual { get; set; }
+        public string Nome { get; set; }
         public int Saldo { get; set; }
         public int SaldoVacinado { get; set; }
         public int ProdutorId { get; set; }
@@ -24,17 +26,21 @@ namespace Entidades.Entidades
         {
         }
 
-        public Propriedade(int inscricaoEstadual, string nome, Produtor produtor, Municipio municipio)
-        {
-            InscricaoEstadual = inscricaoEstadual;
+        public Propriedade(string nome, Produtor produtor, Municipio municipio)
+        {           
             Nome = nome;
             Produtor = produtor;
             Municipio = municipio;
         }
-        public Propriedade(int propriedadeId, int inscricaoEstadual, string nome, Produtor produtor, Municipio municipio)
+        public Propriedade(string nome, int produtorId, int municipioId)
+        {
+            Nome = nome;
+            ProdutorId = produtorId;
+            MunicipioId = municipioId;
+        }
+        public Propriedade(int propriedadeId, string nome, Produtor produtor, Municipio municipio)
         {
             PropriedadeId = propriedadeId;
-            InscricaoEstadual = inscricaoEstadual;
             Nome = nome;
             Produtor = produtor;
             Municipio = municipio;

@@ -41,6 +41,20 @@ namespace Infraestrutura.Migrations
                     b.ToTable("tb_endereco");
                 });
 
+            modelBuilder.Entity("Entidades.Entidades.InscricaoEstadual", b =>
+                {
+                    b.Property<int>("IEGerada")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(285999999)
+                        .HasColumnType("integer")
+                        .HasIdentityOptions(285000000L, null, null, null, null, null)
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.HasKey("IEGerada");
+
+                    b.ToTable("tb_inscricao_estadual");
+                });
+
             modelBuilder.Entity("Entidades.Entidades.Municipio", b =>
                 {
                     b.Property<int>("MunicipioId")
@@ -83,11 +97,17 @@ namespace Infraestrutura.Migrations
 
             modelBuilder.Entity("Entidades.Entidades.Propriedade", b =>
                 {
-                    b.Property<int>("ProdutorId")
-                        .HasColumnType("integer");
+                    b.Property<int>("PropriedadeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("InscricaoEstadual")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(285999999)
+                        .HasColumnType("integer")
+                        .HasIdentityOptions(285000000L, null, null, null, null, null)
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("MunicipioId")
                         .HasColumnType("integer");
@@ -95,7 +115,7 @@ namespace Infraestrutura.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("text");
 
-                    b.Property<int>("PropriedadeId")
+                    b.Property<int>("ProdutorId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Saldo")
@@ -104,9 +124,13 @@ namespace Infraestrutura.Migrations
                     b.Property<int>("SaldoVacinado")
                         .HasColumnType("integer");
 
-                    b.HasKey("ProdutorId");
+                    b.HasKey("PropriedadeId");
+
+                    b.HasAlternateKey("InscricaoEstadual");
 
                     b.HasIndex("MunicipioId");
+
+                    b.HasIndex("ProdutorId");
 
                     b.ToTable("tb_propriedade");
                 });

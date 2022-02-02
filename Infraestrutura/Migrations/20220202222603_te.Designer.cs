@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infraestrutura.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20220202181500_inicial")]
-    partial class inicial
+    [Migration("20220202222603_te")]
+    partial class te
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,20 @@ namespace Infraestrutura.Migrations
                     b.HasIndex("MunicipioId");
 
                     b.ToTable("tb_endereco");
+                });
+
+            modelBuilder.Entity("Entidades.Entidades.InscricaoEstadual", b =>
+                {
+                    b.Property<int>("IEGerada")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(285999999)
+                        .HasColumnType("integer")
+                        .HasIdentityOptions(285000000L, null, null, null, null, null)
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.HasKey("IEGerada");
+
+                    b.ToTable("tb_inscricao_estadual");
                 });
 
             modelBuilder.Entity("Entidades.Entidades.Municipio", b =>
@@ -89,7 +103,9 @@ namespace Infraestrutura.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("InscricaoEstadual")
-                        .HasColumnType("integer");
+                        .HasMaxLength(285999999)
+                        .HasColumnType("integer")
+                        .HasIdentityOptions(285000000L, null, null, null, null, null);
 
                     b.Property<int>("MunicipioId")
                         .HasColumnType("integer");
@@ -98,7 +114,9 @@ namespace Infraestrutura.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("PropriedadeId")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("Saldo")
                         .HasColumnType("integer");

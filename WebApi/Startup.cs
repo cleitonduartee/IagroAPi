@@ -34,15 +34,19 @@ namespace WebApi
                         .UseNpgsql(ObterStringConexaoBanco())
             );
             //INTERFACE E REPOSITORIO
-            // services.AddSingleton(typeof(ICrud<>), typeof(RepositorioCrud<>));
             services.AddScoped<IMunicipio, RepositorioMunicipio>();
             services.AddScoped<IEndereco, RepositorioEndereco>();
             services.AddScoped<IProdutor, RepositorioProdutor>();
-            services.AddScoped<IServicoProdutor, ServicoProdutor>();
+            services.AddScoped<IPropriedade, RepositorioPropriedade>();
 
-            // INTERFACE APLICACAO
+            //INTERFACE E SERVICO
+            services.AddScoped<IServicoProdutor, ServicoProdutor>();
+            services.AddScoped<IServicoPropriedade, ServicoPropriedade>();
+
+            // INTERFACE E APLICACAO
             services.AddScoped<IAplicacaoMunicipio, AplicacaoMunicipio>();
             services.AddScoped<IAplicacaoProdutor, AplicacaoProdutor>();
+            services.AddScoped<IAplicacaoPropriedade, AplicacaoPropriedade>();
 
 
             services.AddControllers();

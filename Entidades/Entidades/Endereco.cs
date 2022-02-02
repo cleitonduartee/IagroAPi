@@ -13,10 +13,10 @@ namespace Entidades.Entidades
     {
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public  int EnderecoId { get; set; }
-        public  string NomeRua { get; set; }
-        public  int Numero { get; set; }
-        public  int MunicipioId { get; set; }
+        public  virtual int EnderecoId { get;  set; }
+        public virtual string NomeRua { get; set; }
+        public virtual int Numero { get; set; }
+        public virtual int MunicipioId { get; set; }
         public virtual Municipio Municipio { get; set; }
 
         public Endereco(string nomeRua, int numero, int municipioId, Municipio municipio)

@@ -23,6 +23,11 @@ namespace WebApi.Controllers
         public async Task<List<Municipio>> BuscarTodos()
         {
             return await _IAplicacaoMunicipio.BuscarTodos();
-        }       
+        }
+        [HttpPost("Cadastrar")]
+        public async Task Cadastrar(Municipio municipio)
+        {
+             await _IAplicacaoMunicipio.Adicionar(municipio);
+        }
     }
 }

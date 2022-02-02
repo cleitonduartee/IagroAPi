@@ -8,5 +8,6 @@ namespace Aplicacao.Interfaces
     public interface IAplicacaoMunicipio 
     { 
         Task<List<Municipio>> BuscarTodos();
+        Task Adicionar(Municipio municipio);
     }
 }
