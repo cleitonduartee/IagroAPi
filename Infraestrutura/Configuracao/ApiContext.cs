@@ -12,28 +12,19 @@ namespace Infraestrutura.Configuracao
         public DbSet<Municipio> Municipios { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Produtor> Produtors { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql(ObterStringConexaoBanco());
-                base.OnConfiguring(optionsBuilder);
-            }
-        }
+        public DbSet<Propriedade> Propriedades { get; set; }
+              
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           // base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ProdutorMap());
             modelBuilder.ApplyConfiguration(new EnderecoMap());            
             modelBuilder.ApplyConfiguration(new MunicipioMap());
+            modelBuilder.ApplyConfiguration(new PropriedadeMap());
 
-            modelBuilder.Entity<Produtor>().Navigation(p => p.Endereco).AutoInclude();
-            modelBuilder.Entity<Endereco>().Navigation(e => e.Municipio).AutoInclude();
-        }
-        public static string ObterStringConexaoBanco()
-        {
-            return "Host=localhost;Port=5432;Pooling=true;Database=IagroDB;User Id=postgres;Password=123;";
-        }
+            //modelBuilder.Entity<Produtor>().Navigation(p => p.Endereco).AutoInclude();
+            //modelBuilder.Entity<Endereco>().Navigation(e => e.Municipio).AutoInclude();
+            //modelBuilder.Entity<Propriedade>().Navigation(e => e.Municipio).AutoInclude();
+        }       
     }
 }

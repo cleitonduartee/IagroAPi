@@ -12,17 +12,14 @@ namespace Infraestrutura.Repositorio
 {
     public class RepositorioProdutor : RepositorioCrud<Produtor>, IProdutor
     {
-        private readonly DbContextOptions<ApiContext> _OptionsBuilder;
-        public RepositorioProdutor()
+        private readonly ApiContext _ApiContext;
+        public RepositorioProdutor(ApiContext ApiContext) : base(ApiContext)
         {
-            _OptionsBuilder = new DbContextOptions<ApiContext>();
+            _ApiContext = ApiContext;
         }
         public async Task<Produtor> BuscarPorCpf(Expression<Func<Produtor, bool>> expression)
         {
-            using (var db = new ApiContext(_OptionsBuilder))
-            {
-                return await db.Produtors.FirstOrDefaultAsync(expression);
-            }
+            return await _ApiContext.Produtors.FirstOrDefaultAsync(expression);
         }
     }
 }

@@ -64,7 +64,9 @@ namespace Infraestrutura.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
 
                     b.Property<int>("EnderecoId")
                         .HasColumnType("integer");
@@ -77,6 +79,36 @@ namespace Infraestrutura.Migrations
                     b.HasIndex("EnderecoId");
 
                     b.ToTable("tb_produtor");
+                });
+
+            modelBuilder.Entity("Entidades.Entidades.Propriedade", b =>
+                {
+                    b.Property<int>("ProdutorId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("InscricaoEstadual")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MunicipioId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PropriedadeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Saldo")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SaldoVacinado")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProdutorId");
+
+                    b.HasIndex("MunicipioId");
+
+                    b.ToTable("tb_propriedade");
                 });
 
             modelBuilder.Entity("Entidades.Entidades.Endereco", b =>
@@ -99,6 +131,25 @@ namespace Infraestrutura.Migrations
                         .IsRequired();
 
                     b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("Entidades.Entidades.Propriedade", b =>
+                {
+                    b.HasOne("Entidades.Entidades.Municipio", "Municipio")
+                        .WithMany()
+                        .HasForeignKey("MunicipioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entidades.Entidades.Produtor", "Produtor")
+                        .WithMany()
+                        .HasForeignKey("ProdutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Municipio");
+
+                    b.Navigation("Produtor");
                 });
 #pragma warning restore 612, 618
         }

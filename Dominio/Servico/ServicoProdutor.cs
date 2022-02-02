@@ -1,11 +1,8 @@
 ﻿using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Dominio.Servico
@@ -13,11 +10,9 @@ namespace Dominio.Servico
     public class ServicoProdutor : IServicoProdutor
     {
         private readonly IProdutor _IProdutor;
-        private readonly IEndereco _IEndereco;
         public ServicoProdutor(IProdutor IProdutor, IEndereco IEndereco)
         {
             _IProdutor = IProdutor;
-            _IEndereco = IEndereco;
         }
         public async Task<Produtor> BuscarPorCpf(string cpf)
         {
@@ -40,7 +35,6 @@ namespace Dominio.Servico
 
         public async Task EditarProdutor(Produtor produtor)
         {
-            await _IEndereco.Atualizar(produtor.Endereco);
             await _IProdutor.Atualizar(produtor);
         }
 

@@ -9,6 +9,7 @@ using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.Crud;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,20 +28,21 @@ namespace WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            //Não passei a config do banco pois esta sendo feito na camada Infraestrutura
-            services.AddDbContext<ApiContext>();
-
+        {            
+            services.AddDbContext<ApiContext>(opt =>
+                     opt.UseLazyLoadingProxies()
+                        .UseNpgsql(ObterStringConexaoBanco())
+            );
             //INTERFACE E REPOSITORIO
-            services.AddSingleton(typeof(ICrud<>), typeof(RepositorioCrud<>));
-            services.AddSingleton<IMunicipio, RepositorioMunicipio>();
-            services.AddSingleton<IEndereco, RepositorioEndereco>();
-            services.AddSingleton<IProdutor, RepositorioProdutor>();
-            services.AddSingleton<IServicoProdutor, ServicoProdutor>();
+            // services.AddSingleton(typeof(ICrud<>), typeof(RepositorioCrud<>));
+            services.AddScoped<IMunicipio, RepositorioMunicipio>();
+            services.AddScoped<IEndereco, RepositorioEndereco>();
+            services.AddScoped<IProdutor, RepositorioProdutor>();
+            services.AddScoped<IServicoProdutor, ServicoProdutor>();
 
             // INTERFACE APLICACAO
-            services.AddSingleton<IAplicacaoMunicipio, AplicacaoMunicipio>();
-            services.AddSingleton<IAplicacaoProdutor, AplicacaoProdutor>();
+            services.AddScoped<IAplicacaoMunicipio, AplicacaoMunicipio>();
+            services.AddScoped<IAplicacaoProdutor, AplicacaoProdutor>();
 
 
             services.AddControllers();
@@ -68,6 +70,10 @@ namespace WebApi
             {
                 endpoints.MapControllers();
             });
+        }
+        public static string ObterStringConexaoBanco()
+        {
+            return "Host=localhost;Port=5432;Pooling=true;Database=IagroDB;User Id=postgres;Password=123;";
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entidades.Entidades
 {
-   
+   [Table("tb_endereco")]
     public class Endereco
     {
         
@@ -17,7 +17,7 @@ namespace Entidades.Entidades
         public  string NomeRua { get; set; }
         public  int Numero { get; set; }
         public  int MunicipioId { get; set; }
-        public  Municipio Municipio { get; set; }
+        public virtual Municipio Municipio { get; set; }
 
         public Endereco(string nomeRua, int numero, int municipioId, Municipio municipio)
         {

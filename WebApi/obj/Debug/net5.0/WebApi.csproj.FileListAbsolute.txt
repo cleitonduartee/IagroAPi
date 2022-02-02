@@ -71,3 +71,5 @@ C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Aplicac
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Infraestrutura.pdb
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Dominio.pdb
 C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Entidades.pdb
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Castle.Core.dll
+C:\Pasta Cleiton\www\TesteIAGRO\Oficial\IagroAPI\WebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Proxies.dll
