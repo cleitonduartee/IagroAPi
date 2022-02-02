@@ -44,7 +44,8 @@ namespace Infraestrutura.Repositorio.Crud
             //AsNoTracking praticamente faz um select no banco e devolve, evitando trazer cofig do enti            
             using (var db = new ApiContext(_OptionsBuilder))
             {
-                return await db.Set<T>().AsNoTracking().ToListAsync();
+                return await db.Set<T>()
+                    .ToListAsync();
             }
         }
 

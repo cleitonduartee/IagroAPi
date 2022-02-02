@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Entidades.Entidades
 {
+   
     public class Endereco
     {
-        [Key]
+        
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int EnderecoId { get; protected set; }
-        public virtual string NomeRua { get; set; }
-        public virtual int Numero { get; set; }
-        [ForeignKey("Municipio")]
-        public virtual int MunicipioId { get; set; }
-        public virtual Municipio Municipio { get; set; }
+        public  int EnderecoId { get; set; }
+        public  string NomeRua { get; set; }
+        public  int Numero { get; set; }
+        public  int MunicipioId { get; set; }
+        public  Municipio Municipio { get; set; }
     }
 }

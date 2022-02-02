@@ -18,9 +18,32 @@ namespace Infraestrutura.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Entidades.Entidades.Endereco", b =>
+                {
+                    b.Property<int>("EnderecoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("MunicipioId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NomeRua")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("integer");
+
+                    b.HasKey("EnderecoId");
+
+                    b.HasIndex("MunicipioId");
+
+                    b.ToTable("tb_endereco");
+                });
+
             modelBuilder.Entity("Entidades.Entidades.Municipio", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MunicipioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -28,9 +51,54 @@ namespace Infraestrutura.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("MunicipioId");
 
                     b.ToTable("tb_municipio");
+                });
+
+            modelBuilder.Entity("Entidades.Entidades.Produtor", b =>
+                {
+                    b.Property<int>("ProdutorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("text");
+
+                    b.Property<int>("EnderecoId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.HasKey("ProdutorId");
+
+                    b.HasIndex("EnderecoId");
+
+                    b.ToTable("tb_produtor");
+                });
+
+            modelBuilder.Entity("Entidades.Entidades.Endereco", b =>
+                {
+                    b.HasOne("Entidades.Entidades.Municipio", "Municipio")
+                        .WithMany()
+                        .HasForeignKey("MunicipioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Municipio");
+                });
+
+            modelBuilder.Entity("Entidades.Entidades.Produtor", b =>
+                {
+                    b.HasOne("Entidades.Entidades.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Endereco");
                 });
 #pragma warning restore 612, 618
         }

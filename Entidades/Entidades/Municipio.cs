@@ -4,10 +4,9 @@ namespace Entidades.Entidades
 {
     [Table("tb_municipio")]
     public class Municipio
-    {
-        [Key]
+    {        
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int MunicipioId { get; protected set; }
+        public int MunicipioId { get; set; }
         public string Nome { get; set; }
 
         public Municipio()

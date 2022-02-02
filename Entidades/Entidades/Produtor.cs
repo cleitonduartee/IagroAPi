@@ -11,30 +11,24 @@ namespace Entidades.Entidades
     [Table("tb_produtor")]
     public class Produtor
     {
-        [Key]
+        
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProdutorId { get; protected set; }
-        public string Nome { get; set; }
-        public long Cpf { get; protected set; }
-        public string Rua { get; set; }        
-        [ForeignKey("Municipio")]
-        public int EnderecoId { get; protected set; }
-        public Endereco Endereco { get; protected set; }
-        public virtual Municipio Municipio { get; protected set; }
+        public  int ProdutorId { get; set; }
+        public  string Nome { get; set; }
+        public  string Cpf { get;  set; }        
+        public  int EnderecoId { get;  set; }
+        public Endereco Endereco { get;  set; }
 
         public Produtor()
         {
         }
 
-        public Produtor(int produtorId, string nome, long cpf, string rua, int enderecoId, Endereco endereco, Municipio municipio)
+        public Produtor(int produtorId, string nome, string cpf, Endereco endereco)
         {
             ProdutorId = produtorId;
             Nome = nome;
             Cpf = cpf;
-            Rua = rua;
-            EnderecoId = enderecoId;
             Endereco = endereco;
-            Municipio = municipio;
         }
 
         public override bool Equals(object obj)

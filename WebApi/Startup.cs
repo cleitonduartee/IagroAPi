@@ -2,6 +2,8 @@ using Aplicacao.Aplicacao;
 using Aplicacao.Interfaces;
 using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceCrud;
+using Dominio.Interfaces.InterfaceServico;
+using Dominio.Servico;
 using Infraestrutura.Configuracao;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.Crud;
@@ -32,9 +34,13 @@ namespace WebApi
             //INTERFACE E REPOSITORIO
             services.AddSingleton(typeof(ICrud<>), typeof(RepositorioCrud<>));
             services.AddSingleton<IMunicipio, RepositorioMunicipio>();
+            services.AddSingleton<IEndereco, RepositorioEndereco>();
+            services.AddSingleton<IProdutor, RepositorioProdutor>();
+            services.AddSingleton<IServicoProdutor, ServicoProdutor>();
 
             // INTERFACE APLICACAO
             services.AddSingleton<IAplicacaoMunicipio, AplicacaoMunicipio>();
+            services.AddSingleton<IAplicacaoProdutor, AplicacaoProdutor>();
 
 
             services.AddControllers();

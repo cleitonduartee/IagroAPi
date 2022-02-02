@@ -13,29 +13,9 @@ namespace Aplicacao.Aplicacao
         {
             _IMunicipio = IMunicipio;
         }
-        public async Task Adicionar(Municipio obj)
-        {
-            await _IMunicipio.Adicionar(obj);
-        }
-
-        public async Task Atualizar(Municipio obj)
-        {
-            await _IMunicipio.Atualizar(obj);
-        }
-
-        public async Task<Municipio> BuscarPorId(int Id)
-        {
-           return await _IMunicipio.BuscarPorId(Id);
-        }
-
         public async Task<List<Municipio>> BuscarTodos()
         {
             return await _IMunicipio.BuscarTodos();
-        }
-
-        public async Task Excluir(Municipio obj)
-        {
-            await _IMunicipio.Excluir(obj);
         }
     }
 }
