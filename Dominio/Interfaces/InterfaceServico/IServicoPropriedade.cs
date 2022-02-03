@@ -13,7 +13,7 @@ namespace Dominio.Interfaces.InterfaceServico
         Task CadastrarPropriedade(Propriedade propriedade);
         Task EditarPropriedade(Propriedade propriedade);
         Task<Propriedade> BuscarPorIE(int ie);
-        Task<Propriedade> BuscarPorProdutor(string produtor);
+        Task<List<Propriedade>> BuscarPorProdutor(string produtor);
         Task<Propriedade> BuscarPorId(int id);
         Task<List<Propriedade>> BuscarTodos();
 

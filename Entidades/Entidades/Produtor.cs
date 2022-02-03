@@ -14,9 +14,9 @@ namespace Entidades.Entidades
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int ProdutorId { get; set; }
-        public  string Nome { get; set; }
-        public  string Cpf { get;  set; }        
-        public  int EnderecoId { get;  set; }
+        public virtual string Nome { get; set; }
+        public virtual string Cpf { get;  set; }        
+        public virtual int EnderecoId { get;  set; }
         public virtual Endereco Endereco { get;  set; }
 
         public Produtor()

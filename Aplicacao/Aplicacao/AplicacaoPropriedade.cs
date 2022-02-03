@@ -4,6 +4,7 @@ using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Aplicacao
@@ -26,14 +27,22 @@ namespace Aplicacao.Aplicacao
         {
             var propriedade = await _IServicoPropriedade.BuscarPorIE(ie);
             if (propriedade != null)
+            {               
                 return new PropriedadeResponseDTO(propriedade);
+            }                
             else
                 return null;
         }
-        public async Task<Propriedade> BuscarPorProdutor(string produtor)
-        {
-            return await _IServicoPropriedade.BuscarPorProdutor(produtor);
+        public async Task<List<PropriedadeResponseDTO>> BuscarPorProdutor(string produtor)
+        {           
+            var propriedades = await _IServicoPropriedade.BuscarPorProdutor(produtor.ToUpper());
+            var propriedadesResponseDTO = new List<PropriedadeResponseDTO>();
+            propriedades.ForEach(propriedade =>
+            {                
+                propriedadesResponseDTO.Add(new PropriedadeResponseDTO(propriedade));
+            });
 
+            return propriedadesResponseDTO;
         }
 
         public async Task<List<PropriedadeResponseDTO>> BuscarTodos()
@@ -41,14 +50,16 @@ namespace Aplicacao.Aplicacao
             var propriedades = await _IServicoPropriedade.BuscarTodos();
             var propriedadesResponseDTO = new List<PropriedadeResponseDTO>();
             propriedades.ForEach(propriedade =>
-                propriedadesResponseDTO.Add(new PropriedadeResponseDTO(propriedade))
-            );
+            {
+                propriedadesResponseDTO.Add(new PropriedadeResponseDTO(propriedade));
+            });
 
             return propriedadesResponseDTO;
         }
 
         public async Task CadastrarPropriedade(Propriedade propriedade)
         {
+            propriedade.Nome = propriedade.Nome.ToUpper();
             await _IServicoPropriedade.CadastrarPropriedade(propriedade);
         }
 

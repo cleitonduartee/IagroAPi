@@ -11,7 +11,7 @@ namespace Aplicacao.Interfaces
         Task CadastrarPropriedade(Propriedade propriedade);
         Task EditarPropriedade(Propriedade propriedade);
         Task<PropriedadeResponseDTO> BuscarPorIE(int ie);
-        Task<Propriedade> BuscarPorProdutor(string produtor);
+        Task<List<PropriedadeResponseDTO>> BuscarPorProdutor(string produtor);
         Task<Propriedade> BuscarPorId(int id);
         Task<List<PropriedadeResponseDTO>> BuscarTodos();
 

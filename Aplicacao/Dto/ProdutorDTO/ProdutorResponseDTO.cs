@@ -2,6 +2,7 @@
 using Entidades.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Aplicacao.Dto.ProdutorDTO
 
         public ProdutorResponseDTO(Produtor produtor)
         {
-            Nome = produtor.Nome;
+            Nome = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(produtor.Nome.ToLower());
             Cpf = produtor.Cpf;
             Endereco = new EnderecoResponseDTO(produtor.Endereco);
         }

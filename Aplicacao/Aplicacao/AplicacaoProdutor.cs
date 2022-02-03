@@ -4,6 +4,7 @@ using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Aplicacao
@@ -20,7 +21,10 @@ namespace Aplicacao.Aplicacao
         {
             var produtor = await _IServicoProdutor.BuscarPorCpf(cpf);
             if (produtor != null)
+            {
+                produtor.Nome = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(produtor.Nome.ToLower());
                 return new ProdutorResponseDTO(produtor);
+            }                
             else
                 return null;
         }
@@ -35,13 +39,16 @@ namespace Aplicacao.Aplicacao
             var produtoresList = await _IServicoProdutor.BuscarTodos();
             var produtoresResponseList = new List<ProdutorResponseDTO>();
             produtoresList.ForEach(produtor =>
-                produtoresResponseList.Add(new ProdutorResponseDTO(produtor))
-            );
+            {
+                produtor.Nome = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(produtor.Nome.ToLower());
+                produtoresResponseList.Add(new ProdutorResponseDTO(produtor));
+            });
             return produtoresResponseList;
         }
 
         public async Task CadastrarProdutor(Produtor produtor)
         {
+            produtor.Nome = produtor.Nome.ToUpper();
             await _IServicoProdutor.CadastrarProdutor(produtor);
         }
 

@@ -12,6 +12,6 @@ namespace Dominio.Interfaces
     public interface IPropriedade : ICrud<Propriedade>
     {
         Task<Propriedade> BuscarPorIE(Expression<Func<Propriedade, bool>> expression);
-        Task<Propriedade> BuscarPorProdutor(Expression<Func<Propriedade, bool>> expression);
+        Task<List<Propriedade>> BuscarPorProdutor(Expression<Func<Propriedade, bool>> expression);
     }
 }

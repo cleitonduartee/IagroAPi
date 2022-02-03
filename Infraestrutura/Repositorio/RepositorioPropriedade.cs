@@ -5,6 +5,7 @@ using Infraestrutura.Repositorio.Crud;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -22,9 +23,9 @@ namespace Infraestrutura.Repositorio
         {
             return await _ApiContext.Propriedades.FirstOrDefaultAsync(expression);
         }
-        public async Task<Propriedade> BuscarPorProdutor(Expression<Func<Propriedade, bool>> expression)
+        public async Task<List<Propriedade>> BuscarPorProdutor(Expression<Func<Propriedade, bool>> expression)
         {
-            return await _ApiContext.Propriedades.FirstOrDefaultAsync(expression);
+            return await _ApiContext.Propriedades.Where(expression).ToListAsync();
         }
     }
 }

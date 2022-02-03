@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA1309: Usar a comparação de cadeia de caracteres ordinal
+dotnet_diagnostic.CA1309.severity = none

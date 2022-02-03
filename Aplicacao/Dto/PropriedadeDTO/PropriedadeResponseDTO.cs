@@ -2,6 +2,7 @@
 using Entidades.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Aplicacao.Dto.PropriedadeDTO
         public PropriedadeResponseDTO(Propriedade propriedade)
         {
             InscricaoEstadual = propriedade.InscricaoEstadual;
-            NomePropriedade = propriedade.Nome;
+            NomePropriedade = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(propriedade.Nome.ToLower()) ;
             Produtor = new ProdutorResponseDTO(propriedade.Produtor);
             MunicipioPropriedade = propriedade.Municipio.Nome;
         }
