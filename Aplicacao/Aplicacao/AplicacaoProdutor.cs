@@ -1,4 +1,5 @@
-﻿using Aplicacao.Interfaces;
+﻿using Aplicacao.Dto.ProdutorDTO;
+using Aplicacao.Interfaces;
 using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
@@ -15,9 +16,13 @@ namespace Aplicacao.Aplicacao
             _IServicoProdutor = IServicoProdutor;
         }
 
-        public async Task<Produtor> BuscarPorCpf(string cpf)
+        public async Task<ProdutorResponseDTO> BuscarPorCpf(string cpf)
         {
-            return await _IServicoProdutor.BuscarPorCpf(cpf);
+            var produtor = await _IServicoProdutor.BuscarPorCpf(cpf);
+            if (produtor != null)
+                return new ProdutorResponseDTO(produtor);
+            else
+                return null;
         }
 
         public async Task<Produtor> BuscarPorId(int id)
@@ -25,9 +30,14 @@ namespace Aplicacao.Aplicacao
             return await _IServicoProdutor.BuscarPorId(id); 
         }
 
-        public async Task<List<Produtor>> BuscarTodos()
+        public async Task<List<ProdutorResponseDTO>> BuscarTodos()
         {
-            return await _IServicoProdutor.BuscarTodos();
+            var produtoresList = await _IServicoProdutor.BuscarTodos();
+            var produtoresResponseList = new List<ProdutorResponseDTO>();
+            produtoresList.ForEach(produtor => {
+                produtoresResponseList.Add(new ProdutorResponseDTO(produtor));
+            });
+            return produtoresResponseList;
         }
 
         public async Task CadastrarProdutor(Produtor produtor)

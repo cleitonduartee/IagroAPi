@@ -20,18 +20,17 @@ namespace WebApi.Controllers
             _IAplicacaoProdutor = IAplicacaoProdutor;
         }
         [HttpGet("BuscarTodos")]
-        public async Task<List<Produtor>> BuscarTodos()
+        public async Task<List<ProdutorResponseDTO>> BuscarTodos()
         {
-            var produtores = await _IAplicacaoProdutor.BuscarTodos();
-            return produtores;
+            return await _IAplicacaoProdutor.BuscarTodos();
         }
         [HttpGet("BuscarPorCpf/{cpf}")]
-        public async Task<ActionResult<Produtor>> BuscarPorCpf(string cpf)
+        public async Task<ActionResult<ProdutorResponseDTO>> BuscarPorCpf(string cpf)
         {
             if (_IAplicacaoProdutor.ValidarCpf(cpf))            {
-                var produtor =  await _IAplicacaoProdutor.BuscarPorCpf(cpf);
-                if(produtor != null) 
-                    return Ok(produtor);
+                var produtorResponseDTO =  await _IAplicacaoProdutor.BuscarPorCpf(cpf);  
+                if(produtorResponseDTO != null)
+                    return Ok(produtorResponseDTO);                                   
                 else
                     return NotFound("Produtor não encontrado.");
             }
