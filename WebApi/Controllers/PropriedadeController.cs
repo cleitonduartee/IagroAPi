@@ -57,7 +57,7 @@ namespace WebApi.Controllers
         {
             if (!ModelState.IsValid)
                 return null;
-            if (id != propriedadeDTO.ProdutorId)
+            if (id != propriedadeDTO.PropriedadeId)
                 return NotFound("Id informado não é o mesmo da Propriedade");
 
 

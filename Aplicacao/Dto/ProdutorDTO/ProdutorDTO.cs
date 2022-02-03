@@ -26,7 +26,7 @@ namespace Aplicacao.Dto.ProdutorDTO
 
         public static void AtualizaProdutor(ProdutorDTO produtorDTO, Produtor produtor)
         {
-            produtor.Nome = produtorDTO.Nome;
+            produtor.Nome = produtorDTO.Nome.ToUpper();
             produtor.Cpf = produtorDTO.Cpf;
             produtor.Endereco.NomeRua = produtorDTO.NomeRua;
             produtor.Endereco.Numero = produtorDTO.Numero;

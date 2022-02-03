@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Aplicacao.Dto.EnderecoDTO
 {
     public class EnderecoResponseDTO
-    {
+    {        
         public  string NomeRua { get; set; }
         public  int Numero { get; set; }
         public  string Municipio { get; set; }

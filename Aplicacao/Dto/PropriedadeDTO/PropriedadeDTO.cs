@@ -11,9 +11,9 @@ namespace Aplicacao.Dto.PropriedadeDTO
     public class PropriedadeDTO
     {
         [Required(ErrorMessage = "Id da Propriedade é obriatório")]
-        public int PropriedadeId { get; protected set; }   
+        public int PropriedadeId { get;  set; }   
         [Required(ErrorMessage = "Nome do Propriedade é obriatório")]
-        public string NomePropriedade { get; protected set; }
+        public string NomePropriedade { get;  set; }
         [Required(ErrorMessage = "Id do Produtor é obriatório")]
         public int ProdutorId { get; set; }
         [Required(ErrorMessage = "Id do municipio é obriatório")]
@@ -21,7 +21,7 @@ namespace Aplicacao.Dto.PropriedadeDTO
 
         public static void AtualizaPropriedade(PropriedadeDTO dto, Propriedade propriedade) 
         {
-                propriedade.Nome = dto.NomePropriedade;
+                propriedade.Nome = dto.NomePropriedade.ToUpper();
                 propriedade.ProdutorId = dto.ProdutorId;
                 propriedade.MunicipioId = dto.MunicipioId;
         }
