@@ -24,6 +24,10 @@ namespace Dominio.Servico
         {
             return await _IPropriedade.BuscarPorIE(p => p.InscricaoEstadual.Equals(ie));
         }
+        public async Task<Propriedade> BuscarPorProdutor(string produtor)
+        {
+            return await _IPropriedade.BuscarPorIE(p => p.Produtor.Nome.Equals(produtor));
+        }
 
         public async Task<List<Propriedade>> BuscarTodos()
         {

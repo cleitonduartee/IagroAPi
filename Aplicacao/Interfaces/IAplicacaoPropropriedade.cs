@@ -1,4 +1,5 @@
-﻿using Aplicacao.Interfaces.InterfaceCrud;
+﻿using Aplicacao.Dto.PropriedadeDTO;
+using Aplicacao.Interfaces.InterfaceCrud;
 using Entidades.Entidades;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,9 +10,10 @@ namespace Aplicacao.Interfaces
     {
         Task CadastrarPropriedade(Propriedade propriedade);
         Task EditarPropriedade(Propriedade propriedade);
-        Task<Propriedade> BuscarPorIE(int ie);
+        Task<PropriedadeResponseDTO> BuscarPorIE(int ie);
+        Task<Propriedade> BuscarPorProdutor(string produtor);
         Task<Propriedade> BuscarPorId(int id);
-        Task<List<Propriedade>> BuscarTodos();
+        Task<List<PropriedadeResponseDTO>> BuscarTodos();
 
     }
 }

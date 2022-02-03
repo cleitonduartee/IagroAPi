@@ -17,7 +17,7 @@ namespace Aplicacao.Dto.ProdutorDTO
         public ProdutorResponseDTO(Produtor produtor)
         {
             Nome = produtor.Nome;
-            Cpf = produtor.Nome;
+            Cpf = produtor.Cpf;
             Endereco = new EnderecoResponseDTO(produtor.Endereco);
         }
     }

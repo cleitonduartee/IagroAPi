@@ -21,17 +21,17 @@ namespace WebApi.Controllers
             _IAplicacaoPropriedade = IAplicacaoPropriedade;
         }
         [HttpGet("BuscarTodos")]
-        public async Task<List<Propriedade>> BuscarTodos()
+        public async Task<List<PropriedadeResponseDTO>> BuscarTodos()
         {
             return await _IAplicacaoPropriedade.BuscarTodos();
              
         }
         [HttpGet("BuscarPorIE/{ie:int}")]
-        public async Task<ActionResult<Propriedade>> BuscarPorIE(int ie)
+        public async Task<ActionResult<PropriedadeResponseDTO>> BuscarPorIE(int ie)
         {
-            var propriedade = await _IAplicacaoPropriedade.BuscarPorIE(ie);
-            if (propriedade != null)
-                return Ok(propriedade);
+            var propriedadeResponseDTO = await _IAplicacaoPropriedade.BuscarPorIE(ie);
+            if (propriedadeResponseDTO != null)
+                return Ok(propriedadeResponseDTO);
             else
                 return NotFound("Propriedade não encontrado.");
         }

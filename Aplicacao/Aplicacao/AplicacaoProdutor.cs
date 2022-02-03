@@ -27,16 +27,16 @@ namespace Aplicacao.Aplicacao
 
         public async Task<Produtor> BuscarPorId(int id)
         {
-            return await _IServicoProdutor.BuscarPorId(id); 
+            return await _IServicoProdutor.BuscarPorId(id);
         }
 
         public async Task<List<ProdutorResponseDTO>> BuscarTodos()
         {
             var produtoresList = await _IServicoProdutor.BuscarTodos();
             var produtoresResponseList = new List<ProdutorResponseDTO>();
-            produtoresList.ForEach(produtor => {
-                produtoresResponseList.Add(new ProdutorResponseDTO(produtor));
-            });
+            produtoresList.ForEach(produtor =>
+                produtoresResponseList.Add(new ProdutorResponseDTO(produtor))
+            );
             return produtoresResponseList;
         }
 

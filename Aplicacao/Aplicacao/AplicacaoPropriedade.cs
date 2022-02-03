@@ -1,4 +1,5 @@
-﻿using Aplicacao.Interfaces;
+﻿using Aplicacao.Dto.PropriedadeDTO;
+using Aplicacao.Interfaces;
 using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
@@ -14,25 +15,40 @@ namespace Aplicacao.Aplicacao
         {
             _IServicoPropriedade = IServicoPropriedade;
         }
-        
+
 
         public async Task<Propriedade> BuscarPorId(int id)
         {
             return await _IServicoPropriedade.BuscarPorId(id);
         }
 
-        public async Task<Propriedade> BuscarPorIE(int ie)
+        public async Task<PropriedadeResponseDTO> BuscarPorIE(int ie)
         {
-            return await _IServicoPropriedade.BuscarPorIE(ie);
+            var propriedade = await _IServicoPropriedade.BuscarPorIE(ie);
+            if (propriedade != null)
+                return new PropriedadeResponseDTO(propriedade);
+            else
+                return null;
+        }
+        public async Task<Propriedade> BuscarPorProdutor(string produtor)
+        {
+            return await _IServicoPropriedade.BuscarPorProdutor(produtor);
+
         }
 
-        public async Task<List<Propriedade>> BuscarTodos()
+        public async Task<List<PropriedadeResponseDTO>> BuscarTodos()
         {
-            return await _IServicoPropriedade.BuscarTodos();
+            var propriedades = await _IServicoPropriedade.BuscarTodos();
+            var propriedadesResponseDTO = new List<PropriedadeResponseDTO>();
+            propriedades.ForEach(propriedade =>
+                propriedadesResponseDTO.Add(new PropriedadeResponseDTO(propriedade))
+            );
+
+            return propriedadesResponseDTO;
         }
 
         public async Task CadastrarPropriedade(Propriedade propriedade)
-        {          
+        {
             await _IServicoPropriedade.CadastrarPropriedade(propriedade);
         }
 
