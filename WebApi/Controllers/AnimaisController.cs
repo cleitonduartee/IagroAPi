@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Interfaces;
 using Dominio.Dto.RebanhoDTO;
+using Dominio.ExceptionPersonalizada;
 using Entidades.Entidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,16 +37,24 @@ namespace WebApi.Controllers
                 return NotFound("Não foi localizado nenhum rebanho para a propriedade informada.");
         }
         [HttpPost("EntradaAnimais")]
-        public async Task<ActionResult> EntradaAnimais(RebanhoInsertDTO rebanhoDto)
+        public async Task<ActionResult> EntradaAnimais(RebanhoInsertDTO rebanhoInsertDTO)
         {
             if (!ModelState.IsValid) { }
-                       
-            var validacoes = _IAplicacaoRebanho.validacoes(rebanhoDto);
-            if (validacoes != null)
-                    return BadRequest(validacoes);
-            
-            await _IAplicacaoRebanho.EntradaAnimais(rebanhoDto);
-            return Ok("Entrada de animais realizada com sucesso.");
+
+            try
+            {
+                await _IAplicacaoRebanho.EntradaAnimais(rebanhoInsertDTO);
+                return Ok("Entrada de animais realizada com sucesso.");
+
+            }
+            catch (EntradaAnimalException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                return NotFound("ERRO: Por favor tentar novamente. Caso o problema persista, entre em contato com o suporte." );
+            }
         }
         [HttpPost("CancelamentoEntradaAnimais")]
         public async Task CancelamentoEntradaAnimais(Rebanho rebanho)

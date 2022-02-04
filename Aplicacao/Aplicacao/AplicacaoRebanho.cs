@@ -44,43 +44,15 @@ namespace Aplicacao.Aplicacao
             await _IServicoRebanho.CancelarEntrada(rebanho);
         }
 
-        public async Task EntradaAnimais(RebanhoInsertDTO rebanhoDto)
-        {            
-            //var rebanho = _IServicoRebanho.BuscarRebanhoPorPropriedadeId(rebanhoDto.PropriedadeId).Result;
-            //realizarEntradasDeAnimaisNoRebanho(rebanhoDto, rebanho);
-            //await _IServicoRebanho.EntradaAnimais(rebanho);
+        public async Task EntradaAnimais(RebanhoInsertDTO rebanhoInsertDto)
+        {
+            await _IServicoRebanho.EntradaAnimais(rebanhoInsertDto);
         }
 
-        public Dictionary<string, string> validacoes(RebanhoInsertDTO rebanhoDTO)
-        {
-            Dictionary<string, string> validacao = new Dictionary<string, string>();
-            var propriedade = _IServicoPropriedade.BuscarPorId(rebanhoDTO.PropriedadeId).Result;
-            if (propriedade == null)
-                validacao.Add("ERROR","Propriedade não localizada.");
-            if (rebanhoDTO.SaldoComVacinaBubalino > 0 || rebanhoDTO.SaldoComVacinaBovino > 0)
-            {
-                if(!rebanhoDTO.DataVacina.HasValue)
-                    validacao.Add("ERROR", "Para entradas de espécies vacinadas é obrigatório a data de vacinação.");
-                else if(rebanhoDTO.DataVacina.Value.Year < DateTime.Now.Year)
-                    validacao.Add("ERROR", "Para entradas de espécies vacinadas a data de vacinação deve ser do ano atual.");
-            }
-                
-            
-            if(validacao.ContainsKey("ERROR"))
-                return validacao;
-            else
-                return null;
-        }
-        private void realizarEntradasDeAnimaisNoRebanho(RebanhoInsertDTO rebanhoDto, Rebanho rebanho)
-        {
-            if(rebanhoDto.SaldoComVacinaBubalino > 0 || rebanhoDto.SaldoComVacinaBovino > 0)
-            {
-                rebanho.SaldoComVacinaBovino += rebanhoDto.SaldoComVacinaBovino;
-                rebanho.SaldoComVacinaBubalino += rebanhoDto.SaldoComVacinaBubalino;
-                rebanho.DataVacina = rebanhoDto.DataVacina;
-            }
-            rebanho.SaldoSemVacinaBovino += rebanhoDto.SaldoSemVacinaBovino;
-            rebanho.SaldoSemVacinaBubalino += rebanhoDto.SaldoSemVacinaBubalino;
-        }
+        //public Dictionary<string, string> ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO)
+        //{
+        //   return _IServicoRebanho.ValidacoesEntradaDeAnimais(rebanhoDTO);
+        //}
+       
     }
 }

@@ -12,7 +12,7 @@ namespace Aplicacao.Interfaces
         Task CancelarEntrada(Rebanho rebanho);
         Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string produtor);
         Task<RebanhoResponseDTO> BuscarPorPropriedade(string propriedade);
-        Dictionary<string, string> validacoes(RebanhoInsertDTO rebanhoDTO) ;
+       // Dictionary<string, string> ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO) ;
 
 
     }

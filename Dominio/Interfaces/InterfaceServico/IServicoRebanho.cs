@@ -16,6 +16,8 @@ namespace Dominio.Interfaces.InterfaceServico
         Task<List<Rebanho>> BuscarPorProdutor(string produtor);
         Task<Rebanho> BuscarPorPropriedade(string propriedade);
         Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId);
+        void ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO);
+
 
     }
 }
