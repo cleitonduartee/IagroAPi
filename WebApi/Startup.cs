@@ -33,6 +33,11 @@ namespace WebApi
                         .UseLazyLoadingProxies()
                         .UseNpgsql(ObterStringConexaoBanco())
             );
+
+            //Utilizado esse servico pois ao cancelar uma movimentacao estava retornando erro
+            services.AddDbContext<ApiContext>(ServiceLifetime.Transient);
+
+
             //INTERFACE E REPOSITORIO
             services.AddScoped<IMunicipio, RepositorioMunicipio>();
             services.AddScoped<IEndereco, RepositorioEndereco>();

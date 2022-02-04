@@ -29,7 +29,7 @@ namespace WebApi.Controllers
         [HttpGet("BuscarPorPropriedade/{propriedade}")]
         public async Task<ActionResult<RebanhoResponseDTO>> BuscarPorPropriedade(string propriedade)
         {
-            var rebanhoResponseDto = await _IAplicacaoRebanho.BuscarPorPropriedade(propriedade);
+            var rebanhoResponseDto = await _IAplicacaoRebanho.BuscarRebanhoPorNomePropriedade(propriedade);
 
             if (rebanhoResponseDto != null)
                 return Ok(rebanhoResponseDto);

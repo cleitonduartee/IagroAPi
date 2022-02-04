@@ -27,9 +27,9 @@ namespace Aplicacao.Aplicacao
             return rebanhoDtoList;
         }
 
-        public async Task<RebanhoResponseDTO> BuscarPorPropriedade(string propriedade)
+        public async Task<RebanhoResponseDTO> BuscarRebanhoPorNomePropriedade(string propriedade)
         {
-            var rebanho = await _IServicoRebanho.BuscarPorPropriedade(propriedade.ToUpper());
+            var rebanho = await _IServicoRebanho.BuscarRebanhoPorNomePropriedade(propriedade.ToUpper());
             if (rebanho != null)
             {
                 return new RebanhoResponseDTO(rebanho);

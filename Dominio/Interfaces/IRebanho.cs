@@ -10,7 +10,7 @@ namespace Dominio.Interfaces
     public interface IRebanho : ICrud<Rebanho>
     {
         Task<List<Rebanho>> BuscarPorProdutor(Expression<Func<Rebanho, bool>> expression);
-        Task<Rebanho> BuscarPorPropriedade(Expression<Func<Rebanho, bool>> expression);
+        Task<Rebanho> BuscarRebanhoPorNomePropriedade(Expression<Func<Rebanho, bool>> expression);
 
         Task<Rebanho> BuscarRebanhoPorPropriedadeId(Expression<Func<Rebanho, bool>> expression);
     }

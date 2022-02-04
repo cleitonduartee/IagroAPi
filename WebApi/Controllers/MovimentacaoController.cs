@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entidades.Entidades;
 using Dominio.Dto.Movimentacao;
+using Dominio.ExceptionPersonalizada;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -28,9 +30,22 @@ namespace WebApi.Controllers
             return movimentacoesDtoList;
         }
         [HttpPost("CancelarMovimentacao/{codigo}")]
-        public async Task CancelarMovimentacao(string codigo)
+        public async Task<ActionResult> CancelarMovimentacao(string codigo)
         {
-            await _IAplicacaoMovimentacao.CancelarMovimentacao(codigo);
+            try
+            {
+                await _IAplicacaoMovimentacao.CancelarMovimentacao(codigo);
+                return Ok();
+            }
+            catch(NotFoundExceptionPersonalizado e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+
         }
     }
 }

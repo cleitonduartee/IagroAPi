@@ -30,9 +30,9 @@ namespace Dominio.Servico
             return await _IRebanho.BuscarPorProdutor(p => p.Propriedade.Produtor.Nome.Equals(produtor));
         }
 
-        public async Task<Rebanho> BuscarPorPropriedade(string propriedade)
+        public async Task<Rebanho> BuscarRebanhoPorNomePropriedade(string propriedade)
         {
-            return await _IRebanho.BuscarPorPropriedade(p => p.Propriedade.Nome.Equals(propriedade));
+            return await _IRebanho.BuscarRebanhoPorNomePropriedade(p => p.Propriedade.Nome.Equals(propriedade));
         }
 
         public async Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId)

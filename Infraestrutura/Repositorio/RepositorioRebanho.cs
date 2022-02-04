@@ -24,7 +24,7 @@ namespace Infraestrutura.Repositorio
             return await _ApiContext.Rebanhos.Where(expression).ToListAsync();
         }
 
-        public async Task<Rebanho> BuscarPorPropriedade(Expression<Func<Rebanho, bool>> expression)
+        public async Task<Rebanho> BuscarRebanhoPorNomePropriedade(Expression<Func<Rebanho, bool>> expression)
         {
             return await _ApiContext.Rebanhos.FirstOrDefaultAsync(expression);
         }

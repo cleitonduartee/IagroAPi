@@ -14,6 +14,8 @@ namespace Dominio.Dto.Movimentacao
         public int QtdSemVacinaBubalino { get; set; }
         public int QtdComVacinaBubalino { get; set; }
         public DateTime? DataVacina { get; set; }
+        public DateTime DataMovimentacao { get; set; }
+        public DateTime? DataCancelamento { get; set; }
         public string Status { get; set; }
 
         public MovimentacaoResponseDTO(HistoricoMovimentacao movimentacao)
@@ -26,6 +28,8 @@ namespace Dominio.Dto.Movimentacao
             QtdSemVacinaBubalino = movimentacao.QtdSemVacinaBubalino;
             QtdComVacinaBubalino = movimentacao.QtdComVacinaBubalino;
             DataVacina = movimentacao.DataVacina;
+            DataMovimentacao = movimentacao.DataMovimentacao;
+            DataCancelamento = movimentacao.DataCancelamento;
             Status =movimentacao.Status.ToString();
         }
     }

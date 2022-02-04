@@ -21,6 +21,8 @@ namespace Entidades.Entidades
         public int QtdSemVacinaBubalino { get; set; }
         public int QtdComVacinaBubalino { get; set; }
         public DateTime? DataVacina { get; set; }
+        public DateTime DataMovimentacao { get; set; }
+        public DateTime? DataCancelamento { get; set; }
         public StatusMovimentacao Status { get; set; }
 
         public HistoricoMovimentacao(string codigoHistorico, int rebanhoId, int propriedadeId, TipoMovimentacao tipoMovimentacao, 
@@ -35,6 +37,7 @@ namespace Entidades.Entidades
             QtdSemVacinaBubalino = qtdSemVacinaBubalino;
             QtdComVacinaBubalino = qtdComVacinaBubalino;
             DataVacina = dataVacina;
+            DataMovimentacao = DateTime.Now;
             Status = StatusMovimentacao.ATIVO;
         }
     }
