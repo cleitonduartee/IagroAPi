@@ -15,6 +15,7 @@ namespace Infraestrutura.Configuracao
         public DbSet<Propriedade> Propriedades { get; set; }
         public DbSet<Rebanho> Rebanhos { get; set; }
         public DbSet<HistoricoMovimentacao> Movimentacoes { get; set; }
+        public DbSet<AutoIncrementoHistorico> AutoIncrementaHistorico { get; set; }
               
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace Infraestrutura.Configuracao
             modelBuilder.ApplyConfiguration(new PropriedadeMap());
             modelBuilder.ApplyConfiguration(new RebanhoMap());
             modelBuilder.ApplyConfiguration(new HistoricoMovimentacaoMap());
+            modelBuilder.ApplyConfiguration(new AutoIncrementoHistoricoMap());
 
             
 

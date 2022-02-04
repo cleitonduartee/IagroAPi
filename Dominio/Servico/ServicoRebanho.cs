@@ -16,11 +16,13 @@ namespace Dominio.Servico
         private readonly IRebanho _IRebanho;
         private readonly IHistoricoMovimentacao _IHistoricoMovimentacao;
         private readonly IServicoPropriedade _IServicoPropriedade;
-        public ServicoRebanho(IRebanho IRebanho, IHistoricoMovimentacao IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade)
+        private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
+        public ServicoRebanho(IRebanho IRebanho, IHistoricoMovimentacao IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
         {
             _IRebanho = IRebanho;
             _IHistoricoMovimentacao = IHistoricoMovimentacao;
             _IServicoPropriedade = IServicoPropriedade;
+            _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;
         }
 
         public async Task<List<Rebanho>> BuscarPorProdutor(string produtor)
@@ -49,11 +51,11 @@ namespace Dominio.Servico
             ValidacoesEntradaDeAnimais(rebanhoInsertDTO);
 
             var rebanho = BuscarRebanhoPorPropriedadeId(rebanhoInsertDTO.PropriedadeId).Result;
-            RealizarEntradasDeAnimaisNoRebanho(rebanhoInsertDTO, rebanho);           
-
+            RealizarEntradasDeAnimaisNoRebanho(rebanhoInsertDTO, rebanho);
             await _IRebanho.Atualizar(rebanho);
+
             await _IHistoricoMovimentacao.CriarHistoricoMovimentacao(new HistoricoMovimentacao(
-                "", rebanho.RebanhoId, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
+                GerarCodigoHistorico(), rebanho.RebanhoId, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
                 rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino, rebanhoInsertDTO.DataVacina
                 ));
             
@@ -90,6 +92,11 @@ namespace Dominio.Servico
             }
             rebanho.SaldoSemVacinaBovino += rebanhoDto.SaldoSemVacinaBovino;
             rebanho.SaldoSemVacinaBubalino += rebanhoDto.SaldoSemVacinaBubalino;
+        }
+        private string GerarCodigoHistorico()
+        {            
+            int idGerado = _IUtilAutoIncrementaHistorico.GerarId().Result;
+            return "HISTORICO - " + idGerado;
         }
     }
 }

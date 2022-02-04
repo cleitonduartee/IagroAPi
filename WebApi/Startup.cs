@@ -40,6 +40,7 @@ namespace WebApi
             services.AddScoped<IPropriedade, RepositorioPropriedade>();
             services.AddScoped<IRebanho, RepositorioRebanho>();
             services.AddScoped<IHistoricoMovimentacao, RepositorioHistoricoMovimentacao>();
+            services.AddScoped<IUtilAutoIncrementaHistorico, RepositorioUtilAutoIncrementaHistorico>();
 
             //INTERFACE E SERVICO
             services.AddScoped<IServicoProdutor, ServicoProdutor>();

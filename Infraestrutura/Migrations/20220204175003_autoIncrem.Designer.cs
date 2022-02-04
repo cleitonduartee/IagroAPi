@@ -3,35 +3,23 @@ using System;
 using Infraestrutura.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infraestrutura.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    partial class ApiContextModelSnapshot : ModelSnapshot
+    [Migration("20220204175003_autoIncrem")]
+    partial class autoIncrem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("Entidades.Entidades.AutoIncrementoHistorico", b =>
-                {
-                    b.Property<int>("IdGerado")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(99999)
-                        .HasColumnType("integer")
-                        .HasIdentityOptions(1L, null, null, null, null, null)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.HasKey("IdGerado");
-
-                    b.ToTable("tb_auto_incremento_historico");
-                });
 
             modelBuilder.Entity("Entidades.Entidades.Endereco", b =>
                 {
