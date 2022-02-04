@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dto.Rebanho;
+﻿using Aplicacao.Dto.RebanhoDTO;
 using Aplicacao.Interfaces;
 using Entidades.Entidades;
 using Microsoft.AspNetCore.Http;
@@ -21,17 +21,17 @@ namespace WebApi.Controllers
             _IAplicacaoRebanho = IAplicacaoRebanho;
         }
         [HttpGet("BuscarPorProdutor/{produtor}")]
-        public async Task<List<Rebanho>> BuscarPorProdutor(string produtor)
+        public async Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string produtor)
         {
             return await _IAplicacaoRebanho.BuscarPorProdutor(produtor);
         }
         [HttpGet("BuscarPorPropriedade/{propriedade}")]
-        public async Task<ActionResult<Rebanho>> BuscarPorPropriedade(string propriedade)
+        public async Task<ActionResult<RebanhoResponseDTO>> BuscarPorPropriedade(string propriedade)
         {
-            var rebanho = await _IAplicacaoRebanho.BuscarPorPropriedade(propriedade);
+            var rebanhoResponseDto = await _IAplicacaoRebanho.BuscarPorPropriedade(propriedade);
 
-            if (rebanho != null)
-                return Ok(rebanho);
+            if (rebanhoResponseDto != null)
+                return Ok(rebanhoResponseDto);
             else
                 return NotFound("Não foi localizado nenhum rebanho para a propriedade informada.");
         }

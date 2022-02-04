@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dto.Rebanho;
+﻿using Aplicacao.Dto.RebanhoDTO;
 using Aplicacao.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
@@ -19,14 +19,24 @@ namespace Aplicacao.Aplicacao
             _IServicoRebanho = IServicoRebanho;
             _IServicoPropriedade = IServicoPropriedade;
         }
-        public async Task<List<Rebanho>> BuscarPorProdutor(string produtor)
+        public async Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string produtor)
         {
-            return await _IServicoRebanho.BuscarPorProdutor(produtor.ToUpper());
+            List<Rebanho> rebanhoList = await _IServicoRebanho.BuscarPorProdutor(produtor.ToUpper());
+            var rebanhoDtoList = new List<RebanhoResponseDTO>();
+            rebanhoList.ForEach(rebanho => rebanhoDtoList.Add(new RebanhoResponseDTO(rebanho)));
+            return rebanhoDtoList;
         }
 
-        public async Task<Rebanho> BuscarPorPropriedade(string propriedade)
+        public async Task<RebanhoResponseDTO> BuscarPorPropriedade(string propriedade)
         {
-            return await _IServicoRebanho.BuscarPorPropriedade(propriedade.ToUpper());
+            var rebanho = await _IServicoRebanho.BuscarPorPropriedade(propriedade.ToUpper());
+            if (rebanho != null)
+            {
+                return new RebanhoResponseDTO(rebanho);
+            }
+            else
+                return null;
+          
         }
 
         public async Task CancelarEntrada(Rebanho rebanho)

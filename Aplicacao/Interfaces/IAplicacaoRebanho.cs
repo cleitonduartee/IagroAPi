@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dto.Rebanho;
+﻿using Aplicacao.Dto.RebanhoDTO;
 using Aplicacao.Interfaces.InterfaceCrud;
 using Entidades.Entidades;
 using System.Collections.Generic;
@@ -10,8 +10,8 @@ namespace Aplicacao.Interfaces
     {
         Task EntradaAnimais(RebanhoInsertDTO rebanho);
         Task CancelarEntrada(Rebanho rebanho);
-        Task<List<Rebanho>> BuscarPorProdutor(string produtor);
-        Task<Rebanho> BuscarPorPropriedade(string propriedade);
+        Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string produtor);
+        Task<RebanhoResponseDTO> BuscarPorPropriedade(string propriedade);
         Dictionary<string, string> validacoes(RebanhoInsertDTO rebanhoDTO) ;
 
 

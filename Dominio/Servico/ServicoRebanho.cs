@@ -27,8 +27,8 @@ namespace Dominio.Servico
 
         public async Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId)
         {
-            throw new System.NotImplementedException();
-            // return await _IRebanho.BuscarRebanhoPorPropriedadeId(r => r.PropriedadeId.Equals(propriedadeId));
+            //throw new System.NotImplementedException();
+            return await _IRebanho.BuscarRebanhoPorPropriedadeId(r => r.PropriedadeId.Equals(propriedadeId));
         }
 
         public async Task CancelarEntrada(Rebanho rebanho)
