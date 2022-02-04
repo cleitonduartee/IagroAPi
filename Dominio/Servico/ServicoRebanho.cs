@@ -46,23 +46,17 @@ namespace Dominio.Servico
 
         public async Task EntradaAnimais(RebanhoInsertDTO rebanhoInsertDTO)
         {
-            //var validacoes = ValidacoesEntradaDeAnimais(rebanhoInsertDTO);
-            //if(validacoes != null)
-            //    return validacoes;
-
             ValidacoesEntradaDeAnimais(rebanhoInsertDTO);
 
+            var rebanho = BuscarRebanhoPorPropriedadeId(rebanhoInsertDTO.PropriedadeId).Result;
+            RealizarEntradasDeAnimaisNoRebanho(rebanhoInsertDTO, rebanho);           
 
-            //var rebanho = BuscarRebanhoPorPropriedadeId(rebanhoDto.PropriedadeId).Result;
-            //realizarEntradasDeAnimaisNoRebanho(rebanhoDto, rebanho);
-            //await _IServicoRebanho.EntradaAnimais(rebanho);
-
-            //await _IRebanho.Atualizar(rebanho);
-            //await _IHistoricoMovimentacao.CriarHistoricoMovimentacao(new HistoricoMovimentacao(
-            //    "", rebanho.RebanhoId, rebanho.PropriedadeId, TipoMovimentacao.ENTRADA, rebanho.SaldoSemVacinaBovino, rebanho.SaldoComVacinaBovino,
-            //    rebanho.SaldoSemVacinaBubalino, rebanho.SaldoComVacinaBubalino, rebanho.DataVacina
-            //    ));
-            //return null;
+            await _IRebanho.Atualizar(rebanho);
+            await _IHistoricoMovimentacao.CriarHistoricoMovimentacao(new HistoricoMovimentacao(
+                "", rebanho.RebanhoId, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
+                rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino, rebanhoInsertDTO.DataVacina
+                ));
+            
         }
 
         public void ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO)
