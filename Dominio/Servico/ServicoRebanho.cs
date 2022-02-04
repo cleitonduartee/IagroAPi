@@ -37,7 +37,6 @@ namespace Dominio.Servico
 
         public async Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId)
         {
-            //throw new System.NotImplementedException();
             return await _IRebanho.BuscarRebanhoPorPropriedadeId(r => r.PropriedadeId.Equals(propriedadeId));
         }
 
@@ -50,20 +49,27 @@ namespace Dominio.Servico
         {
             ValidacoesEntradaDeAnimais(rebanhoInsertDTO);
 
-            var rebanho = BuscarRebanhoPorPropriedadeId(rebanhoInsertDTO.PropriedadeId).Result;
-            RealizarEntradasDeAnimaisNoRebanho(rebanhoInsertDTO, rebanho);
-            await _IRebanho.Atualizar(rebanho);
+            try
+            {
+                //Verificar depois como obter uma conexao com banco aqui para fazer o rollback caso aconteca algum erro.
 
-            await _IHistoricoMovimentacao.CriarHistoricoMovimentacao(new HistoricoMovimentacao(
-                GerarCodigoHistorico(), rebanho.RebanhoId, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
-                rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino, rebanhoInsertDTO.DataVacina
-                ));
+                var rebanho = BuscarRebanhoPorPropriedadeId(rebanhoInsertDTO.PropriedadeId).Result;
+                RealizarEntradasDeAnimaisNoRebanho(rebanhoInsertDTO, rebanho);
+                await _IRebanho.Atualizar(rebanho);
+
+                await _IHistoricoMovimentacao.Adicionar(new HistoricoMovimentacao(
+                    GerarCodigoHistorico(), rebanho.RebanhoId,rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
+                    rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino, rebanhoInsertDTO.DataVacina
+                    ));
+            }catch(Exception ex)
+            {
+                throw new Exception();
+            }
             
         }
 
         public void ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO)
-        {
-            // Dictionary<string, string> validacao = new Dictionary<string, string>();
+        {            
             string validacao = "";
             var propriedade = _IServicoPropriedade.BuscarPorId(rebanhoDTO.PropriedadeId).Result;
             if (propriedade == null)
@@ -79,8 +85,7 @@ namespace Dominio.Servico
 
             if (!String.IsNullOrEmpty(validacao))
                 throw new EntradaAnimalException(validacao);
-            //else
-            //    return null;
+           
         }
         private void RealizarEntradasDeAnimaisNoRebanho(RebanhoInsertDTO rebanhoDto, Rebanho rebanho)
         {
@@ -96,7 +101,7 @@ namespace Dominio.Servico
         private string GerarCodigoHistorico()
         {            
             int idGerado = _IUtilAutoIncrementaHistorico.GerarId().Result;
-            return "HISTORICO - " + idGerado;
+            return "HISTORICO-" + idGerado;
         }
     }
 }

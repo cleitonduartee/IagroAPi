@@ -53,7 +53,7 @@ namespace WebApi.Controllers
             }
             catch(Exception ex)
             {
-                return NotFound("ERRO: Por favor tentar novamente. Caso o problema persista, entre em contato com o suporte." );
+                return NotFound("Erro ao realizar entrada de animais. Tente novamente. Caso o problema persista, entre em contato com o suporte.");
             }
         }
         [HttpPost("CancelamentoEntradaAnimais")]

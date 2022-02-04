@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Entidades.Entidades
@@ -13,6 +14,7 @@ namespace Entidades.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RebanhoId { get; set; }
         public int PropriedadeId { get; set; }
+        [JsonIgnore]
         public virtual Propriedade Propriedade { get; set; }
         public int SaldoSemVacinaBovino { get; set; }
         public int SaldoComVacinaBovino { get; set; }

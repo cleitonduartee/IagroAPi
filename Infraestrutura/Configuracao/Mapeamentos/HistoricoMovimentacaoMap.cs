@@ -15,6 +15,8 @@ namespace Infraestrutura.Configuracao.Mapeamentos
         {
             builder.ToTable("tb_historico_movimentacao");
             builder.HasKey(x => x.CodigoHistorico);
+            builder.HasOne(x => x.Propriedade).WithMany().HasForeignKey(x => x.PropriedadeId);
+            builder.Ignore(e => e.Propriedade);
         }
     }
 }

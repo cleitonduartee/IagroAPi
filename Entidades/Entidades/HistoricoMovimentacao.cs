@@ -14,6 +14,7 @@ namespace Entidades.Entidades
         public string CodigoHistorico { get; set; }
         public int RebanhoId { get; set; }
         public int PropriedadeId { get; set; }
+        public virtual Propriedade Propriedade { get; set; }
         public TipoMovimentacao TipoMovimentacao { get; set; }
         public int QtdSemVacinaBovino { get; set; }
         public int QtdComVacinaBovino { get; set; }

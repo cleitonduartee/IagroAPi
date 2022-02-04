@@ -17,11 +17,12 @@ namespace Infraestrutura.Repositorio
             _ApiContext = ApiContext;
         }
         public async Task<int> GerarId()
-        {
+        {            
             var autoIncremento = new AutoIncrementoHistorico();
             await _ApiContext.AddAsync(autoIncremento);
             await _ApiContext.SaveChangesAsync();
             return autoIncremento.IdGerado;
+            
         }
     }
 }

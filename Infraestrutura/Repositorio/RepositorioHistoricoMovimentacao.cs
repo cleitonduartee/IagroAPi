@@ -1,31 +1,33 @@
 ﻿using Dominio.Interfaces;
 using Entidades.Entidades;
 using Infraestrutura.Configuracao;
+using Infraestrutura.Repositorio.Crud;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Infraestrutura.Repositorio
 {
-    public class RepositorioHistoricoMovimentacao : IHistoricoMovimentacao
+    public class RepositorioHistoricoMovimentacao : RepositorioCrud<HistoricoMovimentacao>, IHistoricoMovimentacao
     {
         private readonly ApiContext _ApiContext;
-        public RepositorioHistoricoMovimentacao(ApiContext ApiContext) 
+        public RepositorioHistoricoMovimentacao(ApiContext ApiContext) : base(ApiContext)
         {
             _ApiContext = ApiContext;
         }
-        public async Task CancelarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao)
+
+        public async Task<HistoricoMovimentacao> BuscarPorCodigo(string codigoMovimentacao)
         {
-            _ApiContext.Movimentacoes.Update(historicoMovimentacao);
-            await _ApiContext.SaveChangesAsync();
+            return await _ApiContext.Movimentacoes.FindAsync(codigoMovimentacao);
         }
 
-        public async Task CriarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao)
+        public async Task<List<HistoricoMovimentacao>> BuscarPorIdPropriedade(Expression<Func<HistoricoMovimentacao, bool>> expression)
         {
-            await _ApiContext.Movimentacoes.AddAsync(historicoMovimentacao);
-            await _ApiContext.SaveChangesAsync();
+             return await _ApiContext.Movimentacoes.Where(expression).ToListAsync();
         }
     }
 }

@@ -46,12 +46,14 @@ namespace WebApi
             services.AddScoped<IServicoProdutor, ServicoProdutor>();
             services.AddScoped<IServicoPropriedade, ServicoPropriedade>();
             services.AddScoped<IServicoRebanho, ServicoRebanho>();
+            services.AddScoped<IServicoMovimentacao, ServicoMovimentacao>();
 
             // INTERFACE E APLICACAO
             services.AddScoped<IAplicacaoMunicipio, AplicacaoMunicipio>();
             services.AddScoped<IAplicacaoProdutor, AplicacaoProdutor>();
             services.AddScoped<IAplicacaoPropriedade, AplicacaoPropriedade>();
             services.AddScoped<IAplicacaoRebanho, AplicacaoRebanho>();
+            services.AddScoped<IAplicacaoMovimentacao, AplicacaoMovimentacao>();
 
 
             services.AddControllers();
