@@ -29,8 +29,8 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {            
-            services.AddDbContext<ApiContext>(opt =>
-                     opt.UseLazyLoadingProxies()
+            services.AddDbContext<ApiContext>(opt => opt
+                        .UseLazyLoadingProxies()
                         .UseNpgsql(ObterStringConexaoBanco())
             );
             //INTERFACE E REPOSITORIO
@@ -38,15 +38,18 @@ namespace WebApi
             services.AddScoped<IEndereco, RepositorioEndereco>();
             services.AddScoped<IProdutor, RepositorioProdutor>();
             services.AddScoped<IPropriedade, RepositorioPropriedade>();
+            services.AddScoped<IRebanho, RepositorioRebanho>();
 
             //INTERFACE E SERVICO
             services.AddScoped<IServicoProdutor, ServicoProdutor>();
             services.AddScoped<IServicoPropriedade, ServicoPropriedade>();
+            services.AddScoped<IServicoRebanho, ServicoRebanho>();
 
             // INTERFACE E APLICACAO
             services.AddScoped<IAplicacaoMunicipio, AplicacaoMunicipio>();
             services.AddScoped<IAplicacaoProdutor, AplicacaoProdutor>();
             services.AddScoped<IAplicacaoPropriedade, AplicacaoPropriedade>();
+            services.AddScoped<IAplicacaoRebanho, AplicacaoRebanho>();
 
 
             services.AddControllers();

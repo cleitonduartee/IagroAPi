@@ -13,6 +13,7 @@ namespace Infraestrutura.Configuracao
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Produtor> Produtors { get; set; }
         public DbSet<Propriedade> Propriedades { get; set; }
+        public DbSet<Rebanho> Rebanhos { get; set; }
               
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,7 @@ namespace Infraestrutura.Configuracao
             modelBuilder.ApplyConfiguration(new EnderecoMap());            
             modelBuilder.ApplyConfiguration(new MunicipioMap());
             modelBuilder.ApplyConfiguration(new PropriedadeMap());
+            modelBuilder.ApplyConfiguration(new RebanhoMap());
 
             
 

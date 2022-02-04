@@ -34,7 +34,8 @@ namespace Aplicacao.Aplicacao
                 return null;
         }
         public async Task<List<PropriedadeResponseDTO>> BuscarPorProdutor(string produtor)
-        {           
+        {
+            //produtor = produtor.ToUpper();
             var propriedades = await _IServicoPropriedade.BuscarPorProdutor(produtor.ToUpper());
             var propriedadesResponseDTO = new List<PropriedadeResponseDTO>();
             propriedades.ForEach(propriedade =>

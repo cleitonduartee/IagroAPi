@@ -21,6 +21,7 @@ namespace Entidades.Entidades
         public virtual  Produtor Produtor { get; set; }
         public int MunicipioId { get; set; }
         public virtual Municipio Municipio { get; set; }
+        public virtual Rebanho Rebanho { get; set; } = new Rebanho();
 
         public Propriedade()
         {
