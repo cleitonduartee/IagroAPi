@@ -1,5 +1,5 @@
-﻿using Aplicacao.Dto.RebanhoDTO;
-using Aplicacao.Interfaces.InterfaceCrud;
+﻿using Aplicacao.Interfaces.InterfaceCrud;
+using Dominio.Dto.RebanhoDTO;
 using Entidades.Entidades;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,6 +1,5 @@
-﻿using Aplicacao.Dto;
-using Aplicacao.Dto.PropriedadeDTO;
-using Aplicacao.Interfaces;
+﻿using Aplicacao.Interfaces;
+using Dominio.Dto.PropriedadeDTO;
 using Dominio.Interfaces;
 using Entidades.Entidades;
 using Infraestrutura.Repositorio;

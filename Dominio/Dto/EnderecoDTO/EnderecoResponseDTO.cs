@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Dto.EnderecoDTO
+namespace Dominio.Dto.EnderecoDTO
 {
     public class EnderecoResponseDTO
     {        

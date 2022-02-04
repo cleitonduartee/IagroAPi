@@ -1,5 +1,5 @@
-﻿using Aplicacao.Dto.PropriedadeDTO;
-using Aplicacao.Interfaces;
+﻿using Aplicacao.Interfaces;
+using Dominio.Dto.PropriedadeDTO;
 using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;

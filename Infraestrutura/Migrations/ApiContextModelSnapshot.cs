@@ -42,6 +42,43 @@ namespace Infraestrutura.Migrations
                     b.ToTable("tb_endereco");
                 });
 
+            modelBuilder.Entity("Entidades.Entidades.HistoricoMovimentacao", b =>
+                {
+                    b.Property<string>("CodigoHistorico")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("DataVacina")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("PropriedadeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QtdComVacinaBovino")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QtdComVacinaBubalino")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QtdSemVacinaBovino")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QtdSemVacinaBubalino")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RebanhoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TipoMovimentacao")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CodigoHistorico");
+
+                    b.ToTable("tb_historico_movimentacao");
+                });
+
             modelBuilder.Entity("Entidades.Entidades.Municipio", b =>
                 {
                     b.Property<int>("MunicipioId")

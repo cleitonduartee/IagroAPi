@@ -1,5 +1,5 @@
-﻿using Aplicacao.Dto.RebanhoDTO;
-using Aplicacao.Interfaces;
+﻿using Aplicacao.Interfaces;
+using Dominio.Dto.RebanhoDTO;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
 using System;
@@ -46,9 +46,9 @@ namespace Aplicacao.Aplicacao
 
         public async Task EntradaAnimais(RebanhoInsertDTO rebanhoDto)
         {            
-            var rebanho = _IServicoRebanho.BuscarRebanhoPorPropriedadeId(rebanhoDto.PropriedadeId).Result;
-            realizarEntradasDeAnimaisNoRebanho(rebanhoDto, rebanho);
-            await _IServicoRebanho.EntradaAnimais(rebanho);
+            //var rebanho = _IServicoRebanho.BuscarRebanhoPorPropriedadeId(rebanhoDto.PropriedadeId).Result;
+            //realizarEntradasDeAnimaisNoRebanho(rebanhoDto, rebanho);
+            //await _IServicoRebanho.EntradaAnimais(rebanho);
         }
 
         public Dictionary<string, string> validacoes(RebanhoInsertDTO rebanhoDTO)
@@ -76,7 +76,8 @@ namespace Aplicacao.Aplicacao
             if(rebanhoDto.SaldoComVacinaBubalino > 0 || rebanhoDto.SaldoComVacinaBovino > 0)
             {
                 rebanho.SaldoComVacinaBovino += rebanhoDto.SaldoComVacinaBovino;
-                rebanho.SaldoComVacinaBubalino += rebanhoDto.SaldoComVacinaBubalino;                
+                rebanho.SaldoComVacinaBubalino += rebanhoDto.SaldoComVacinaBubalino;
+                rebanho.DataVacina = rebanhoDto.DataVacina;
             }
             rebanho.SaldoSemVacinaBovino += rebanhoDto.SaldoSemVacinaBovino;
             rebanho.SaldoSemVacinaBubalino += rebanhoDto.SaldoSemVacinaBubalino;

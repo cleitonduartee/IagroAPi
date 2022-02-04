@@ -1,5 +1,5 @@
-﻿using Aplicacao.Dto.PropriedadeDTO;
-using Aplicacao.Interfaces.InterfaceCrud;
+﻿using Aplicacao.Interfaces.InterfaceCrud;
+using Dominio.Dto.PropriedadeDTO;
 using Entidades.Entidades;
 using System.Collections.Generic;
 using System.Threading.Tasks;

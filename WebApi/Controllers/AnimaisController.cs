@@ -1,5 +1,5 @@
-﻿using Aplicacao.Dto.RebanhoDTO;
-using Aplicacao.Interfaces;
+﻿using Aplicacao.Interfaces;
+using Dominio.Dto.RebanhoDTO;
 using Entidades.Entidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

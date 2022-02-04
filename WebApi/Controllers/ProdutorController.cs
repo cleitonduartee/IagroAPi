@@ -1,5 +1,5 @@
-﻿using Aplicacao.Dto.ProdutorDTO;
-using Aplicacao.Interfaces;
+﻿using Aplicacao.Interfaces;
+using Dominio.Dto.ProdutorDTO;
 using Dominio.Interfaces;
 using Entidades.Entidades;
 using Infraestrutura.Repositorio;

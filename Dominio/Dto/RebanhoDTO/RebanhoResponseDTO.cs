@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Dto.RebanhoDTO
+namespace Dominio.Dto.RebanhoDTO
 {
     public class RebanhoResponseDTO
     {

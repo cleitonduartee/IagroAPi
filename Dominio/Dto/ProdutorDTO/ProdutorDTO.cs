@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Dto.ProdutorDTO
+namespace Dominio.Dto.ProdutorDTO
 {
     public class ProdutorDTO
     {        

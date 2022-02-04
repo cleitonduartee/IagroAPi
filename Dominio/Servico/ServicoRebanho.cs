@@ -1,6 +1,8 @@
-﻿using Dominio.Interfaces;
+﻿using Dominio.Dto.RebanhoDTO;
+using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
+using Entidades.Entidades.Enuns;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +12,11 @@ namespace Dominio.Servico
     public class ServicoRebanho : IServicoRebanho
     {
         private readonly IRebanho _IRebanho;
-        public ServicoRebanho(IRebanho IRebanho)
+        private readonly IHistoricoMovimentacao _IHistoricoMovimentacao;
+        public ServicoRebanho(IRebanho IRebanho, IHistoricoMovimentacao IHistoricoMovimentacao)
         {
             _IRebanho = IRebanho;
+            _IHistoricoMovimentacao = IHistoricoMovimentacao;
         }
 
         public async Task<List<Rebanho>> BuscarPorProdutor(string produtor)
@@ -36,9 +40,13 @@ namespace Dominio.Servico
             throw new System.NotImplementedException();
         }
 
-        public async Task EntradaAnimais(Rebanho rebanho)
+        public async Task EntradaAnimais(RebanhoInsertDTO rebanho)
         {
-            await _IRebanho.Atualizar(rebanho);
+            //await _IRebanho.Atualizar(rebanho);
+            //await _IHistoricoMovimentacao.CriarHistoricoMovimentacao(new HistoricoMovimentacao(
+            //    "", rebanho.RebanhoId, rebanho.PropriedadeId, TipoMovimentacao.ENTRADA, rebanho.SaldoSemVacinaBovino, rebanho.SaldoComVacinaBovino,
+            //    rebanho.SaldoSemVacinaBubalino, rebanho.SaldoComVacinaBubalino,rebanho.DataVacina
+            //    ));
         }
     }
 }

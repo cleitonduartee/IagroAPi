@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacao.Dto.PropriedadeDTO
+namespace Dominio.Dto.PropriedadeDTO
 {
     public class PropriedadeInsertDTO
     {

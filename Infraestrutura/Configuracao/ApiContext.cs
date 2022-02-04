@@ -14,6 +14,7 @@ namespace Infraestrutura.Configuracao
         public DbSet<Produtor> Produtors { get; set; }
         public DbSet<Propriedade> Propriedades { get; set; }
         public DbSet<Rebanho> Rebanhos { get; set; }
+        public DbSet<HistoricoMovimentacao> Movimentacoes { get; set; }
               
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +24,7 @@ namespace Infraestrutura.Configuracao
             modelBuilder.ApplyConfiguration(new MunicipioMap());
             modelBuilder.ApplyConfiguration(new PropriedadeMap());
             modelBuilder.ApplyConfiguration(new RebanhoMap());
+            modelBuilder.ApplyConfiguration(new HistoricoMovimentacaoMap());
 
             
 

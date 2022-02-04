@@ -1,4 +1,5 @@
-﻿using Entidades.Entidades;
+﻿using Dominio.Dto.RebanhoDTO;
+using Entidades.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Dominio.Interfaces.InterfaceServico
 {
     public interface IServicoRebanho
     {
-        Task EntradaAnimais(Rebanho rebanho);
+        Task EntradaAnimais(RebanhoInsertDTO rebanho);
         Task CancelarEntrada(Rebanho rebanho);
         Task<List<Rebanho>> BuscarPorProdutor(string produtor);
         Task<Rebanho> BuscarPorPropriedade(string propriedade);
