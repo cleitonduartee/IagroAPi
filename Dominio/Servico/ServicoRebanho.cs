@@ -68,7 +68,7 @@ namespace Dominio.Servico
             
         }
 
-        public void ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO)
+        private void ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO)
         {            
             string validacao = "";
             var propriedade = _IServicoPropriedade.BuscarPorId(rebanhoDTO.PropriedadeId).Result;
@@ -84,7 +84,7 @@ namespace Dominio.Servico
 
 
             if (!String.IsNullOrEmpty(validacao))
-                throw new EntradaAnimalException(validacao);
+                throw new ExceptionGenerica(validacao);
            
         }
         private void RealizarEntradasDeAnimaisNoRebanho(RebanhoInsertDTO rebanhoDto, Rebanho rebanho)

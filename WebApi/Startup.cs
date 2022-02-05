@@ -52,6 +52,7 @@ namespace WebApi
             services.AddScoped<IServicoPropriedade, ServicoPropriedade>();
             services.AddScoped<IServicoRebanho, ServicoRebanho>();
             services.AddScoped<IServicoMovimentacao, ServicoMovimentacao>();
+            services.AddScoped<IServicoVenda, ServicoVenda>();
 
             // INTERFACE E APLICACAO
             services.AddScoped<IAplicacaoMunicipio, AplicacaoMunicipio>();
@@ -59,12 +60,13 @@ namespace WebApi
             services.AddScoped<IAplicacaoPropriedade, AplicacaoPropriedade>();
             services.AddScoped<IAplicacaoRebanho, AplicacaoRebanho>();
             services.AddScoped<IAplicacaoMovimentacao, AplicacaoMovimentacao>();
+            services.AddTransient<IAplicacaoVenda, AplicacaoVenda>();
 
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IagroApi", Version = "v1" });
             });
         }
 
@@ -75,7 +77,7 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IagroApi v1"));
             }
 
             app.UseRouting();

@@ -2,7 +2,7 @@
 using Entidades.Entidades.Enuns;
 using Entidades.Entidades;
 
-namespace Dominio.Dto.Movimentacao
+namespace Dominio.Dto.Movimentacao.MovimentacaoDTO
 {
     public class MovimentacaoResponseDTO
     {

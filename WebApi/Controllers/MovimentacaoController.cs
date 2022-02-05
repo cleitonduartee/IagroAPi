@@ -4,9 +4,9 @@ using Aplicacao.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entidades.Entidades;
-using Dominio.Dto.Movimentacao;
 using Dominio.ExceptionPersonalizada;
 using System;
+using Dominio.Dto.Movimentacao.MovimentacaoDTO;
 
 namespace WebApi.Controllers
 {
@@ -37,13 +37,13 @@ namespace WebApi.Controllers
                 await _IAplicacaoMovimentacao.CancelarMovimentacao(codigo);
                 return Ok();
             }
-            catch(NotFoundExceptionPersonalizado e)
+            catch(ExceptionGenerica ex)
             {
-                return NotFound(e.Message);
+                return NotFound(ex.Message);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return NotFound(e.Message);
+                return NotFound(ex.Message);
             }
 
         }

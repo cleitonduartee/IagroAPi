@@ -21,15 +21,15 @@ namespace WebApi.Controllers
         {
             _IAplicacaoRebanho = IAplicacaoRebanho;
         }
-        [HttpGet("BuscarPorProdutor/{produtor}")]
-        public async Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string produtor)
+        [HttpGet("BuscarPorProdutor/{nomeProdutor}")]
+        public async Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string nomeProdutor)
         {
-            return await _IAplicacaoRebanho.BuscarPorProdutor(produtor);
+            return await _IAplicacaoRebanho.BuscarPorProdutor(nomeProdutor);
         }
-        [HttpGet("BuscarPorPropriedade/{propriedade}")]
-        public async Task<ActionResult<RebanhoResponseDTO>> BuscarPorPropriedade(string propriedade)
+        [HttpGet("BuscarPorPropriedade/{nomePropriedade}")]
+        public async Task<ActionResult<RebanhoResponseDTO>> BuscarPorPropriedade(string nomePropriedade)
         {
-            var rebanhoResponseDto = await _IAplicacaoRebanho.BuscarRebanhoPorNomePropriedade(propriedade);
+            var rebanhoResponseDto = await _IAplicacaoRebanho.BuscarRebanhoPorNomePropriedade(nomePropriedade);
 
             if (rebanhoResponseDto != null)
                 return Ok(rebanhoResponseDto);
@@ -47,7 +47,7 @@ namespace WebApi.Controllers
                 return Ok("Entrada de animais realizada com sucesso.");
 
             }
-            catch (EntradaAnimalException ex)
+            catch (ExceptionGenerica ex)
             {
                 return BadRequest(ex.Message);
             }

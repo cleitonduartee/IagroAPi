@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Dominio.ExceptionPersonalizada
 {
     [Serializable]
-    public class NotFoundExceptionPersonalizado : Exception
+    public class ExceptionGenerica : Exception
     {
-        public NotFoundExceptionPersonalizado(string msg) : base(msg) { }
+        public ExceptionGenerica(string msg) : base(msg) { }
     }
 }

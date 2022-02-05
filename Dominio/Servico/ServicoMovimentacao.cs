@@ -31,9 +31,9 @@ namespace Dominio.Servico
             var movimentacao = await _IHistoricoMovimentacao.BuscarPorCodigo(codigoMovimentacao);
 
             if (movimentacao == null)
-                throw new NotFoundExceptionPersonalizado("Não foi localizado histórico de movimentação com o código informado.");
+                throw new ExceptionGenerica("Não foi localizado histórico de movimentação com o código informado.");
             if (movimentacao.Status.Equals(StatusMovimentacao.CANCELADO))
-                throw new NotFoundExceptionPersonalizado("Movimentação já encontra-se CANCELADA.");
+                throw new ExceptionGenerica("Movimentação já encontra-se CANCELADA.");
 
             movimentacao.Status = StatusMovimentacao.CANCELADO;
             movimentacao.DataCancelamento = DateTime.Now;
@@ -43,7 +43,7 @@ namespace Dominio.Servico
             else if (movimentacao.TipoMovimentacao.Equals(TipoMovimentacao.VENDA))
                 await RealizaEstornoVenda(movimentacao);
             else
-                await RealizaEstornoCompra(movimentacao);
+                await RealizaEstornoCompra(movimentacao); //Acredito que nao ira precisar implementar esse método
 
             await _IHistoricoMovimentacao.Atualizar(movimentacao);
 

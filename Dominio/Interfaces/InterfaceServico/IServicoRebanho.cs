@@ -15,9 +15,6 @@ namespace Dominio.Interfaces.InterfaceServico
         Task CancelarEntrada(Rebanho rebanho);
         Task<List<Rebanho>> BuscarPorProdutor(string produtor);
         Task<Rebanho> BuscarRebanhoPorNomePropriedade(string propriedade);
-        Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId);
-        void ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO);
-
-
+        Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId);   
     }
 }
