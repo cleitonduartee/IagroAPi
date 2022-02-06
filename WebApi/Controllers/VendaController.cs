@@ -25,7 +25,7 @@ namespace WebApi.Controllers
             try
             {
                 await _AplicacaoVenda.RealizarVenda(vendaInsertDto);
-                return Ok("Chegou");
+                return Ok();
             }
             catch (Exception ex)
             {

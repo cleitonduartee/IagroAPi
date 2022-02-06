@@ -3,11 +3,10 @@ using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
 using Entidades.Entidades.Enuns;
+using Dominio.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Dominio.Servico
@@ -16,14 +15,19 @@ namespace Dominio.Servico
     {
         private readonly IHistoricoMovimentacao _IHistoricoMovimentacao;
         private readonly IRebanho _IRebanho;
-        public ServicoMovimentacao(IHistoricoMovimentacao IHistoricoMovimentacao, IRebanho IRebanho)
+        private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
+        public ServicoMovimentacao(IHistoricoMovimentacao IHistoricoMovimentacao, IRebanho IRebanho, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
         {
             _IHistoricoMovimentacao = IHistoricoMovimentacao;
             _IRebanho = IRebanho;
+            _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;
         }
         public async Task<List<HistoricoMovimentacao>> BuscarPorIdPropriedade(int idPropriedade)
         {
-             return await _IHistoricoMovimentacao.BuscarPorIdPropriedade(m => m.PropriedadeId.Equals(idPropriedade));
+           //  return await _IHistoricoMovimentacao.BuscarPorIdPropriedade(m => m.PropriedadeId.Equals(idPropriedade));
+
+            return await _IHistoricoMovimentacao.BuscarPorIdPropriedade(
+                m => m.PropriedadeOrigemId.Equals(idPropriedade) && TipoMovimentacao.VENDA.Equals(m.TipoMovimentacao) || m.PropriedadeDestinoId.Equals(idPropriedade));
         }
 
         public async Task CancelarMovimentacao(string codigoMovimentacao)
@@ -45,13 +49,13 @@ namespace Dominio.Servico
             else
                 await RealizaEstornoCompra(movimentacao); //Acredito que nao ira precisar implementar esse método
 
-            await _IHistoricoMovimentacao.Atualizar(movimentacao);
+            await _IHistoricoMovimentacao.AtualizarHistoricoMovimentacao(movimentacao);
 
             //Implementar posteriormente com if, caso for entrada faz isso, caso for venda, faz isso. Verificar como pegar os dois id
         }
         private async Task RealizaEstornoEntrada(HistoricoMovimentacao movimentacao)
         {
-            var rebanho = _IRebanho.BuscarPorId(movimentacao.RebanhoId).Result;
+            var rebanho = _IRebanho.BuscarPorId(movimentacao.RebanhoDestinoId).Result;
             rebanho.SaldoComVacinaBovino -= movimentacao.QtdComVacinaBovino;
             rebanho.SaldoComVacinaBubalino -= movimentacao.QtdComVacinaBubalino;
             rebanho.SaldoSemVacinaBovino -= movimentacao.QtdSemVacinaBovino;
@@ -66,5 +70,15 @@ namespace Dominio.Servico
         {
 
         }
+
+        public async Task CriarHistoricoDeMovimentacao(HistoricoMovimentacao historico)
+        {
+            await _IHistoricoMovimentacao.CriarHistoricoMovimentacao(historico);
+        }
+        //private string GerarCodigoHistorico()
+        //{
+        //    int idGerado = _IUtilAutoIncrementaHistorico.GerarId().Result;
+        //    return "HISTORICO-" + idGerado;
+        //}
     }
 }

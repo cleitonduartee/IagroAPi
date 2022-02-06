@@ -12,12 +12,20 @@ using System.Threading.Tasks;
 
 namespace Infraestrutura.Repositorio
 {
-    public class RepositorioHistoricoMovimentacao : RepositorioCrud<HistoricoMovimentacao>, IHistoricoMovimentacao
+    public class RepositorioHistoricoMovimentacao : IHistoricoMovimentacao
     {
         private readonly ApiContext _ApiContext;
-        public RepositorioHistoricoMovimentacao(ApiContext ApiContext) : base(ApiContext)
+        private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
+        public RepositorioHistoricoMovimentacao(ApiContext ApiContext, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
         {
             _ApiContext = ApiContext;
+            _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;
+        }
+
+        public async Task AtualizarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao)
+        {
+            _ApiContext.Movimentacoes.Update(historicoMovimentacao);
+            await _ApiContext.SaveChangesAsync();
         }
 
         public async Task<HistoricoMovimentacao> BuscarPorCodigo(string codigoMovimentacao)
@@ -28,6 +36,18 @@ namespace Infraestrutura.Repositorio
         public async Task<List<HistoricoMovimentacao>> BuscarPorIdPropriedade(Expression<Func<HistoricoMovimentacao, bool>> expression)
         {
              return await _ApiContext.Movimentacoes.Where(expression).ToListAsync();
+        }
+
+        public async Task CriarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao)
+        {
+            historicoMovimentacao.CodigoHistorico = GerarCodigoHistorico();
+            await _ApiContext.Movimentacoes.AddAsync(historicoMovimentacao);
+            await _ApiContext.SaveChangesAsync();
+        }
+        private string GerarCodigoHistorico()
+        {
+            int idGerado = _IUtilAutoIncrementaHistorico.GerarId().Result;
+            return "HISTORICO-" + idGerado;
         }
     }
 }

@@ -14,15 +14,24 @@ namespace Dominio.Servico
     public class ServicoRebanho : IServicoRebanho
     {
         private readonly IRebanho _IRebanho;
-        private readonly IHistoricoMovimentacao _IHistoricoMovimentacao;
         private readonly IServicoPropriedade _IServicoPropriedade;
-        private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
-        public ServicoRebanho(IRebanho IRebanho, IHistoricoMovimentacao IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
+        private readonly IServicoMovimentacao _IServicoMovimentacao;
+
+
+        //private readonly IHistoricoMovimentacao _IHistoricoMovimentacao;
+        // private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
+
+        private Propriedade propriedadeEntradaAnimais;
+
+        public ServicoRebanho(IRebanho IRebanho, IServicoPropriedade IServicoPropriedade, IServicoMovimentacao IServicoMovimentacao)
         {
             _IRebanho = IRebanho;
-            _IHistoricoMovimentacao = IHistoricoMovimentacao;
             _IServicoPropriedade = IServicoPropriedade;
-            _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;
+            _IServicoMovimentacao = IServicoMovimentacao;
+
+            //  _IHistoricoMovimentacao = IHistoricoMovimentacao;
+
+            //  _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;
         }
 
         public async Task<List<Rebanho>> BuscarPorProdutor(string produtor)
@@ -53,40 +62,44 @@ namespace Dominio.Servico
             {
                 //Verificar depois como obter uma conexao com banco aqui para fazer o rollback caso aconteca algum erro.
 
-                var rebanho = BuscarRebanhoPorPropriedadeId(rebanhoInsertDTO.PropriedadeId).Result;
+                var rebanho = propriedadeEntradaAnimais.Rebanho;
                 RealizarEntradasDeAnimaisNoRebanho(rebanhoInsertDTO, rebanho);
                 await _IRebanho.Atualizar(rebanho);
+                await CriarMovimentacaoDeEntrada(rebanho.RebanhoId, rebanhoInsertDTO);
 
-                await _IHistoricoMovimentacao.Adicionar(new HistoricoMovimentacao(
-                    GerarCodigoHistorico(), rebanho.RebanhoId,rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
-                    rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino, rebanhoInsertDTO.DataVacina
-                    ));
-            }catch(Exception ex)
+
+                //await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(null,rebanho.RebanhoId,null ,rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
+                //    rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino, rebanhoInsertDTO.DataVacina,
+                //    ));
+            }
+            catch (Exception ex)
             {
                 throw new Exception();
             }
-            
+
         }
 
         private void ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO)
-        {            
+        {
             string validacao = "";
-            var propriedade = _IServicoPropriedade.BuscarPorId(rebanhoDTO.PropriedadeId).Result;
-            if (propriedade == null)
-                validacao += "ERROR: Propriedade não localizada.";
+            propriedadeEntradaAnimais = _IServicoPropriedade.BuscarPorId(rebanhoDTO.PropriedadeId).Result;
+            if (propriedadeEntradaAnimais == null)
+                validacao += "ERROR: Propriedade informada não localizada.";
+
             else if (rebanhoDTO.SaldoComVacinaBubalino > 0 || rebanhoDTO.SaldoComVacinaBovino > 0)
             {
+
+
                 if (!rebanhoDTO.DataVacina.HasValue)
                     validacao += "ERROR: Para entradas de espécies vacinadas é obrigatório a data de vacinação.";
                 else if (rebanhoDTO.DataVacina.Value.Year < DateTime.Now.Year)
                     validacao += "ERROR: Para entradas de espécies vacinadas a data de vacinação deve ser do ano atual.";
+
+                if (!String.IsNullOrEmpty(validacao))
+                    throw new ExceptionGenerica(validacao);
             }
-
-
-            if (!String.IsNullOrEmpty(validacao))
-                throw new ExceptionGenerica(validacao);
-           
         }
+
         private void RealizarEntradasDeAnimaisNoRebanho(RebanhoInsertDTO rebanhoDto, Rebanho rebanho)
         {
             if (rebanhoDto.SaldoComVacinaBubalino > 0 || rebanhoDto.SaldoComVacinaBovino > 0)
@@ -98,10 +111,12 @@ namespace Dominio.Servico
             rebanho.SaldoSemVacinaBovino += rebanhoDto.SaldoSemVacinaBovino;
             rebanho.SaldoSemVacinaBubalino += rebanhoDto.SaldoSemVacinaBubalino;
         }
-        private string GerarCodigoHistorico()
-        {            
-            int idGerado = _IUtilAutoIncrementaHistorico.GerarId().Result;
-            return "HISTORICO-" + idGerado;
+        private async Task CriarMovimentacaoDeEntrada(int idRebanho, RebanhoInsertDTO rebanhoInsertDTO)
+        {
+            await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(new HistoricoMovimentacao(null, null, idRebanho, null, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA,
+                                                                                                rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
+                                                                                                 rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino,
+                                                                                                 rebanhoInsertDTO.DataVacina ));
         }
     }
 }

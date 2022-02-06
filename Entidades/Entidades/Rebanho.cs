@@ -25,5 +25,13 @@ namespace Entidades.Entidades
         {
             return SaldoSemVacinaBovino + SaldoComVacinaBovino + SaldoSemVacinaBubalino + SaldoComVacinaBubalino;
         }
+
+        public bool ExisteSaldoParaVenda(int qtdSemVacinaBovino, int qtdSemVacinaBubalino, int qtdComVacinaBovino, int qtdComVacinaBubalino)
+        {
+            return SaldoSemVacinaBovino >= qtdSemVacinaBovino
+                && SaldoSemVacinaBubalino >= qtdSemVacinaBubalino
+                && SaldoComVacinaBovino >= qtdComVacinaBovino 
+                && SaldoComVacinaBubalino >= qtdComVacinaBubalino;
+        }
     }
 }

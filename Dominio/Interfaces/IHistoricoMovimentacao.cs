@@ -7,9 +7,10 @@ using Dominio.Interfaces.InterfaceCrud;
 
 namespace Dominio.Interfaces
 {
-    public interface IHistoricoMovimentacao : ICrud<HistoricoMovimentacao>
-    {      
+    public interface IHistoricoMovimentacao { 
         Task<List<HistoricoMovimentacao>> BuscarPorIdPropriedade(Expression<Func<HistoricoMovimentacao, bool>> expression);
         Task<HistoricoMovimentacao> BuscarPorCodigo(string codigoMovimentacao);
+        Task CriarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao);
+        Task AtualizarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao);
     }
 }
