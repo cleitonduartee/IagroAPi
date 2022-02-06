@@ -10,10 +10,7 @@ namespace Dominio.Dto.VendaDTO
     {
         public int PropriedadeOrigemId { get; set; }
         public int PropriedadeDestinoId { get; set; }
-        public int SaldoSemVacinaBovino { get; set; }
         public int SaldoComVacinaBovino { get; set; }
-        public int SaldoSemVacinaBubalino { get; set; }
         public int SaldoComVacinaBubalino { get; set; }
-        public DateTime? DataVacina { get; set; }
     }
 }

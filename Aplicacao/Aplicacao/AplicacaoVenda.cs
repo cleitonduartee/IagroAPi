@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Interfaces;
 using Dominio.Dto.Movimentacao.MovimentacaoDTO;
+using Dominio.Dto.MovimentacaoDTO;
 using Dominio.Dto.VendaDTO;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
@@ -18,18 +19,18 @@ namespace Aplicacao.Aplicacao
             _IServicoMovimentacao = IServicoMovimentacao;
         }
 
-        public async Task<List<MovimentacaoResponseDTO>> BuscarComprasPorProdutor(int idProdutor)
+        public async Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int idProdutor)
         {
             var movemntacoesList = await _IServicoMovimentacao.BuscarComprasPorProdutor(idProdutor);
-            var movimentacoesDtoList = new List<MovimentacaoResponseDTO>();
-            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoResponseDTO(mov)));
+            var movimentacoesDtoList = new List<MovimentacaoCompraVendaResponseDTO>();
+            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoCompraVendaResponseDTO(mov)));
             return movimentacoesDtoList;
         }
-        public async Task<List<MovimentacaoResponseDTO>> BuscarVendasPorProdutor(int idProdutor)
+        public async Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int idProdutor)
         {
             var movemntacoesList = await _IServicoMovimentacao.BuscarVendasPorProdutor(idProdutor);
-            var movimentacoesDtoList = new List<MovimentacaoResponseDTO>();
-            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoResponseDTO(mov)));
+            var movimentacoesDtoList = new List<MovimentacaoCompraVendaResponseDTO>();
+            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoCompraVendaResponseDTO(mov)));
             return movimentacoesDtoList;
         }
 

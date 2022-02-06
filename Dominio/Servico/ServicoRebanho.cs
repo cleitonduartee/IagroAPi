@@ -81,26 +81,12 @@ namespace Dominio.Servico
             if (propriedadeEntradaAnimais == null)
                 validacao += "ERROR: Propriedade informada não localizada.";
 
-            else if (rebanhoDTO.SaldoComVacinaBubalino > 0 || rebanhoDTO.SaldoComVacinaBovino > 0)
-            {
-                if (!rebanhoDTO.DataVacina.HasValue)
-                    validacao += "ERROR: Para entradas de espécies vacinadas é obrigatório a data de vacinação.";
-                else if (rebanhoDTO.DataVacina.Value.Year < DateTime.Now.Year)
-                    validacao += "ERROR: Para entradas de espécies vacinadas a data de vacinação deve ser do ano atual.";
-
-                if (!String.IsNullOrEmpty(validacao))
-                    throw new ExceptionGenerica(validacao);
-            }
+            if (!String.IsNullOrEmpty(validacao))
+                throw new ExceptionGenerica(validacao);
         }
 
         private void RealizarEntradasDeAnimaisNoRebanho(RebanhoInsertDTO rebanhoDto, Rebanho rebanho)
-        {
-            if (rebanhoDto.SaldoComVacinaBubalino > 0 || rebanhoDto.SaldoComVacinaBovino > 0)
-            {
-                rebanho.SaldoComVacinaBovino += rebanhoDto.SaldoComVacinaBovino;
-                rebanho.SaldoComVacinaBubalino += rebanhoDto.SaldoComVacinaBubalino;
-                rebanho.DataVacina = rebanhoDto.DataVacina;
-            }
+        {          
             rebanho.SaldoSemVacinaBovino += rebanhoDto.SaldoSemVacinaBovino;
             rebanho.SaldoSemVacinaBubalino += rebanhoDto.SaldoSemVacinaBubalino;
         }
@@ -108,9 +94,8 @@ namespace Dominio.Servico
         {
             await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(
                 new HistoricoMovimentacao(null, null, idPropriedade, null, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA,
-                                          rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
-                                          rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino,
-                                          rebanhoInsertDTO.DataVacina ));
+                                          rebanhoInsertDTO.SaldoSemVacinaBovino, 0,
+                                          rebanhoInsertDTO.SaldoSemVacinaBubalino, 0));
         }
     }
 }

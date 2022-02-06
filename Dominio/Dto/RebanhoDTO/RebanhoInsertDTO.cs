@@ -13,10 +13,6 @@ namespace Dominio.Dto.RebanhoDTO
         [Range(1, 99999,  ErrorMessage = "Id da propriedade deve ser maior que 0")]
         public int PropriedadeId { get; set; }
         public int SaldoSemVacinaBovino { get; set; }
-        public int SaldoComVacinaBovino { get; set; }
         public int SaldoSemVacinaBubalino { get; set; }
-        public int SaldoComVacinaBubalino { get; set; }
-        [DisplayFormat(DataFormatString = "mm/dd/yyyy")]
-        public DateTime? DataVacina { get; set; }
     }
 }

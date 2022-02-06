@@ -26,12 +26,14 @@ namespace Entidades.Entidades
             return SaldoSemVacinaBovino + SaldoComVacinaBovino + SaldoSemVacinaBubalino + SaldoComVacinaBubalino;
         }
 
-        public bool ExisteSaldoParaVenda(int qtdSemVacinaBovino, int qtdSemVacinaBubalino, int qtdComVacinaBovino, int qtdComVacinaBubalino)
+        public bool ExisteSaldoParaVenda(int qtdComVacinaBovino, int qtdComVacinaBubalino)
         {
-            return SaldoSemVacinaBovino >= qtdSemVacinaBovino
-                && SaldoSemVacinaBubalino >= qtdSemVacinaBubalino
-                && SaldoComVacinaBovino >= qtdComVacinaBovino 
+            return  SaldoComVacinaBovino >= qtdComVacinaBovino 
                 && SaldoComVacinaBubalino >= qtdComVacinaBubalino;
+        }
+        public bool VacinaEstaValida()
+        {
+            return DataVacina.Value.Year == DateTime.Now.Year;
         }
     }
 }

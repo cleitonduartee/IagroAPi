@@ -1,40 +1,36 @@
-﻿using System;
-using Entidades.Entidades.Enuns;
-using Entidades.Entidades;
+﻿using Entidades.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Dominio.Dto.Movimentacao.MovimentacaoDTO
+namespace Dominio.Dto.MovimentacaoDTO
 {
-    public class MovimentacaoResponseDTO
+    public class MovimentacaoCompraVendaResponseDTO
     {
-       
         public string CodigoHistorico { get; set; }
-     //   public string? CodigoMovimentacaoDaCompra { get; set; }
-        public int? ProdutorOrigemId { get; set; }
+        public int ProdutorOrigemId { get; set; }
         public int ProdutorDestinoId { get; set; }
-        public int? PropriedadeOrigemId { get; set; }
+        public int PropriedadeOrigemId { get; set; }
         public int PropriedadeDestinoId { get; set; }
         public string TipoMovimentacao { get; set; }
-        public int QtdSemVacinaBovino { get; set; }
         public int QtdComVacinaBovino { get; set; }
-        public int QtdSemVacinaBubalino { get; set; }
         public int QtdComVacinaBubalino { get; set; }
         public DateTime DataMovimentacao { get; set; }
         public DateTime? DataCancelamento { get; set; }
         public string Status { get; set; }
 
 
-        public MovimentacaoResponseDTO(HistoricoMovimentacao movimentacao)
+        public MovimentacaoCompraVendaResponseDTO(HistoricoMovimentacao movimentacao)
         {
             CodigoHistorico = movimentacao.CodigoHistorico;
-       //     CodigoMovimentacaoDaCompra = movimentacao.CodigoMovimentacaoDaCompra;
-            ProdutorOrigemId = movimentacao.ProdutorOrigemId;
+            ProdutorOrigemId = (int)movimentacao.ProdutorOrigemId;
             ProdutorDestinoId = movimentacao.ProdutorDestinoId;
-            PropriedadeOrigemId = movimentacao.PropriedadeOrigemId;
+            PropriedadeOrigemId = (int)movimentacao.PropriedadeOrigemId;
             PropriedadeDestinoId = movimentacao.PropriedadeDestinoId;
             TipoMovimentacao = movimentacao.TipoMovimentacao.ToString();
-            QtdSemVacinaBovino = movimentacao.QtdSemVacinaBovino;
             QtdComVacinaBovino = movimentacao.QtdComVacinaBovino;
-            QtdSemVacinaBubalino = movimentacao.QtdSemVacinaBubalino;
             QtdComVacinaBubalino = movimentacao.QtdComVacinaBubalino;
             DataMovimentacao = movimentacao.DataMovimentacao;
             DataCancelamento = movimentacao.DataCancelamento;

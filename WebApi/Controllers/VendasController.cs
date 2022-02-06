@@ -1,6 +1,7 @@
 ﻿using Aplicacao.Aplicacao;
 using Aplicacao.Interfaces;
 using Dominio.Dto.Movimentacao.MovimentacaoDTO;
+using Dominio.Dto.MovimentacaoDTO;
 using Dominio.Dto.VendaDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace WebApi.Controllers
             try
             {
                 await _AplicacaoVenda.RealizarVenda(vendaInsertDto);
-                return Ok();
+                return Ok("Venda realizada com suceso.");
             }
             catch (Exception ex)
             {
@@ -40,7 +41,7 @@ namespace WebApi.Controllers
             try
             {
                 await _AplicacaoVenda.CancelarVenda(codigoMovimentacao);
-                return Ok();
+                return Ok("Cancelamento realizada com suceso.");
             }
             catch (Exception ex)
             {
@@ -53,13 +54,13 @@ namespace WebApi.Controllers
             return await _AplicacaoVenda.BuscarMovimentacoesPorPropriedade(propriedadeId);
         }
         [HttpGet("BuscarVendasPorProdutor/{produtorId:int}")]
-        public async Task<List<MovimentacaoResponseDTO>> BuscarVendasPorProdutor(int produtorId)
+        public async Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int produtorId)
         {
             return await _AplicacaoVenda.BuscarVendasPorProdutor(produtorId);          
           
         }
         [HttpGet("BuscarComprasPorProdutor/{produtorId:int}")]
-        public async Task<List<MovimentacaoResponseDTO>> BuscarComprasPorProdutor(int produtorId)
+        public async Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int produtorId)
         {
             return await _AplicacaoVenda.BuscarComprasPorProdutor(produtorId);
         }

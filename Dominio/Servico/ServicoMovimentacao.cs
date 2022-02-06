@@ -37,7 +37,7 @@ namespace Dominio.Servico
         public async Task<List<HistoricoMovimentacao>> BuscarPorIdPropriedade(int idPropriedade)
         {         
             return await _IMovimentacao.BuscarPorIdPropriedade(
-                m => m.PropriedadeOrigemId.Equals(idPropriedade) && TipoMovimentacao.VENDA.Equals(m.TipoMovimentacao) || m.PropriedadeDestinoId.Equals(idPropriedade));
+                m => m.PropriedadeOrigemId.Equals(idPropriedade) && TipoMovimentacao.VENDA.Equals(m.TipoMovimentacao) || m.PropriedadeDestinoId.Equals(idPropriedade) && !TipoMovimentacao.VENDA.Equals(m.TipoMovimentacao));
         }
         public async Task<List<HistoricoMovimentacao>> BuscarPorIdProdutor(int idProdutor)
         {

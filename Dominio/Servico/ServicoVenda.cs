@@ -39,41 +39,26 @@ namespace Dominio.Servico
             await ValidacoesVendaDeAnimais(vendaInsertDto);
 
             var rebanhoOrigem = propriedadeOrigem.Rebanho;
+            var rebanhoDestino = propriedadeDestino.Rebanho;
 
-            if (rebanhoOrigem.ExisteSaldoParaVenda(
-                vendaInsertDto.SaldoSemVacinaBovino, vendaInsertDto.SaldoSemVacinaBubalino,
-                vendaInsertDto.SaldoComVacinaBovino, vendaInsertDto.SaldoComVacinaBovino
-                ))
-            {
-                var rebanhoDestino = propriedadeDestino.Rebanho;
+            RealizaDebitoRebanhoOrigem(rebanhoOrigem, vendaInsertDto);
+            RealizaCreditoRebanhoDestino(rebanhoDestino, vendaInsertDto);
+            await AtualizaRebanhosNoBanco(rebanhoOrigem, rebanhoDestino);
 
-                RealizaDebitoRebanhoOrigem(rebanhoOrigem, vendaInsertDto);
-                RealizaCreditoRebanhoDestino(rebanhoDestino, vendaInsertDto);
-                await AtualizaRebanhosNoBanco(rebanhoOrigem, rebanhoDestino);
-
-                //var novaMovimentacao = CriaHistoricoDeMovimentacaoDeVenda(rebanhoOrigem.RebanhoId, vendaInsertDto);
-                //await AdicionaMovimentacaoNoBanco(novaMovimentacao);
-                await CriaHistoricoDeMovimentacaoDeCompraEVenda(propriedadeOrigem.ProdutorId, propriedadeDestino.ProdutorId, vendaInsertDto);
-            }
-            else
-            {
-                throw new ExceptionGenerica("Não existe saldo suficiente para realizar a venda.");
-            }
+            //var novaMovimentacao = CriaHistoricoDeMovimentacaoDeVenda(rebanhoOrigem.RebanhoId, vendaInsertDto);
+            //await AdicionaMovimentacaoNoBanco(novaMovimentacao);
+            await CriaHistoricoDeMovimentacaoDeCompraEVenda(propriedadeOrigem.ProdutorId, propriedadeDestino.ProdutorId, vendaInsertDto);
 
         }
 
 
         private void RealizaDebitoRebanhoOrigem(Rebanho rebanhoOrigem, VendaInsertDTO vendaInsertDto)
-        {
-            rebanhoOrigem.SaldoSemVacinaBubalino -= vendaInsertDto.SaldoSemVacinaBubalino;
-            rebanhoOrigem.SaldoSemVacinaBovino -= vendaInsertDto.SaldoSemVacinaBovino;
+        {           
             rebanhoOrigem.SaldoComVacinaBubalino -= vendaInsertDto.SaldoComVacinaBubalino;
             rebanhoOrigem.SaldoComVacinaBovino -= vendaInsertDto.SaldoComVacinaBovino;
         }
         private void RealizaCreditoRebanhoDestino(Rebanho rebanhoDestino, VendaInsertDTO vendaInsertDto)
         {
-            rebanhoDestino.SaldoSemVacinaBubalino += vendaInsertDto.SaldoSemVacinaBubalino;
-            rebanhoDestino.SaldoSemVacinaBovino += vendaInsertDto.SaldoSemVacinaBovino;
             rebanhoDestino.SaldoComVacinaBubalino += vendaInsertDto.SaldoComVacinaBubalino;
             rebanhoDestino.SaldoComVacinaBovino += vendaInsertDto.SaldoComVacinaBovino;
         }
@@ -83,10 +68,6 @@ namespace Dominio.Servico
             await _IRebanho.Atualizar(rebanhoDestino);
         }
 
-        //private async Task AdicionaMovimentacaoNoBanco(HistoricoMovimentacao movimentacao)
-        //{
-        //    await _IHistoricoMovimentacao.Adicionar(movimentacao);
-        //}
         private async Task ValidacoesVendaDeAnimais(VendaInsertDTO vendaInsertDto)
         {
             string validacao = "";
@@ -97,14 +78,17 @@ namespace Dominio.Servico
                 validacao += "ERROR: Propriedade origem não localizada.";
             if (propriedadeDestino == null)
                 validacao += "ERROR: Propriedade destino não localizada.";
-            else if (vendaInsertDto.SaldoComVacinaBubalino > 0 || vendaInsertDto.SaldoComVacinaBovino > 0)
-            {
-                if (!vendaInsertDto.DataVacina.HasValue)
-                    validacao += "ERROR: Para entradas de espécies vacinadas é obrigatório a data de vacinação.";
-                else if (vendaInsertDto.DataVacina.Value.Year < DateTime.Now.Year)
-                    validacao += "ERROR: Para entradas de espécies vacinadas a data de vacinação deve ser do ano atual.";
-            }
 
+            var rebanhoOrigem = propriedadeOrigem.Rebanho;
+
+            if (!rebanhoOrigem.ExisteSaldoParaVenda(vendaInsertDto.SaldoComVacinaBovino, vendaInsertDto.SaldoComVacinaBubalino))
+            {
+                validacao += "ERROR: Não existe saldo suficiente para realizar a venda.";
+            }
+            if (!rebanhoOrigem.VacinaEstaValida())
+            {
+                validacao += "ERROR: A Vacina dos animais deve ser do ano atual.";
+            }
 
             if (!String.IsNullOrEmpty(validacao))
                 throw new ExceptionGenerica(validacao);
@@ -118,8 +102,8 @@ namespace Dominio.Servico
         private async Task<HistoricoMovimentacao> CriaHistoricoDeMovimentacaoDeCompra(int idProdutorOrigem, int idProdutorDestino, VendaInsertDTO vendaInsertDto)
         {
             var movimentacaoCompra = new HistoricoMovimentacao(null, idProdutorOrigem, idProdutorDestino, vendaInsertDto.PropriedadeOrigemId, vendaInsertDto.PropriedadeDestinoId,
-                                                               TipoMovimentacao.COMPRA, vendaInsertDto.SaldoSemVacinaBovino, vendaInsertDto.SaldoComVacinaBovino, 
-                                                               vendaInsertDto.SaldoSemVacinaBubalino,vendaInsertDto.SaldoComVacinaBubalino, vendaInsertDto.DataVacina);
+                                                               TipoMovimentacao.COMPRA, 0, vendaInsertDto.SaldoComVacinaBovino, 
+                                                               0,vendaInsertDto.SaldoComVacinaBubalino);
 
             await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(movimentacaoCompra);
             return movimentacaoCompra;
@@ -127,9 +111,9 @@ namespace Dominio.Servico
         private async Task CriaHistoricoDeMovimentacaoDeVenda(int idProdutorOrigem, int idProdutorDestino, string codigoMovimentacaoCompra, VendaInsertDTO vendaInsertDto)
         {
             var movimentacaoCompra = new HistoricoMovimentacao(codigoMovimentacaoCompra, idProdutorOrigem, idProdutorDestino, vendaInsertDto.PropriedadeOrigemId,
-                                          vendaInsertDto.PropriedadeDestinoId, TipoMovimentacao.VENDA, vendaInsertDto.SaldoSemVacinaBovino,
-                                          vendaInsertDto.SaldoComVacinaBovino, vendaInsertDto.SaldoSemVacinaBubalino,
-                                          vendaInsertDto.SaldoComVacinaBubalino, vendaInsertDto.DataVacina);
+                                          vendaInsertDto.PropriedadeDestinoId, TipoMovimentacao.VENDA, 0,
+                                          vendaInsertDto.SaldoComVacinaBovino, 0,
+                                          vendaInsertDto.SaldoComVacinaBubalino);
 
             await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(movimentacaoCompra);
         }

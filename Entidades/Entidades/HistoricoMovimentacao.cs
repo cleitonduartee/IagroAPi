@@ -52,15 +52,13 @@ namespace Entidades.Entidades
         public int QtdComVacinaBovino { get; set; }
         public int QtdSemVacinaBubalino { get; set; }
         public int QtdComVacinaBubalino { get; set; }
-        public DateTime? DataVacina { get; set; }
         public DateTime DataMovimentacao { get; set; }
         public DateTime? DataCancelamento { get; set; }
         public StatusMovimentacao Status { get; set; }
 
         public HistoricoMovimentacao(string? codigoMovimentacaoDaCompra, int? produtorOrigemId, int produtorDestinoId,
                                     int? propriedadeOrigemId, int propriedadeDestinoId, TipoMovimentacao tipoMovimentacao,
-                                    int qtdSemVacinaBovino, int qtdComVacinaBovino, int qtdSemVacinaBubalino, int qtdComVacinaBubalino,
-                                    DateTime? dataVacina)
+                                    int qtdSemVacinaBovino, int qtdComVacinaBovino, int qtdSemVacinaBubalino, int qtdComVacinaBubalino)
         {
             CodigoMovimentacaoDaCompra = codigoMovimentacaoDaCompra;
             ProdutorOrigemId = produtorOrigemId;
@@ -72,7 +70,6 @@ namespace Entidades.Entidades
             QtdComVacinaBovino = qtdComVacinaBovino;
             QtdSemVacinaBubalino = qtdSemVacinaBubalino;
             QtdComVacinaBubalino = qtdComVacinaBubalino;
-            DataVacina = dataVacina;
             DataMovimentacao = DateTime.Now;
             DataCancelamento = null;
             Status = StatusMovimentacao.ATIVO;
