@@ -47,12 +47,7 @@ namespace Dominio.Servico
         public async Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId)
         {
             return await _IRebanho.BuscarRebanhoPorPropriedadeId(r => r.PropriedadeId.Equals(propriedadeId));
-        }
-
-        public async Task CancelarEntrada(Rebanho rebanho)
-        {
-            throw new System.NotImplementedException();
-        }
+        }        
 
         public async Task EntradaAnimais(RebanhoInsertDTO rebanhoInsertDTO)
         {
@@ -65,7 +60,7 @@ namespace Dominio.Servico
                 var rebanho = propriedadeEntradaAnimais.Rebanho;
                 RealizarEntradasDeAnimaisNoRebanho(rebanhoInsertDTO, rebanho);
                 await _IRebanho.Atualizar(rebanho);
-                await CriarMovimentacaoDeEntrada(rebanho.RebanhoId, rebanhoInsertDTO);
+                await CriarMovimentacaoDeEntrada(propriedadeEntradaAnimais.ProdutorId, rebanhoInsertDTO);
 
 
                 //await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(null,rebanho.RebanhoId,null ,rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA, rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
@@ -88,8 +83,6 @@ namespace Dominio.Servico
 
             else if (rebanhoDTO.SaldoComVacinaBubalino > 0 || rebanhoDTO.SaldoComVacinaBovino > 0)
             {
-
-
                 if (!rebanhoDTO.DataVacina.HasValue)
                     validacao += "ERROR: Para entradas de espécies vacinadas é obrigatório a data de vacinação.";
                 else if (rebanhoDTO.DataVacina.Value.Year < DateTime.Now.Year)
@@ -111,12 +104,13 @@ namespace Dominio.Servico
             rebanho.SaldoSemVacinaBovino += rebanhoDto.SaldoSemVacinaBovino;
             rebanho.SaldoSemVacinaBubalino += rebanhoDto.SaldoSemVacinaBubalino;
         }
-        private async Task CriarMovimentacaoDeEntrada(int idRebanho, RebanhoInsertDTO rebanhoInsertDTO)
+        private async Task CriarMovimentacaoDeEntrada(int idPropriedade, RebanhoInsertDTO rebanhoInsertDTO)
         {
-            await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(new HistoricoMovimentacao(null, null, idRebanho, null, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA,
-                                                                                                rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
-                                                                                                 rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino,
-                                                                                                 rebanhoInsertDTO.DataVacina ));
+            await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(
+                new HistoricoMovimentacao(null, null, idPropriedade, null, rebanhoInsertDTO.PropriedadeId, TipoMovimentacao.ENTRADA,
+                                          rebanhoInsertDTO.SaldoSemVacinaBovino, rebanhoInsertDTO.SaldoComVacinaBovino,
+                                          rebanhoInsertDTO.SaldoSemVacinaBubalino, rebanhoInsertDTO.SaldoComVacinaBubalino,
+                                          rebanhoInsertDTO.DataVacina ));
         }
     }
 }

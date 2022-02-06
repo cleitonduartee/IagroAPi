@@ -15,13 +15,13 @@ namespace Dominio.Servico
     public class ServicoVenda : IServicoVenda
     {
         private readonly IRebanho _IRebanho;
-        private readonly IHistoricoMovimentacao _IHistoricoMovimentacao;
+        private readonly IMovimentacao _IHistoricoMovimentacao;
         private readonly IServicoPropriedade _IServicoPropriedade;
         private readonly IServicoMovimentacao _IServicoMovimentacao;
         private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
         private Propriedade propriedadeOrigem;
         private Propriedade propriedadeDestino;
-        public ServicoVenda(IRebanho IRebanho, IHistoricoMovimentacao IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico, IServicoMovimentacao IServicoMovimentacao)
+        public ServicoVenda(IRebanho IRebanho, IMovimentacao IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico, IServicoMovimentacao IServicoMovimentacao)
         {
             _IRebanho = IRebanho;
             _IHistoricoMovimentacao = IHistoricoMovimentacao;
@@ -53,7 +53,7 @@ namespace Dominio.Servico
 
                 //var novaMovimentacao = CriaHistoricoDeMovimentacaoDeVenda(rebanhoOrigem.RebanhoId, vendaInsertDto);
                 //await AdicionaMovimentacaoNoBanco(novaMovimentacao);
-                await CriaHistoricoDeMovimentacaoDeCompraEVenda(rebanhoOrigem.RebanhoId, rebanhoDestino.RebanhoId, vendaInsertDto);
+                await CriaHistoricoDeMovimentacaoDeCompraEVenda(propriedadeOrigem.ProdutorId, propriedadeDestino.ProdutorId, vendaInsertDto);
             }
             else
             {
@@ -110,23 +110,23 @@ namespace Dominio.Servico
                 throw new ExceptionGenerica(validacao);
 
         }
-        private async Task CriaHistoricoDeMovimentacaoDeCompraEVenda(int idRebanhoOrigem, int idRebanhoDestino, VendaInsertDTO vendaInsertDto)
+        private async Task CriaHistoricoDeMovimentacaoDeCompraEVenda(int idProdutorOrigem, int idProdutorDestino, VendaInsertDTO vendaInsertDto)
         {
-            var movimentacaoCompra = await CriaHistoricoDeMovimentacaoDeCompra(idRebanhoOrigem, idRebanhoDestino, vendaInsertDto);
-            await CriaHistoricoDeMovimentacaoDeVenda(idRebanhoOrigem, idRebanhoDestino, movimentacaoCompra.CodigoHistorico, vendaInsertDto);
+            var movimentacaoCompra = await CriaHistoricoDeMovimentacaoDeCompra(idProdutorOrigem, idProdutorDestino, vendaInsertDto);
+            await CriaHistoricoDeMovimentacaoDeVenda(idProdutorOrigem, idProdutorDestino, movimentacaoCompra.CodigoHistorico, vendaInsertDto);
         }
-        private async Task<HistoricoMovimentacao> CriaHistoricoDeMovimentacaoDeCompra(int idRebanhoOrigem, int idRebanhoDestino, VendaInsertDTO vendaInsertDto)
+        private async Task<HistoricoMovimentacao> CriaHistoricoDeMovimentacaoDeCompra(int idProdutorOrigem, int idProdutorDestino, VendaInsertDTO vendaInsertDto)
         {
-            var movimentacaoCompra = new HistoricoMovimentacao(null, idRebanhoOrigem, idRebanhoDestino, vendaInsertDto.PropriedadeOrigemId, vendaInsertDto.PropriedadeDestinoId,
+            var movimentacaoCompra = new HistoricoMovimentacao(null, idProdutorOrigem, idProdutorDestino, vendaInsertDto.PropriedadeOrigemId, vendaInsertDto.PropriedadeDestinoId,
                                                                TipoMovimentacao.COMPRA, vendaInsertDto.SaldoSemVacinaBovino, vendaInsertDto.SaldoComVacinaBovino, 
                                                                vendaInsertDto.SaldoSemVacinaBubalino,vendaInsertDto.SaldoComVacinaBubalino, vendaInsertDto.DataVacina);
 
             await _IServicoMovimentacao.CriarHistoricoDeMovimentacao(movimentacaoCompra);
             return movimentacaoCompra;
         }
-        private async Task CriaHistoricoDeMovimentacaoDeVenda(int idRebanhoOrigem, int idRebanhoDestino, string codigoMovimentacaoCompra, VendaInsertDTO vendaInsertDto)
+        private async Task CriaHistoricoDeMovimentacaoDeVenda(int idProdutorOrigem, int idProdutorDestino, string codigoMovimentacaoCompra, VendaInsertDTO vendaInsertDto)
         {
-            var movimentacaoCompra = new HistoricoMovimentacao(codigoMovimentacaoCompra, idRebanhoOrigem, idRebanhoDestino, vendaInsertDto.PropriedadeOrigemId,
+            var movimentacaoCompra = new HistoricoMovimentacao(codigoMovimentacaoCompra, idProdutorOrigem, idProdutorDestino, vendaInsertDto.PropriedadeOrigemId,
                                           vendaInsertDto.PropriedadeDestinoId, TipoMovimentacao.VENDA, vendaInsertDto.SaldoSemVacinaBovino,
                                           vendaInsertDto.SaldoComVacinaBovino, vendaInsertDto.SaldoSemVacinaBubalino,
                                           vendaInsertDto.SaldoComVacinaBubalino, vendaInsertDto.DataVacina);

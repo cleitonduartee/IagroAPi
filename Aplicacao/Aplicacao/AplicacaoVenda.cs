@@ -1,6 +1,9 @@
 ﻿using Aplicacao.Interfaces;
+using Dominio.Dto.Movimentacao.MovimentacaoDTO;
 using Dominio.Dto.VendaDTO;
 using Dominio.Interfaces.InterfaceServico;
+using Entidades.Entidades;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Aplicacao
@@ -8,10 +11,37 @@ namespace Aplicacao.Aplicacao
     public class AplicacaoVenda : IAplicacaoVenda
     {
         private readonly IServicoVenda _IServicoVenda;
-        public AplicacaoVenda(IServicoVenda IServicoVenda)
+        private readonly IServicoMovimentacao _IServicoMovimentacao;
+        public AplicacaoVenda(IServicoVenda IServicoVenda, IServicoMovimentacao IServicoMovimentacao)
         {
             _IServicoVenda = IServicoVenda;
+            _IServicoMovimentacao = IServicoMovimentacao;
         }
+
+        public async Task<List<MovimentacaoResponseDTO>> BuscarComprasPorProdutor(int idProdutor)
+        {
+            var movemntacoesList = await _IServicoMovimentacao.BuscarComprasPorProdutor(idProdutor);
+            var movimentacoesDtoList = new List<MovimentacaoResponseDTO>();
+            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoResponseDTO(mov)));
+            return movimentacoesDtoList;
+        }
+        public async Task<List<MovimentacaoResponseDTO>> BuscarVendasPorProdutor(int idProdutor)
+        {
+            var movemntacoesList = await _IServicoMovimentacao.BuscarVendasPorProdutor(idProdutor);
+            var movimentacoesDtoList = new List<MovimentacaoResponseDTO>();
+            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoResponseDTO(mov)));
+            return movimentacoesDtoList;
+        }
+
+        public async Task<List<MovimentacaoResponseDTO>> BuscarMovimentacoesPorPropriedade(int idPropriedade)
+        {            
+            var movemntacoesList = await _IServicoMovimentacao.BuscarPorIdPropriedade(idPropriedade);
+            var movimentacoesDtoList = new List<MovimentacaoResponseDTO>();
+            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoResponseDTO(mov)));
+            return movimentacoesDtoList;
+        }
+
+        
 
         public async Task CancelarVenda(string codigoMovimentacao)
         {

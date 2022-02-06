@@ -42,10 +42,10 @@ namespace Entidades.Entidades
         //}
         public string CodigoHistorico { get; set; }
         public string? CodigoMovimentacaoDaCompra { get; set; }
-        public int? RebanhoOrigemId { get; set; }
-        public int RebanhoDestinoId { get; set; }
         public int? PropriedadeOrigemId { get; set; }
         public int PropriedadeDestinoId { get; set; }
+        public int? ProdutorOrigemId { get; set; }
+        public int ProdutorDestinoId { get; set; }
         // public virtual Propriedade Propriedade { get; set; }
         public TipoMovimentacao TipoMovimentacao { get; set; }
         public int QtdSemVacinaBovino { get; set; }
@@ -57,14 +57,14 @@ namespace Entidades.Entidades
         public DateTime? DataCancelamento { get; set; }
         public StatusMovimentacao Status { get; set; }
 
-        public HistoricoMovimentacao(string? codigoMovimentacaoDaCompra, int? rebanhoOrigemId, int rebanhoDestinoId,
+        public HistoricoMovimentacao(string? codigoMovimentacaoDaCompra, int? produtorOrigemId, int produtorDestinoId,
                                     int? propriedadeOrigemId, int propriedadeDestinoId, TipoMovimentacao tipoMovimentacao,
                                     int qtdSemVacinaBovino, int qtdComVacinaBovino, int qtdSemVacinaBubalino, int qtdComVacinaBubalino,
                                     DateTime? dataVacina)
         {
             CodigoMovimentacaoDaCompra = codigoMovimentacaoDaCompra;
-            RebanhoOrigemId = rebanhoOrigemId;
-            RebanhoDestinoId = rebanhoDestinoId;
+            ProdutorOrigemId = produtorOrigemId;
+            ProdutorDestinoId = produtorDestinoId;
             PropriedadeOrigemId = propriedadeOrigemId;
             PropriedadeDestinoId = propriedadeDestinoId;
             TipoMovimentacao = tipoMovimentacao;

@@ -66,6 +66,7 @@ namespace Aplicacao.Aplicacao
 
         public async Task EditarPropriedade(Propriedade propriedade)
         {
+            propriedade.Nome = propriedade.Nome.ToUpper();
             await _IServicoPropriedade.EditarPropriedade(propriedade);
         }
     }

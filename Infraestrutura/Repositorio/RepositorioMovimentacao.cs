@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Infraestrutura.Repositorio
 {
-    public class RepositorioHistoricoMovimentacao : IHistoricoMovimentacao
+    public class RepositorioMovimentacao : IMovimentacao
     {
         private readonly ApiContext _ApiContext;
         private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
-        public RepositorioHistoricoMovimentacao(ApiContext ApiContext, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
+        public RepositorioMovimentacao(ApiContext ApiContext, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
         {
             _ApiContext = ApiContext;
             _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;
@@ -28,6 +28,11 @@ namespace Infraestrutura.Repositorio
             await _ApiContext.SaveChangesAsync();
         }
 
+        public async Task<List<HistoricoMovimentacao>> BuscarComprasPorProdutor(Expression<Func<HistoricoMovimentacao, bool>> expression)
+        {
+            return await _ApiContext.Movimentacoes.Where(expression).ToListAsync();
+        }
+
         public async Task<HistoricoMovimentacao> BuscarPorCodigo(string codigoMovimentacao)
         {
             return await _ApiContext.Movimentacoes.FindAsync(codigoMovimentacao);
@@ -36,6 +41,11 @@ namespace Infraestrutura.Repositorio
         public async Task<List<HistoricoMovimentacao>> BuscarPorIdPropriedade(Expression<Func<HistoricoMovimentacao, bool>> expression)
         {
              return await _ApiContext.Movimentacoes.Where(expression).ToListAsync();
+        }
+
+        public async Task<List<HistoricoMovimentacao>> BuscarVendasPorProdutor(Expression<Func<HistoricoMovimentacao, bool>> expression)
+        {
+            return await _ApiContext.Movimentacoes.Where(expression).ToListAsync();
         }
 
         public async Task CriarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao)

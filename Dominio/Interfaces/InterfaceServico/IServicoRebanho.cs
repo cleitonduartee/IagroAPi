@@ -11,8 +11,7 @@ namespace Dominio.Interfaces.InterfaceServico
 {
     public interface IServicoRebanho
     {
-        Task EntradaAnimais(RebanhoInsertDTO rebanho);
-        Task CancelarEntrada(Rebanho rebanho);
+        Task EntradaAnimais(RebanhoInsertDTO rebanho);      
         Task<List<Rebanho>> BuscarPorProdutor(string produtor);
         Task<Rebanho> BuscarRebanhoPorNomePropriedade(string propriedade);
         Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId);   

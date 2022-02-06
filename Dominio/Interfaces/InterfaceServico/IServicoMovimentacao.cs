@@ -1,4 +1,5 @@
-﻿using Entidades.Entidades;
+﻿using Dominio.Dto.Movimentacao.MovimentacaoDTO;
+using Entidades.Entidades;
 using Entidades.Entidades.Enuns;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,13 @@ namespace Dominio.Interfaces.InterfaceServico
 {
     public interface IServicoMovimentacao
     {
-        Task CancelarMovimentacao(string codigoMovimentacao);
+        Task CancelarMovimentacaoDeEntrada(string codigoMovimentacao);
+        Task CancelarMovimentacaoDeVenda(string codigoMovimentacao);
         Task<List<HistoricoMovimentacao>> BuscarPorIdPropriedade(int idPropriedade);
+        Task<List<HistoricoMovimentacao>> BuscarPorIdProdutor(int idProdutor);
         Task CriarHistoricoDeMovimentacao(HistoricoMovimentacao historicoMovimentacao);
+        Task<List<HistoricoMovimentacao>> BuscarVendasPorProdutor(int idProdutor);
+        Task<List<HistoricoMovimentacao>> BuscarComprasPorProdutor(int idProdutor);
 
     }
 }

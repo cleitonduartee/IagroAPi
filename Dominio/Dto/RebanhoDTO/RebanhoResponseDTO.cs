@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace Dominio.Dto.RebanhoDTO
 {
     public class RebanhoResponseDTO
-    {
-        public int RebanhoId { get; set; }
+    {        
         public int PropriedadeId { get; set; }
         public int SaldoSemVacinaBovino { get; set; }
         public int SaldoComVacinaBovino { get; set; }
@@ -19,7 +18,6 @@ namespace Dominio.Dto.RebanhoDTO
 
         public RebanhoResponseDTO(Rebanho rebanho)
         {
-            RebanhoId = rebanho.RebanhoId;
             PropriedadeId = rebanho.PropriedadeId;
             SaldoSemVacinaBovino = rebanho.SaldoSemVacinaBovino;
             SaldoComVacinaBovino = rebanho.SaldoComVacinaBovino;

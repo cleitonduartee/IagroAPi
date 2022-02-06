@@ -34,10 +34,10 @@ namespace WebApi.Controllers
             else
                 return NotFound("Propriedade não encontrado.");
         }
-        [HttpGet("BuscarPorProdutor/{produtor}")]
-        public async Task<List<PropriedadeResponseDTO>> BuscarPorProdutor(string produtor)
+        [HttpGet("BuscarPorProdutor/{nomeProdutor}")]
+        public async Task<List<PropriedadeResponseDTO>> BuscarPorProdutor(string nomeProdutor)
         {
-            return await _IAplicacaoPropriedade.BuscarPorProdutor(produtor);
+            return await _IAplicacaoPropriedade.BuscarPorProdutor(nomeProdutor);
            
         }
         [HttpPost("CadastrarPropriedade")]

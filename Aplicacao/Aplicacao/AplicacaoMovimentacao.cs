@@ -23,7 +23,7 @@ namespace Aplicacao.Aplicacao
 
         public async Task CancelarMovimentacao(string codigoMovimentacao)
         {
-            await _IServicoMovimentacao.CancelarMovimentacao(codigoMovimentacao);
+            await _IServicoMovimentacao.CancelarMovimentacaoDeEntrada(codigoMovimentacao);
         }
     }
 }

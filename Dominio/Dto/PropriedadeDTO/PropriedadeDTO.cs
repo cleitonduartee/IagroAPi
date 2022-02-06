@@ -21,7 +21,7 @@ namespace Dominio.Dto.PropriedadeDTO
 
         public static void AtualizaPropriedade(PropriedadeDTO dto, Propriedade propriedade) 
         {
-                propriedade.Nome = dto.NomePropriedade.ToUpper();
+                propriedade.Nome = dto.NomePropriedade;
                 propriedade.ProdutorId = dto.ProdutorId;
                 propriedade.MunicipioId = dto.MunicipioId;
         }

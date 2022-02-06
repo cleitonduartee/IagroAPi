@@ -56,10 +56,10 @@ namespace WebApi.Controllers
                 return NotFound("Erro ao realizar entrada de animais. Tente novamente. Caso o problema persista, entre em contato com o suporte.");
             }
         }
-        [HttpPost("CancelamentoEntradaAnimais")]
-        public async Task CancelamentoEntradaAnimais(Rebanho rebanho)
+        [HttpPost("CancelamentoEntradaAnimais/{codigoMovimentacaoEntrada}")]
+        public async Task CancelamentoEntradaAnimais(string codigoMovimentacaoEntrada)
         {
-            await _IAplicacaoRebanho.CancelarEntrada(rebanho);
+            await _IAplicacaoRebanho.CancelarEntrada(codigoMovimentacaoEntrada);
         }
 
     }
