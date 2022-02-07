@@ -8,16 +8,16 @@ using System;
 using System.Collections.Generic;
 
 using System.Threading.Tasks;
-using Dominio.Dto.Movimentacao.MovimentacaoDTO;
+using Dominio.Dto.Movimentacao.HistoricoDTO;
 
 namespace Dominio.Servico
 {
-    public class ServicoMovimentacao : IServicoMovimentacao
+    public class ServicoHistorico : IServicoHistorico
     {
-        private readonly IMovimentacao _IMovimentacao;
+        private readonly IHistorico _IMovimentacao;
         private readonly IRebanho _IRebanho;
         private readonly IPropriedade _IPropriedade;
-        public ServicoMovimentacao(IMovimentacao IMovimentacao, IRebanho IRebanho, IPropriedade IPropriedade)
+        public ServicoHistorico(IHistorico IMovimentacao, IRebanho IRebanho, IPropriedade IPropriedade)
         {
             _IMovimentacao = IMovimentacao;
             _IRebanho = IRebanho;

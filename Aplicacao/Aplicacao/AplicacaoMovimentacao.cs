@@ -11,8 +11,8 @@ namespace Aplicacao.Aplicacao
 {
     public class AplicacaoMovimentacao : IAplicacaoMovimentacao
     {
-        private readonly IServicoMovimentacao _IServicoMovimentacao;
-        public AplicacaoMovimentacao(IServicoMovimentacao IServicoMovimentacao)
+        private readonly IServicoHistorico _IServicoMovimentacao;
+        public AplicacaoMovimentacao(IServicoHistorico IServicoMovimentacao)
         {
             _IServicoMovimentacao = IServicoMovimentacao;
         }

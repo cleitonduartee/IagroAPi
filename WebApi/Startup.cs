@@ -44,14 +44,14 @@ namespace WebApi
             services.AddScoped<IProdutor, RepositorioProdutor>();
             services.AddScoped<IPropriedade, RepositorioPropriedade>();
             services.AddScoped<IRebanho, RepositorioRebanho>();
-            services.AddScoped<IMovimentacao, RepositorioMovimentacao>();
+            services.AddScoped<IHistorico, RepositorioHistorico>();
             services.AddScoped<IUtilAutoIncrementaHistorico, RepositorioUtilAutoIncrementaHistorico>();
 
             //INTERFACE E SERVICO
             services.AddScoped<IServicoProdutor, ServicoProdutor>();
             services.AddScoped<IServicoPropriedade, ServicoPropriedade>();
             services.AddScoped<IServicoRebanho, ServicoRebanho>();
-            services.AddScoped<IServicoMovimentacao, ServicoMovimentacao>();
+            services.AddScoped<IServicoHistorico, ServicoHistorico>();
             services.AddScoped<IServicoVenda, ServicoVenda>();
 
             // INTERFACE E APLICACAO

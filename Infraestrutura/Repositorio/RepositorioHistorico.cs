@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Infraestrutura.Repositorio
 {
-    public class RepositorioMovimentacao : IMovimentacao
+    public class RepositorioHistorico : IHistorico
     {
         private readonly ApiContext _ApiContext;
         private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
-        public RepositorioMovimentacao(ApiContext ApiContext, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
+        public RepositorioHistorico(ApiContext ApiContext, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico)
         {
             _ApiContext = ApiContext;
             _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;

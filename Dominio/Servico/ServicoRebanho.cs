@@ -15,7 +15,7 @@ namespace Dominio.Servico
     {
         private readonly IRebanho _IRebanho;
         private readonly IServicoPropriedade _IServicoPropriedade;
-        private readonly IServicoMovimentacao _IServicoMovimentacao;
+        private readonly IServicoHistorico _IServicoMovimentacao;
 
 
         //private readonly IHistoricoMovimentacao _IHistoricoMovimentacao;
@@ -23,7 +23,7 @@ namespace Dominio.Servico
 
         private Propriedade propriedadeEntradaAnimais;
 
-        public ServicoRebanho(IRebanho IRebanho, IServicoPropriedade IServicoPropriedade, IServicoMovimentacao IServicoMovimentacao)
+        public ServicoRebanho(IRebanho IRebanho, IServicoPropriedade IServicoPropriedade, IServicoHistorico IServicoMovimentacao)
         {
             _IRebanho = IRebanho;
             _IServicoPropriedade = IServicoPropriedade;

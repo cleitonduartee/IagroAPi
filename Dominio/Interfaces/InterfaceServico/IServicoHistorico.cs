@@ -1,5 +1,4 @@
-﻿using Dominio.Dto.Movimentacao.MovimentacaoDTO;
-using Entidades.Entidades;
+﻿using Entidades.Entidades;
 using Entidades.Entidades.Enuns;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Interfaces.InterfaceServico
 {
-    public interface IServicoMovimentacao
+    public interface IServicoHistorico
     {
         Task CancelarMovimentacaoDeEntrada(string codigoMovimentacao);
         Task CancelarMovimentacaoDeVenda(string codigoMovimentacao);

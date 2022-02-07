@@ -1,5 +1,5 @@
-﻿using Dominio.Dto.Movimentacao.MovimentacaoDTO;
-using Dominio.Dto.MovimentacaoDTO;
+﻿using Dominio.Dto.HistoricoDTO;
+using Dominio.Dto.Movimentacao.HistoricoDTO;
 using Dominio.Dto.VendaDTO;
 using Entidades.Entidades;
 using System;
@@ -14,8 +14,8 @@ namespace Aplicacao.Interfaces
     {
         Task RealizarVenda(VendaInsertDTO vendaInsertDto);
         Task CancelarVenda(string codigoMovimentacao);
-        Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int idProdutor);
-        Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int idProdutor);
-        Task<List<MovimentacaoResponseDTO>> BuscarMovimentacoesPorPropriedade(int idPropriedade);
+        Task<List<HistoricoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int idProdutor);
+        Task<List<HistoricoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int idProdutor);
+        Task<List<HistoricoTodosTipoResponseDTO>> BuscarMovimentacoesPorPropriedade(int idPropriedade);
     }
 }

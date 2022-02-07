@@ -1,7 +1,7 @@
 ﻿using Aplicacao.Aplicacao;
 using Aplicacao.Interfaces;
-using Dominio.Dto.Movimentacao.MovimentacaoDTO;
-using Dominio.Dto.MovimentacaoDTO;
+using Dominio.Dto.HistoricoDTO;
+using Dominio.Dto.Movimentacao.HistoricoDTO;
 using Dominio.Dto.VendaDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,18 +49,18 @@ namespace WebApi.Controllers
             }
         }
         [HttpGet("BuscarMovimentacoesPorPropriedade/{propriedadeId:int}")]
-        public async Task<List<MovimentacaoResponseDTO>> BuscarMovimentacoesPorPropriedade(int propriedadeId)
+        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarMovimentacoesPorPropriedade(int propriedadeId)
         {
             return await _AplicacaoVenda.BuscarMovimentacoesPorPropriedade(propriedadeId);
         }
         [HttpGet("BuscarVendasPorProdutor/{produtorId:int}")]
-        public async Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int produtorId)
+        public async Task<List<HistoricoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int produtorId)
         {
             return await _AplicacaoVenda.BuscarVendasPorProdutor(produtorId);          
           
         }
         [HttpGet("BuscarComprasPorProdutor/{produtorId:int}")]
-        public async Task<List<MovimentacaoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int produtorId)
+        public async Task<List<HistoricoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int produtorId)
         {
             return await _AplicacaoVenda.BuscarComprasPorProdutor(produtorId);
         }

@@ -14,8 +14,8 @@ namespace Aplicacao.Aplicacao
     {
         private readonly IServicoRebanho _IServicoRebanho;
         private readonly IServicoPropriedade _IServicoPropriedade;
-        private readonly IServicoMovimentacao _IServicoMovimentacao;
-        public AplicacaoRebanho(IServicoRebanho IServicoRebanho, IServicoPropriedade IServicoPropriedade, IServicoMovimentacao IServicoMovimentacao)
+        private readonly IServicoHistorico _IServicoMovimentacao;
+        public AplicacaoRebanho(IServicoRebanho IServicoRebanho, IServicoPropriedade IServicoPropriedade, IServicoHistorico IServicoMovimentacao)
         {
             _IServicoRebanho = IServicoRebanho;
             _IServicoPropriedade = IServicoPropriedade;

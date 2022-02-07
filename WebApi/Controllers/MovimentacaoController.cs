@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Entidades.Entidades;
 using Dominio.ExceptionPersonalizada;
 using System;
-using Dominio.Dto.Movimentacao.MovimentacaoDTO;
+using Dominio.Dto.Movimentacao.HistoricoDTO;
 
 namespace WebApi.Controllers
 {
@@ -22,11 +22,11 @@ namespace WebApi.Controllers
             _IAplicacaoMovimentacao = IAplicacaoMovimentacao;
         }
         [HttpGet("BuscarPorIdPropriedade/{propriedadeId:int}")]
-        public async Task<List<MovimentacaoResponseDTO>> BuscarPorIdPropriedade(int propriedadeId)
+        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarPorIdPropriedade(int propriedadeId)
         {
             var movemntacoesList = await _IAplicacaoMovimentacao.BuscarPorIdPropriedade(propriedadeId);
-            var movimentacoesDtoList = new List<MovimentacaoResponseDTO>();
-            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new MovimentacaoResponseDTO(mov)));
+            var movimentacoesDtoList = new List<HistoricoTodosTipoResponseDTO>();
+            movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new HistoricoTodosTipoResponseDTO(mov)));
             return movimentacoesDtoList;
         }
         [HttpPost("CancelarMovimentacao/{codigo}")]

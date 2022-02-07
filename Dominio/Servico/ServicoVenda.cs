@@ -15,13 +15,13 @@ namespace Dominio.Servico
     public class ServicoVenda : IServicoVenda
     {
         private readonly IRebanho _IRebanho;
-        private readonly IMovimentacao _IHistoricoMovimentacao;
+        private readonly IHistorico _IHistoricoMovimentacao;
         private readonly IServicoPropriedade _IServicoPropriedade;
-        private readonly IServicoMovimentacao _IServicoMovimentacao;
+        private readonly IServicoHistorico _IServicoMovimentacao;
         private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
         private Propriedade propriedadeOrigem;
         private Propriedade propriedadeDestino;
-        public ServicoVenda(IRebanho IRebanho, IMovimentacao IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico, IServicoMovimentacao IServicoMovimentacao)
+        public ServicoVenda(IRebanho IRebanho, IHistorico IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico, IServicoHistorico IServicoMovimentacao)
         {
             _IRebanho = IRebanho;
             _IHistoricoMovimentacao = IHistoricoMovimentacao;
