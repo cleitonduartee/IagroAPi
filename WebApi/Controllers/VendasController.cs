@@ -25,6 +25,9 @@ namespace WebApi.Controllers
         [HttpPost("RealizarVenda")]
         public async Task<ActionResult> RealizarVenda(VendaInsertDTO vendaInsertDto)
         {
+            if (!ModelState.IsValid)
+                return null;
+
             try
             {
                 await _AplicacaoVenda.RealizarVenda(vendaInsertDto);
@@ -35,12 +38,12 @@ namespace WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost("CancelarVenda/{codigoMovimentacao}")]
-        public async Task<ActionResult> CancelarVenda(string codigoMovimentacao)
+        [HttpPost("CancelarVenda/{codigoHistoricoVenda}")]
+        public async Task<ActionResult> CancelarVenda(string codigoHistoricoVenda)
         {
             try
             {
-                await _AplicacaoVenda.CancelarVenda(codigoMovimentacao);
+                await _AplicacaoVenda.CancelarVenda(codigoHistoricoVenda);
                 return Ok("Cancelamento realizada com suceso.");
             }
             catch (Exception ex)

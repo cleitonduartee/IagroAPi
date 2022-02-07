@@ -20,6 +20,7 @@ namespace Dominio.Dto.HistoricoDTO
         public DateTime DataMovimentacao { get; set; }
         public DateTime? DataCancelamento { get; set; }
         public string Status { get; set; }
+        public string Finalidade { get; set; }
 
 
         public HistoricoCompraVendaResponseDTO(HistoricoMovimentacao movimentacao)
@@ -35,6 +36,7 @@ namespace Dominio.Dto.HistoricoDTO
             DataMovimentacao = movimentacao.DataMovimentacao;
             DataCancelamento = movimentacao.DataCancelamento;
             Status = movimentacao.Status.ToString();
+            Finalidade = movimentacao.Finalidade.ToString();
         }
     }
 }

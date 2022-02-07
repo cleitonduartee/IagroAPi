@@ -3,11 +3,7 @@ using Dominio.ExceptionPersonalizada;
 using Dominio.Interfaces;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
-using Entidades.Entidades.Enuns;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Dominio.Servico
@@ -15,19 +11,15 @@ namespace Dominio.Servico
     public class ServicoVenda : IServicoVenda
     {
         private readonly IRebanho _IRebanho;
-        private readonly IHistorico _IHistoricoMovimentacao;
         private readonly IServicoPropriedade _IServicoPropriedade;
         private readonly IServicoHistorico _IServicoHistorico;
-        private readonly IUtilAutoIncrementaHistorico _IUtilAutoIncrementaHistorico;
         private Propriedade propriedadeOrigem;
         private Propriedade propriedadeDestino;
-        public ServicoVenda(IRebanho IRebanho, IHistorico IHistoricoMovimentacao, IServicoPropriedade IServicoPropriedade, IUtilAutoIncrementaHistorico IUtilAutoIncrementaHistorico, IServicoHistorico IServicoMovimentacao)
+        public ServicoVenda(IRebanho IRebanho,IServicoPropriedade IServicoPropriedade, IServicoHistorico IServicoHistorico)
         {
             _IRebanho = IRebanho;
-            _IHistoricoMovimentacao = IHistoricoMovimentacao;
             _IServicoPropriedade = IServicoPropriedade;
-            _IUtilAutoIncrementaHistorico = IUtilAutoIncrementaHistorico;
-            _IServicoHistorico = IServicoMovimentacao;
+            _IServicoHistorico = IServicoHistorico;
         }
         public Task CancelarVenda(string codigoMovimentacao)
         {
@@ -44,9 +36,7 @@ namespace Dominio.Servico
             RealizaDebitoRebanhoOrigem(rebanhoOrigem, vendaInsertDto);
             RealizaCreditoRebanhoDestino(rebanhoDestino, vendaInsertDto);
             await AtualizaRebanhosNoBanco(rebanhoOrigem, rebanhoDestino);
-
-            //var novaMovimentacao = CriaHistoricoDeMovimentacaoDeVenda(rebanhoOrigem.RebanhoId, vendaInsertDto);
-            //await AdicionaMovimentacaoNoBanco(novaMovimentacao);
+            
             await CriaHistoricoDeMovimentacaoDeCompraEVenda(propriedadeOrigem.ProdutorId, propriedadeDestino.ProdutorId, vendaInsertDto);
 
         }
@@ -74,6 +64,7 @@ namespace Dominio.Servico
             propriedadeOrigem = await _IServicoPropriedade.BuscarPorId(vendaInsertDto.PropriedadeOrigemId);
             propriedadeDestino = await _IServicoPropriedade.BuscarPorId(vendaInsertDto.PropriedadeDestinoId);
 
+            if (propriedadeOrigem == null)
             if (propriedadeOrigem == null)
                 validacao += "ERROR: Propriedade origem não localizada.";
             if (propriedadeDestino == null)
@@ -106,11 +97,6 @@ namespace Dominio.Servico
         }
         private async Task CriaHistoricoDeMovimentacaoDeVenda(string codigoHistoricoCompra, int idProdutorOrigem, int idProdutorDestino, VendaInsertDTO vendaInsertDto)
         {
-            //var movimentacaoCompra = new HistoricoMovimentacao(codigoHistoricoCompra, idProdutorOrigem, idProdutorDestino, vendaInsertDto.PropriedadeOrigemId,
-            //                              vendaInsertDto.PropriedadeDestinoId, TipoMovimentacao.VENDA, 0,
-            //                              vendaInsertDto.SaldoComVacinaBovino, 0,
-            //                              vendaInsertDto.SaldoComVacinaBubalino);
-
             await _IServicoHistorico.CriarHistoricoDeVenda(codigoHistoricoCompra, idProdutorOrigem, idProdutorDestino, vendaInsertDto);
         }
     }

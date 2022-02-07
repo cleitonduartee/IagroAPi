@@ -59,9 +59,12 @@ namespace Dominio.Servico
 
         public async Task<HistoricoMovimentacao> CriarHistoricoDeCompra(int produtorOrigemId, int produtorDestinoId,  VendaInsertDTO vendaInsertDto)
         {
-            var movimentacaoCompra = new HistoricoMovimentacao(null, produtorOrigemId, produtorDestinoId, vendaInsertDto.PropriedadeOrigemId, vendaInsertDto.PropriedadeDestinoId,
-                                                              TipoMovimentacao.COMPRA, 0, vendaInsertDto.SaldoComVacinaBovino,
-                                                              0, vendaInsertDto.SaldoComVacinaBubalino);
+            var movimentacaoCompra = new HistoricoMovimentacao(null, produtorOrigemId, produtorDestinoId, 
+                                                                vendaInsertDto.PropriedadeOrigemId, 
+                                                                vendaInsertDto.PropriedadeDestinoId, TipoMovimentacao.COMPRA,
+                                                                vendaInsertDto.SaldoComVacinaBovino,
+                                                                vendaInsertDto.SaldoComVacinaBubalino,
+                                                                vendaInsertDto.Finalidade);
 
             await _IHistorico.AdicionarHistoricoMovimentacao(movimentacaoCompra);
             return movimentacaoCompra;
@@ -69,10 +72,12 @@ namespace Dominio.Servico
 
         public async Task<HistoricoMovimentacao> CriarHistoricoDeVenda(string codigoHistorico, int produtorOrigemId, int produtorDestinoId, VendaInsertDTO vendaInsertDto)
         {
-            var movimentacaoVenda = new HistoricoMovimentacao(codigoHistorico, produtorOrigemId, produtorDestinoId, vendaInsertDto.PropriedadeOrigemId,
-                                         vendaInsertDto.PropriedadeDestinoId, TipoMovimentacao.VENDA, 0,
-                                         vendaInsertDto.SaldoComVacinaBovino, 0,
-                                         vendaInsertDto.SaldoComVacinaBubalino);
+            var movimentacaoVenda = new HistoricoMovimentacao(codigoHistorico, produtorOrigemId, produtorDestinoId, 
+                                                              vendaInsertDto.PropriedadeOrigemId,
+                                                              vendaInsertDto.PropriedadeDestinoId, TipoMovimentacao.VENDA,
+                                                              vendaInsertDto.SaldoComVacinaBovino, 
+                                                              vendaInsertDto.SaldoComVacinaBubalino,
+                                                              vendaInsertDto.Finalidade);
 
             await _IHistorico.AdicionarHistoricoMovimentacao(movimentacaoVenda);
             return movimentacaoVenda;
@@ -80,9 +85,9 @@ namespace Dominio.Servico
 
         public async Task CriarHistoricoDeEntrada(int idProdutor, RebanhoInsertDTO rebanhoInsertDto)
         {
-            var historico = new HistoricoMovimentacao(null, null, idProdutor, null, rebanhoInsertDto.PropriedadeId, TipoMovimentacao.ENTRADA,
-                                              rebanhoInsertDto.SaldoSemVacinaBovino, 0,
-                                              rebanhoInsertDto.SaldoSemVacinaBubalino, 0);
+            var historico = new HistoricoMovimentacao(idProdutor,rebanhoInsertDto.PropriedadeId,
+                                              rebanhoInsertDto.SaldoSemVacinaBovino,
+                                              rebanhoInsertDto.SaldoSemVacinaBubalino);
             await _IHistorico.AdicionarHistoricoMovimentacao(historico);
         }
 
