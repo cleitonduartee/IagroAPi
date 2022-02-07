@@ -25,7 +25,7 @@ namespace Entidades.Entidades
         public DateTime DataMovimentacao { get; set; }
         public DateTime? DataCancelamento { get; set; }
         public StatusMovimentacao Status { get; set; }
-        public Finalidade Finalidade { get; set; }
+        public FinalidadeVenda Finalidade { get; set; }
 
         //Construtor para entrada de animais.
         public HistoricoMovimentacao(int produtorDestinoId, int propriedadeDestinoId, int qtdSemVacinaBovino, int qtdSemVacinaBubalino)
@@ -38,12 +38,12 @@ namespace Entidades.Entidades
             DataMovimentacao = DateTime.Now;
             DataCancelamento = null;
             Status = StatusMovimentacao.ATIVO;
-            Finalidade = Finalidade.ENGORDA;
+            Finalidade = FinalidadeVenda.ENGORDA;
         }       
 
         public HistoricoMovimentacao(string? codigoMovimentacaoDaCompra, int? produtorOrigemId, int produtorDestinoId,
                                     int? propriedadeOrigemId, int propriedadeDestinoId, TipoMovimentacao tipoMovimentacao,
-                                     int qtdComVacinaBovino, int qtdComVacinaBubalino, Finalidade finalidade)
+                                     int qtdComVacinaBovino, int qtdComVacinaBubalino, FinalidadeVenda finalidade)
         {
             CodigoMovimentacaoDaCompra = codigoMovimentacaoDaCompra;
             ProdutorOrigemId = produtorOrigemId;

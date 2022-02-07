@@ -16,6 +16,7 @@ namespace Infraestrutura.Configuracao
         public DbSet<Rebanho> Rebanhos { get; set; }
         public DbSet<HistoricoMovimentacao> Movimentacoes { get; set; }
         public DbSet<AutoIncrementoHistorico> AutoIncrementaHistorico { get; set; }
+        public DbSet<RegistroVacina> RegistroVacinacao { get; set; }
               
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,12 +28,8 @@ namespace Infraestrutura.Configuracao
             modelBuilder.ApplyConfiguration(new RebanhoMap());
             modelBuilder.ApplyConfiguration(new HistoricoMovimentacaoMap());
             modelBuilder.ApplyConfiguration(new AutoIncrementoHistoricoMap());
-
-            
-
-            //modelBuilder.Entity<Produtor>().Navigation(p => p.Endereco).AutoInclude();
-            //modelBuilder.Entity<Endereco>().Navigation(e => e.Municipio).AutoInclude();
-            //modelBuilder.Entity<Propriedade>().Navigation(e => e.Municipio).AutoInclude();
+            modelBuilder.ApplyConfiguration(new RegistroVacinacaoMap());
+                      
         }       
     }
 }

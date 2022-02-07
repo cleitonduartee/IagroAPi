@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Entidades.Entidades.Enuns
 {
     [Flags]
-    public enum Finalidade
+    public enum FinalidadeVenda
     {
         REPRODUCAO,
         ENGORDA,

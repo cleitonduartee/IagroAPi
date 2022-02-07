@@ -24,6 +24,6 @@ namespace Dominio.Dto.VendaDTO
         //    get;
         //    set;
         //}
-        public Finalidade Finalidade { get; set; }
+        public FinalidadeVenda Finalidade { get; set; }
     }
 }
