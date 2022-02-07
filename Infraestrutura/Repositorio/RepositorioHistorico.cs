@@ -48,11 +48,12 @@ namespace Infraestrutura.Repositorio
             return await _ApiContext.Movimentacoes.Where(expression).ToListAsync();
         }
 
-        public async Task CriarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao)
+        public async Task<HistoricoMovimentacao> AdicionarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao)
         {
             historicoMovimentacao.CodigoHistorico = GerarCodigoHistorico();
             await _ApiContext.Movimentacoes.AddAsync(historicoMovimentacao);
             await _ApiContext.SaveChangesAsync();
+            return historicoMovimentacao;
         }
         private string GerarCodigoHistorico()
         {

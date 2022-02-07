@@ -12,7 +12,7 @@ namespace Dominio.Interfaces
         Task<List<HistoricoMovimentacao>> BuscarVendasPorProdutor(Expression<Func<HistoricoMovimentacao, bool>> expression);
         Task<List<HistoricoMovimentacao>> BuscarComprasPorProdutor(Expression<Func<HistoricoMovimentacao, bool>> expression);
         Task<HistoricoMovimentacao> BuscarPorCodigo(string codigoMovimentacao);
-        Task CriarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao);
+        Task<HistoricoMovimentacao> AdicionarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao);
         Task AtualizarHistoricoMovimentacao(HistoricoMovimentacao historicoMovimentacao);
     }
 }

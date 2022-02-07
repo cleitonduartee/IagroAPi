@@ -59,7 +59,6 @@ namespace WebApi
             services.AddScoped<IAplicacaoProdutor, AplicacaoProdutor>();
             services.AddScoped<IAplicacaoPropriedade, AplicacaoPropriedade>();
             services.AddScoped<IAplicacaoRebanho, AplicacaoRebanho>();
-            services.AddScoped<IAplicacaoMovimentacao, AplicacaoMovimentacao>();
             services.AddTransient<IAplicacaoVenda, AplicacaoVenda>();
 
 

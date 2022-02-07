@@ -57,9 +57,22 @@ namespace WebApi.Controllers
             }
         }
         [HttpPost("CancelamentoEntradaAnimais/{codigoMovimentacaoEntrada}")]
-        public async Task CancelamentoEntradaAnimais(string codigoMovimentacaoEntrada)
+        public async Task<ActionResult> CancelamentoEntradaAnimais(string codigoMovimentacaoEntrada)
         {
-            await _IAplicacaoRebanho.CancelarEntrada(codigoMovimentacaoEntrada);
+            try
+            {
+                await _IAplicacaoRebanho.CancelarEntrada(codigoMovimentacaoEntrada);
+                return Ok("Cancelamento realizado com sucesso.");
+
+            }
+            catch (ExceptionGenerica ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Erro ao realizar cancelamento. Tente novamente. Caso o problema persista, entre em contato com o suporte.");
+            }
         }
 
     }

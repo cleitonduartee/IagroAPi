@@ -13,13 +13,9 @@ namespace Aplicacao.Aplicacao
     public class AplicacaoRebanho : IAplicacaoRebanho
     {
         private readonly IServicoRebanho _IServicoRebanho;
-        private readonly IServicoPropriedade _IServicoPropriedade;
-        private readonly IServicoHistorico _IServicoMovimentacao;
-        public AplicacaoRebanho(IServicoRebanho IServicoRebanho, IServicoPropriedade IServicoPropriedade, IServicoHistorico IServicoMovimentacao)
+        public AplicacaoRebanho(IServicoRebanho IServicoRebanho)
         {
             _IServicoRebanho = IServicoRebanho;
-            _IServicoPropriedade = IServicoPropriedade;
-            _IServicoMovimentacao = IServicoMovimentacao;
         }
         public async Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string produtor)
         {
@@ -43,18 +39,12 @@ namespace Aplicacao.Aplicacao
 
         public async Task CancelarEntrada(string codigoMovimentacaoEntrada)
         {
-            await _IServicoMovimentacao.CancelarMovimentacaoDeEntrada(codigoMovimentacaoEntrada);
+            await _IServicoRebanho.CancelarMovimentacaoDeEntrada(codigoMovimentacaoEntrada);
         }
 
         public async Task EntradaAnimais(RebanhoInsertDTO rebanhoInsertDto)
         {
             await _IServicoRebanho.EntradaAnimais(rebanhoInsertDto);
         }
-
-        //public Dictionary<string, string> ValidacoesEntradaDeAnimais(RebanhoInsertDTO rebanhoDTO)
-        //{
-        //   return _IServicoRebanho.ValidacoesEntradaDeAnimais(rebanhoDTO);
-        //}
-       
     }
 }

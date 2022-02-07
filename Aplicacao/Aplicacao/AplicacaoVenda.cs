@@ -36,7 +36,7 @@ namespace Aplicacao.Aplicacao
 
         public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarMovimentacoesPorPropriedade(int idPropriedade)
         {            
-            var movemntacoesList = await _IServicoMovimentacao.BuscarPorIdPropriedade(idPropriedade);
+            var movemntacoesList = await _IServicoMovimentacao.BuscarTodosPorIdPropriedade(idPropriedade);
             var movimentacoesDtoList = new List<HistoricoTodosTipoResponseDTO>();
             movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new HistoricoTodosTipoResponseDTO(mov)));
             return movimentacoesDtoList;
