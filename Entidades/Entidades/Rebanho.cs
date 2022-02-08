@@ -34,6 +34,6 @@ namespace Entidades.Entidades
                 return DataVacina.Value.Year == DateTime.Now.Year;
 
             return false;
-        }
+        }        
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Infraestrutura.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infraestrutura.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    partial class ApiContextModelSnapshot : ModelSnapshot
+    [Migration("20220208033005_rebanho101")]
+    partial class rebanho101
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,9 +234,6 @@ namespace Infraestrutura.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("DataCancelamento")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("DataRegistro")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataVacinacao")

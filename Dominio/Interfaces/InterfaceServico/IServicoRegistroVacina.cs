@@ -11,6 +11,7 @@ namespace Dominio.Interfaces.InterfaceServico
     public interface IServicoRegistroVacina
     {
         Task AdicionarRegistroVacina(RegistroVacinaInsertDTO registroVacinaDto);
-        Task CancelarRegistroVacina(int idRegistroVacina);
+        Task CancelarRegistroVacina(string codigoRegistro);
+        Task<List<RegistroVacina>> BuscarRegistrosPorPropriedadeId(int idPropriedade);
     }
 }

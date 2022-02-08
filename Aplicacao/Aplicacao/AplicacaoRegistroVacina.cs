@@ -2,6 +2,7 @@
 using Dominio.Dto.RegistroVacinaDTO;
 using Dominio.Interfaces.InterfaceServico;
 using Entidades.Entidades;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Aplicacao.Aplicacao
@@ -19,9 +20,14 @@ namespace Aplicacao.Aplicacao
             await _IServicoRegistroVacina.AdicionarRegistroVacina(registroVacinaDto);
         }
 
-        public async Task CancelarRegistroVacina(int idRegistroVacina)
+        public async Task<List<RegistroVacina>> BuscarRegistrosPorPropriedadeId(int idPropriedade)
         {
-            await _IServicoRegistroVacina.CancelarRegistroVacina(idRegistroVacina);
+            return await _IServicoRegistroVacina.BuscarRegistrosPorPropriedadeId(idPropriedade);
+        }
+
+        public async Task CancelarRegistroVacina(string codigoRegistro)
+        {
+            await _IServicoRegistroVacina.CancelarRegistroVacina(codigoRegistro);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Infraestrutura.Configuracao.Mapeamentos
         public void Configure(EntityTypeBuilder<RegistroVacina> builder)
         {
             builder.ToTable("tb_registro_vacina");
-            builder.HasKey(x => x.RegistroVacinaId);
+            builder.HasKey(x => x.CodigoRegistro);
             builder.HasOne(x => x.Propriedade).WithMany().HasForeignKey(x => x.PropriedadeId);
             builder.Ignore(x => x.Propriedade);
         }
