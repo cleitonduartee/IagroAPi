@@ -19,5 +19,18 @@ namespace Entidades.Entidades
         public int QtdBovinoVacinado { get; set; }
         public int QtdBubalinoVacinado { get; set; }
         public DateTime DataVacinacao { get; set; }        
+        public DateTime? DataCancelamento { get; set; }        
+        public bool Ativo { get; set; }
+
+        public RegistroVacina(int propriedadeId, TipoVacina tipoVacina, int qtdBovinoVacinado, int qtdBubalinoVacinado)
+        {
+            PropriedadeId = propriedadeId;
+            TipoVacina = tipoVacina;
+            QtdBovinoVacinado = qtdBovinoVacinado;
+            QtdBubalinoVacinado = qtdBubalinoVacinado;
+            DataVacinacao = DateTime.Now;
+            DataCancelamento = null;
+            Ativo = true;
+        }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entidades.Entidades.Enuns
 {
-    [Flags]
+    [Serializable]
     public enum FinalidadeVenda
     {
-        REPRODUCAO,
+        REPRODUCAO = 1,
         ENGORDA,
         TRABALHO
     }

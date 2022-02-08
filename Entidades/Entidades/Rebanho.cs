@@ -21,10 +21,7 @@ namespace Entidades.Entidades
         public int SaldoSemVacinaBubalino { get; set; }
         public int SaldoComVacinaBubalino { get; set; }
         public DateTime? DataVacina { get; set; }
-        public int SaldoTotal()
-        {
-            return SaldoSemVacinaBovino + SaldoComVacinaBovino + SaldoSemVacinaBubalino + SaldoComVacinaBubalino;
-        }
+        public DateTime? DataUltimaVenda { get; set; }
 
         public bool ExisteSaldoParaVenda(int qtdComVacinaBovino, int qtdComVacinaBubalino)
         {
@@ -33,7 +30,10 @@ namespace Entidades.Entidades
         }
         public bool VacinaEstaValida()
         {
-            return DataVacina.Value.Year == DateTime.Now.Year;
+            if(DataVacina != null)
+                return DataVacina.Value.Year == DateTime.Now.Year;
+
+            return false;
         }
     }
 }

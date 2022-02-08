@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
+using Dominio.ValidadorCustomizado.ValidadorDTO;
 
 namespace Dominio.Dto.VendaDTO
 {
@@ -18,12 +20,9 @@ namespace Dominio.Dto.VendaDTO
         public int SaldoComVacinaBovino { get; set; }
         public int SaldoComVacinaBubalino { get; set; }
        
-        //[EnumDataType(typeof(Finalidade))]
-        //public Finalidade Finalidade
-        //{
-        //    get;
-        //    set;
-        //}
+        [DefinedEnumValue(typeof(FinalidadeVenda))]
         public FinalidadeVenda Finalidade { get; set; }
     }
+
+   
 }

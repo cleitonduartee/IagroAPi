@@ -14,7 +14,8 @@ namespace Infraestrutura.Configuracao.Mapeamentos
         public void Configure(EntityTypeBuilder<HistoricoMovimentacao> builder)
         {
             builder.ToTable("tb_historico_movimentacao");
-            builder.HasKey(x => x.CodigoHistorico);
+            builder.HasKey(x => x.CodigoHistorico);            
+
             //builder.HasOne(x => x.Propriedade).WithMany().HasForeignKey(x => x.PropriedadeId);
             //builder.Ignore(e => e.Propriedade);
         }

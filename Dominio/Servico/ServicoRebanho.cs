@@ -84,7 +84,7 @@ namespace Dominio.Servico
             historico = await _IServicoHistorico.BuscarPorCodigoHistorico(codigoHistorico);            
 
             if (historico.Status.Equals(StatusMovimentacao.CANCELADO))
-                validacao += "ERROR: Movimentação já encontra-se CANCELADA.";
+                validacao += "ERROR: Historico já encontra-se CANCELADA.";
 
             if (historico.TipoMovimentacao.Equals(TipoMovimentacao.ENTRADA))
             {

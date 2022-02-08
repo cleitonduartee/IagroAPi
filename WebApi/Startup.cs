@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Text.Json;
 
 namespace WebApi
 {
@@ -46,6 +47,7 @@ namespace WebApi
             services.AddScoped<IRebanho, RepositorioRebanho>();
             services.AddScoped<IHistorico, RepositorioHistorico>();
             services.AddScoped<IUtilAutoIncrementaHistorico, RepositorioUtilAutoIncrementaHistorico>();
+            services.AddScoped<IRegistroVacina, RepositorioRegistroVacina>();
 
             //INTERFACE E SERVICO
             services.AddScoped<IServicoProdutor, ServicoProdutor>();
@@ -53,6 +55,7 @@ namespace WebApi
             services.AddScoped<IServicoRebanho, ServicoRebanho>();
             services.AddScoped<IServicoHistorico, ServicoHistorico>();
             services.AddScoped<IServicoVenda, ServicoVenda>();
+            services.AddScoped<IServicoRegistroVacina, ServicoRegistraVacina>();
 
             // INTERFACE E APLICACAO
             services.AddScoped<IAplicacaoMunicipio, AplicacaoMunicipio>();
@@ -60,9 +63,12 @@ namespace WebApi
             services.AddScoped<IAplicacaoPropriedade, AplicacaoPropriedade>();
             services.AddScoped<IAplicacaoRebanho, AplicacaoRebanho>();
             services.AddTransient<IAplicacaoVenda, AplicacaoVenda>();
+            services.AddTransient<IAplicacaoRegistroVacina, AplicacaoRegistroVacina>();
 
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddControllersAsServices();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IagroApi", Version = "v1" });

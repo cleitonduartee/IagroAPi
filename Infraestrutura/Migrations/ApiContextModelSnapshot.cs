@@ -193,6 +193,9 @@ namespace Infraestrutura.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<DateTime?>("DataUltimaVenda")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<DateTime?>("DataVacina")
                         .HasColumnType("timestamp without time zone");
 
@@ -225,6 +228,12 @@ namespace Infraestrutura.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("DataCancelamento")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataVacinacao")
                         .HasColumnType("timestamp without time zone");
