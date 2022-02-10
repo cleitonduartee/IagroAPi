@@ -3,6 +3,7 @@ using Dominio.Dto.ProdutorDTO;
 using Dominio.Interfaces;
 using Entidades.Entidades;
 using Infraestrutura.Repositorio;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace WebApi.Controllers
 {    
     [Route("api/v1/[controller]")]
-    [Produces("application/json")]
+    [Produces("application/json")]   
     [ApiController]
     public class ProdutorController : ControllerBase
     {

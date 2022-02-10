@@ -12,14 +12,14 @@ namespace Dominio.Dto.ProdutorDTO
 {
     public class ProdutorResponseDTO
     {
-        public int ProdutoId { get; set; }
+        public int ProdutorId { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public  EnderecoResponseDTO Endereco { get; set; }
 
         public ProdutorResponseDTO(Produtor produtor)
         {
-            ProdutoId = produtor.ProdutorId;
+            ProdutorId = produtor.ProdutorId;
             Nome = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(produtor.Nome.ToLower());
             Cpf = produtor.Cpf;
             Endereco = new EnderecoResponseDTO(produtor.Endereco);

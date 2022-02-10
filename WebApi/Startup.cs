@@ -90,7 +90,11 @@ namespace WebApi
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseCors(option => option.AllowAnyOrigin()); 
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin                
+                );
 
             app.UseEndpoints(endpoints =>
             {
