@@ -69,6 +69,8 @@ namespace WebApi
             services.AddControllers()
                 .AddControllersAsServices();
 
+            services.AddCors();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IagroApi", Version = "v1" });
@@ -88,6 +90,7 @@ namespace WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(option => option.AllowAnyOrigin()); 
 
             app.UseEndpoints(endpoints =>
             {

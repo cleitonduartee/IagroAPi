@@ -23,10 +23,9 @@ namespace Entidades.Entidades
         public DateTime? DataCancelamento { get; set; }        
         public bool Ativo { get; set; }
 
-        public RegistroVacina(int propriedadeId,Propriedade propriedade, TipoVacina tipoVacina, int qtdBovinoVacinado, int qtdBubalinoVacinado, DateTime dataVacinacao)
+        public RegistroVacina(int propriedadeId,TipoVacina tipoVacina, int qtdBovinoVacinado, int qtdBubalinoVacinado, DateTime dataVacinacao)
         {
             PropriedadeId = propriedadeId;
-            Propriedade = propriedade;
             TipoVacina = tipoVacina;
             QtdBovinoVacinado = qtdBovinoVacinado;
             QtdBubalinoVacinado = qtdBubalinoVacinado;

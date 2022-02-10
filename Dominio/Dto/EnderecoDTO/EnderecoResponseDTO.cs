@@ -12,13 +12,13 @@ namespace Dominio.Dto.EnderecoDTO
     {        
         public  string NomeRua { get; set; }
         public  int Numero { get; set; }
-        public  string Municipio { get; set; }
+        public MunicipioResponseDTO Municipio { get; set; }
 
         public EnderecoResponseDTO(Endereco endereco)
         {
             NomeRua = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(endereco.NomeRua.ToLower());
             Numero = endereco.Numero;
-            Municipio = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(endereco.Municipio.Nome);
+            Municipio = new MunicipioResponseDTO(endereco.Municipio);
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Dominio.Servico
             //Verificar pq esse construtor está apresentando problema na busca das propriedade
 
             var registroVacinaNovo = new RegistroVacina(registroDto.PropriedadeId,
-                                                    propriedade,
                                                     registroDto.TipoVacina,
                                                     registroDto.QtdBovinoVacinado,
                                                     registroDto.QtdBubalinoVacinado,
