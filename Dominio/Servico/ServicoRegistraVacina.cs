@@ -130,7 +130,7 @@ namespace Dominio.Servico
         public async Task<List<RegistroVacina>> BuscarRegistrosPorPropriedadeId(int idPropriedade)
         {
             var list = await _IRegistroVacina.BuscarRegistrosPorPropriedadeId(registro =>
-                                             registro.PropriedadeId.Equals(idPropriedade));
+                                             registro.PropriedadeId.Equals(idPropriedade) && registro.Ativo.Equals(true));
 
             return list;
         }
