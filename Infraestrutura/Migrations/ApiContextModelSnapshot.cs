@@ -188,10 +188,8 @@ namespace Infraestrutura.Migrations
 
             modelBuilder.Entity("Entidades.Entidades.Rebanho", b =>
                 {
-                    b.Property<int>("RebanhoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<int>("PropriedadeId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("DataUltimaVenda")
                         .HasColumnType("timestamp without time zone");
@@ -199,8 +197,10 @@ namespace Infraestrutura.Migrations
                     b.Property<DateTime?>("DataVacina")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("PropriedadeId")
-                        .HasColumnType("integer");
+                    b.Property<int>("RebanhoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("SaldoComVacinaBovino")
                         .HasColumnType("integer");
@@ -214,10 +214,7 @@ namespace Infraestrutura.Migrations
                     b.Property<int>("SaldoSemVacinaBubalino")
                         .HasColumnType("integer");
 
-                    b.HasKey("RebanhoId");
-
-                    b.HasIndex("PropriedadeId")
-                        .IsUnique();
+                    b.HasKey("PropriedadeId");
 
                     b.ToTable("tb_rebanho");
                 });

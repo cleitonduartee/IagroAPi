@@ -13,8 +13,9 @@ namespace Entidades.Entidades
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RebanhoId { get; set; }
+
+        [ForeignKey("Propriedade")]
         public int PropriedadeId { get; set; }
-        [JsonIgnore]
         public virtual Propriedade Propriedade { get; set; }
         public int SaldoSemVacinaBovino { get; set; }
         public int SaldoComVacinaBovino { get; set; }
@@ -23,6 +24,7 @@ namespace Entidades.Entidades
         public DateTime? DataVacina { get; set; }
         public DateTime? DataUltimaVenda { get; set; }
 
+        
         public bool ExisteSaldoParaVenda(int qtdComVacinaBovino, int qtdComVacinaBubalino)
         {
             return  SaldoComVacinaBovino >= qtdComVacinaBovino 

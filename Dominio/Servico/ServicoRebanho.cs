@@ -124,6 +124,9 @@ namespace Dominio.Servico
             await _IRebanho.Atualizar(rebanho);
         }
 
-       
+        public async Task<List<HistoricoMovimentacao>> BuscarEntradasPorPropriedadeId(int propriedadeId)
+        {
+           return await _IServicoHistorico.BuscarEntradasPorIdPropriedade(propriedadeId);
+        }
     }
 }

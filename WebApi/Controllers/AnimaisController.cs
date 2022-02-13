@@ -1,4 +1,5 @@
 ﻿using Aplicacao.Interfaces;
+using Dominio.Dto.Movimentacao.HistoricoDTO;
 using Dominio.Dto.RebanhoDTO;
 using Dominio.ExceptionPersonalizada;
 using Entidades.Entidades;
@@ -73,6 +74,12 @@ namespace WebApi.Controllers
             {
                 return NotFound("Erro ao realizar cancelamento. Tente novamente. Caso o problema persista, entre em contato com o suporte.");
             }
+        }
+
+        [HttpGet("BuscarEntradasPorPropriedadeId/{propriedadeId:int}")]
+        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarEntradasPorPropriedadeId(int propriedadeId)
+        {
+           return await _IAplicacaoRebanho.BuscarEntradasPorPropriedadeId(propriedadeId);
         }
 
     }

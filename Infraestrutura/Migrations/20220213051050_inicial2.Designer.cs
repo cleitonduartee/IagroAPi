@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infraestrutura.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20220207190948_registro3")]
-    partial class registro3
+    [Migration("20220213051050_inicial2")]
+    partial class inicial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -190,16 +190,19 @@ namespace Infraestrutura.Migrations
 
             modelBuilder.Entity("Entidades.Entidades.Rebanho", b =>
                 {
-                    b.Property<int>("RebanhoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<int>("PropriedadeId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("DataUltimaVenda")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("DataVacina")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("PropriedadeId")
-                        .HasColumnType("integer");
+                    b.Property<int>("RebanhoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("SaldoComVacinaBovino")
                         .HasColumnType("integer");
@@ -213,20 +216,25 @@ namespace Infraestrutura.Migrations
                     b.Property<int>("SaldoSemVacinaBubalino")
                         .HasColumnType("integer");
 
-                    b.HasKey("RebanhoId");
-
-                    b.HasIndex("PropriedadeId")
-                        .IsUnique();
+                    b.HasKey("PropriedadeId");
 
                     b.ToTable("tb_rebanho");
                 });
 
             modelBuilder.Entity("Entidades.Entidades.RegistroVacina", b =>
                 {
-                    b.Property<int>("RegistroVacinaId")
+                    b.Property<string>("CodigoRegistro")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("DataCancelamento")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DataRegistro")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataVacinacao")
                         .HasColumnType("timestamp without time zone");
@@ -243,7 +251,7 @@ namespace Infraestrutura.Migrations
                     b.Property<int>("TipoVacina")
                         .HasColumnType("integer");
 
-                    b.HasKey("RegistroVacinaId");
+                    b.HasKey("CodigoRegistro");
 
                     b.ToTable("tb_registro_vacina");
                 });

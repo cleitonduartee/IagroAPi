@@ -9,9 +9,11 @@ namespace Infraestrutura.Configuracao.Mapeamentos
         public void Configure(EntityTypeBuilder<Rebanho> builder)
         {
             builder.ToTable("tb_rebanho");
-            builder.HasKey(x => x.RebanhoId);
+            builder.HasKey(x => x.PropriedadeId);
 
             builder.HasOne(r => r.Propriedade).WithOne(p => p.Rebanho).HasForeignKey<Rebanho>(r => r.PropriedadeId);
+            // builder.HasOne(r => r.Propriedade).WithOne(p => p.Rebanho).HasForeignKey<Rebanho>(r => r.PropriedadeId);
+
 
         }
     }

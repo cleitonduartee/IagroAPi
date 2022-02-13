@@ -29,7 +29,10 @@ namespace Infraestrutura.Configuracao
             modelBuilder.ApplyConfiguration(new HistoricoMovimentacaoMap());
             modelBuilder.ApplyConfiguration(new AutoIncrementoHistoricoMap());
             modelBuilder.ApplyConfiguration(new RegistroVacinacaoMap());
-                      
+
+//             modelBuilder.Entity<Rebanho>().Navigation(r => r.Propriedade).AutoInclude();
+
+
         }       
     }
 }

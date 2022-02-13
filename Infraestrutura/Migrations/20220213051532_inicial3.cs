@@ -2,7 +2,7 @@
 
 namespace Infraestrutura.Migrations
 {
-    public partial class teste : Migration
+    public partial class inicial3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

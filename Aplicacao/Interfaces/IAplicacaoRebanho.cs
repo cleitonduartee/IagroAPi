@@ -1,4 +1,5 @@
 ﻿using Aplicacao.Interfaces.InterfaceCrud;
+using Dominio.Dto.Movimentacao.HistoricoDTO;
 using Dominio.Dto.RebanhoDTO;
 using Entidades.Entidades;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Aplicacao.Interfaces
         Task EntradaAnimais(RebanhoInsertDTO rebanho);
         Task CancelarEntrada(string codigoMovimentacaoEntrada);
         Task<List<RebanhoResponseDTO>> BuscarPorProdutor(string produtor);
+        Task<List<HistoricoTodosTipoResponseDTO>> BuscarEntradasPorPropriedadeId(int propriedadeId);
         Task<RebanhoResponseDTO> BuscarRebanhoPorNomePropriedade(string propriedade);
 
 

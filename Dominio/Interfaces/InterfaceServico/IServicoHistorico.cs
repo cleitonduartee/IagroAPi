@@ -18,6 +18,7 @@ namespace Dominio.Interfaces.InterfaceServico
         Task CancelarHistorico(HistoricoMovimentacao historico);
         Task<HistoricoMovimentacao> BuscarPorCodigoHistorico(string codigohistorico);
         Task<List<HistoricoMovimentacao>> BuscarTodosPorIdPropriedade(int idPropriedade);
+        Task<List<HistoricoMovimentacao>> BuscarEntradasPorIdPropriedade(int idPropriedade);
         Task<List<HistoricoMovimentacao>> BuscarTodosPorIdProdutor(int idProdutor);
         Task<HistoricoMovimentacao> CriarHistoricoDeCompra(int produtorOrigemId, int produtorDestinoId, VendaInsertDTO vendaInsertDto);
         Task<HistoricoMovimentacao> CriarHistoricoDeVenda(string codigoHistorico,int produtorOrigemId, int produtorDestinoId, VendaInsertDTO vendaInsertDto);

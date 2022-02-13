@@ -91,6 +91,10 @@ namespace Dominio.Servico
             await _IHistorico.AdicionarHistoricoMovimentacao(historico);
         }
 
-       
+        public async Task<List<HistoricoMovimentacao>> BuscarEntradasPorIdPropriedade(int idPropriedade)
+        {
+            return await _IHistorico.BuscarPorIdPropriedade(
+                m => m.PropriedadeDestinoId.Equals(idPropriedade) && TipoMovimentacao.ENTRADA.Equals(m.TipoMovimentacao) && StatusMovimentacao.ATIVO.Equals(m.Status));
+        }
     }
 }

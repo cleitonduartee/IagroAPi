@@ -10,9 +10,11 @@ namespace Dominio.Servico
     public class ServicoPropriedade : IServicoPropriedade
     {
         private readonly IPropriedade _IPropriedade;
-        public ServicoPropriedade(IPropriedade IPropriedade)
+        private readonly IRebanho _IRebanho;
+        public ServicoPropriedade(IPropriedade IPropriedade, IRebanho IRebanho)
         {
             _IPropriedade = IPropriedade;
+            _IRebanho = IRebanho;
         }
 
         public async Task<Propriedade> BuscarPorId(int id)
@@ -37,6 +39,11 @@ namespace Dominio.Servico
         public async Task CadastrarPropriedade(Propriedade propriedade)
         {
             await  _IPropriedade.Adicionar(propriedade);
+            var rebanho = new Rebanho();
+            rebanho.Propriedade = propriedade;
+            rebanho.PropriedadeId = propriedade.PropriedadeId;
+            await _IRebanho.Adicionar(rebanho);
+
         }
 
         public async Task EditarPropriedade(Propriedade propriedade)

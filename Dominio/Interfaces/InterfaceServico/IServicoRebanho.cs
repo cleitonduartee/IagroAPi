@@ -16,5 +16,6 @@ namespace Dominio.Interfaces.InterfaceServico
         Task<Rebanho> BuscarRebanhoPorNomePropriedade(string propriedade);
         Task<Rebanho> BuscarRebanhoPorPropriedadeId(int propriedadeId);
         Task CancelarMovimentacaoDeEntrada(string codigoHistorico);
+        Task<List<HistoricoMovimentacao>> BuscarEntradasPorPropriedadeId(int propriedadeId);
     }
 }

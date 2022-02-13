@@ -2,7 +2,7 @@
 
 namespace Infraestrutura.Migrations
 {
-    public partial class autoIncrem : Migration
+    public partial class inicial1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

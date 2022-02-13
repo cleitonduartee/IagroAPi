@@ -21,32 +21,17 @@ namespace Entidades.Entidades
         public virtual  Produtor Produtor { get; set; }
         public int MunicipioId { get; set; }
         public virtual Municipio Municipio { get; set; }
-        public virtual Rebanho Rebanho { get; set; } = new Rebanho();
+        public virtual Rebanho Rebanho { get; set; }
 
-        public Propriedade()
-        {
-        }
 
-        public Propriedade(string nome, Produtor produtor, Municipio municipio)
-        {           
-            Nome = nome;
-            Produtor = produtor;
-            Municipio = municipio;
-        }
         public Propriedade(string nome, int produtorId, int municipioId)
         {
             Nome = nome;
             ProdutorId = produtorId;
             MunicipioId = municipioId;
-        }
-        public Propriedade(int propriedadeId, string nome, Produtor produtor, Municipio municipio)
-        {
-            PropriedadeId = propriedadeId;
-            Nome = nome;
-            Produtor = produtor;
-            Municipio = municipio;
-        }
 
+        }
+       
 
         public override bool Equals(object obj)
         {
