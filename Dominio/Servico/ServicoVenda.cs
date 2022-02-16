@@ -78,7 +78,7 @@ namespace Dominio.Servico
         private void RealizaEstornoDaVenda(Rebanho rebanhoOrigem, Rebanho rebanhoDestino)
         {
             int QtdBovinoVendido = hsitoricoVenda.QtdComVacinaBovino;
-            int QtdBubalinoVendido = hsitoricoVenda.QtdComVacinaBovino;
+            int QtdBubalinoVendido = hsitoricoVenda.QtdComVacinaBubalino;
 
             //Debita do destino
             rebanhoDestino.SaldoComVacinaBovino -= QtdBovinoVendido;
