@@ -93,7 +93,7 @@ namespace Dominio.Servico
                     validacao += "ERROR: Propriedade informada não localizada.";
                 var rebanho = propriedadeDestino.Rebanho;
                 if(historico.QtdSemVacinaBovino > rebanho.SaldoSemVacinaBovino || historico.QtdSemVacinaBubalino > rebanho.SaldoSemVacinaBubalino)
-                    validacao += "ERROR: Houve registro de vacinação apos a entrada.";
+                    validacao += "ERROR: Não é possível cancelar essa entrada, pois houve registro de vacinação apos a entrada de animais.";
             }
             else
             {
