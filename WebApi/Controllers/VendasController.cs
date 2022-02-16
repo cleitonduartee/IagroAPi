@@ -51,10 +51,10 @@ namespace WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("BuscarMovimentacoesPorPropriedade/{propriedadeId:int}")]
-        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarMovimentacoesPorPropriedade(int propriedadeId)
+        [HttpGet("BuscarVendasPorPropriedade/{propriedadeId:int}")]
+        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarVendasPorPropriedade(int propriedadeId)
         {
-            return await _AplicacaoVenda.BuscarMovimentacoesPorPropriedade(propriedadeId);
+            return await _AplicacaoVenda.BuscarVendasPorPropriedade(propriedadeId);
         }
         [HttpGet("BuscarVendasPorProdutor/{produtorId:int}")]
         public async Task<List<HistoricoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int produtorId)

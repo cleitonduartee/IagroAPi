@@ -29,10 +29,7 @@ namespace Dominio.Servico
         public async Task AdicionarRegistroVacina(RegistroVacinaInsertDTO registroDto)
         {
             await ValidacoesParaRegistrarVacinacao(registroDto);
-            await AtualizaAnimaisVacinadoRebanho(registroDto);
-
-
-            //Verificar pq esse construtor está apresentando problema na busca das propriedade
+            await AtualizaAnimaisVacinadoRebanho(registroDto);                       
 
             var registroVacinaNovo = new RegistroVacina(registroDto.PropriedadeId,
                                                     registroDto.TipoVacina,
@@ -41,6 +38,8 @@ namespace Dominio.Servico
                                                     registroDto.DataVacinacao);
 
             await _IRegistroVacina.AdicionarRegistroVacina(registroVacinaNovo);
+            //propriedade.DataUltimaVacinacao = registroVacinaNovo.DataRegistro;
+            //await _IServicoPropriedade.EditarPropriedade(propriedade);
         }
 
         public async Task CancelarRegistroVacina(string codigoRegistro)

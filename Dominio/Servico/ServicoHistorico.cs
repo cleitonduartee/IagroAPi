@@ -30,10 +30,10 @@ namespace Dominio.Servico
             return await _IHistorico.BuscarVendasPorProdutor(
               m => m.ProdutorDestinoId.Equals(idProdutor) && TipoMovimentacao.COMPRA.Equals(m.TipoMovimentacao));
         }
-        public async Task<List<HistoricoMovimentacao>> BuscarTodosPorIdPropriedade(int idPropriedade)
+        public async Task<List<HistoricoMovimentacao>> BuscarVendasPorIdPropriedade(int idPropriedade)
         {
             return await _IHistorico.BuscarPorIdPropriedade(
-                m => m.PropriedadeOrigemId.Equals(idPropriedade) && TipoMovimentacao.VENDA.Equals(m.TipoMovimentacao) || m.PropriedadeDestinoId.Equals(idPropriedade) && !TipoMovimentacao.VENDA.Equals(m.TipoMovimentacao));
+                m => m.PropriedadeOrigemId.Equals(idPropriedade) && TipoMovimentacao.VENDA.Equals(m.TipoMovimentacao));
         }
         public async Task<List<HistoricoMovimentacao>> BuscarTodosPorIdProdutor(int idProdutor)
         {

@@ -91,6 +91,9 @@ namespace Dominio.Servico
                 propriedadeDestino = await _IServicoPropriedade.BuscarPorId(historico.PropriedadeDestinoId);
                 if (propriedadeDestino == null)
                     validacao += "ERROR: Propriedade informada não localizada.";
+                var rebanho = propriedadeDestino.Rebanho;
+                if(historico.QtdSemVacinaBovino > rebanho.SaldoSemVacinaBovino || historico.QtdSemVacinaBubalino > rebanho.SaldoSemVacinaBubalino)
+                    validacao += "ERROR: Houve registro de vacinação apos a entrada.";
             }
             else
             {

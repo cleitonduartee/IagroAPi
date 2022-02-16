@@ -15,8 +15,7 @@ namespace Entidades.Entidades
         public int PropriedadeId { get; set; }
         public int InscricaoEstadual { get; set; }
         public string Nome { get; set; }
-        public int Saldo { get; set; }
-        public int SaldoVacinado { get; set; }
+        public DateTime? DataUltimaVacinacao { get; set; }
         public int ProdutorId { get; set; }
         public virtual  Produtor Produtor { get; set; }
         public int MunicipioId { get; set; }

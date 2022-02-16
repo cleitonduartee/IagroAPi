@@ -12,31 +12,31 @@ namespace Aplicacao.Aplicacao
     public class AplicacaoVenda : IAplicacaoVenda
     {
         private readonly IServicoVenda _IServicoVenda;
-        private readonly IServicoHistorico _IServicoMovimentacao;
+        private readonly IServicoHistorico _IServicoHistorico;
         public AplicacaoVenda(IServicoVenda IServicoVenda, IServicoHistorico IServicoMovimentacao)
         {
             _IServicoVenda = IServicoVenda;
-            _IServicoMovimentacao = IServicoMovimentacao;
+            _IServicoHistorico = IServicoMovimentacao;
         }
 
         public async Task<List<HistoricoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int idProdutor)
         {
-            var movemntacoesList = await _IServicoMovimentacao.BuscarComprasPorProdutor(idProdutor);
+            var movemntacoesList = await _IServicoHistorico.BuscarComprasPorProdutor(idProdutor);
             var movimentacoesDtoList = new List<HistoricoCompraVendaResponseDTO>();
             movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new HistoricoCompraVendaResponseDTO(mov)));
             return movimentacoesDtoList;
         }
         public async Task<List<HistoricoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int idProdutor)
         {
-            var movemntacoesList = await _IServicoMovimentacao.BuscarVendasPorProdutor(idProdutor);
+            var movemntacoesList = await _IServicoHistorico.BuscarVendasPorProdutor(idProdutor);
             var movimentacoesDtoList = new List<HistoricoCompraVendaResponseDTO>();
             movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new HistoricoCompraVendaResponseDTO(mov)));
             return movimentacoesDtoList;
         }
 
-        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarMovimentacoesPorPropriedade(int idPropriedade)
+        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarVendasPorPropriedade(int idPropriedade)
         {            
-            var movemntacoesList = await _IServicoMovimentacao.BuscarTodosPorIdPropriedade(idPropriedade);
+            var movemntacoesList = await _IServicoHistorico.BuscarVendasPorIdPropriedade(idPropriedade);
             var movimentacoesDtoList = new List<HistoricoTodosTipoResponseDTO>();
             movemntacoesList.ForEach(mov => movimentacoesDtoList.Add(new HistoricoTodosTipoResponseDTO(mov)));
             return movimentacoesDtoList;
