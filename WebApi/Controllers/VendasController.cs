@@ -52,7 +52,7 @@ namespace WebApi.Controllers
             }
         }
         [HttpGet("BuscarVendasPorPropriedade/{propriedadeId:int}")]
-        public async Task<List<HistoricoTodosTipoResponseDTO>> BuscarVendasPorPropriedade(int propriedadeId)
+        public async Task<List<HistoricoCompraVendaResponseDTO>> BuscarVendasPorPropriedade(int propriedadeId)
         {
             return await _AplicacaoVenda.BuscarVendasPorPropriedade(propriedadeId);
         }

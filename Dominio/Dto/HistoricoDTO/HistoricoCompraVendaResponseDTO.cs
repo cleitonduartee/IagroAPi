@@ -13,6 +13,8 @@ namespace Dominio.Dto.HistoricoDTO
         public int ProdutorOrigemId { get; set; }
         public int ProdutorDestinoId { get; set; }
         public int PropriedadeOrigemId { get; set; }
+        public string NomePropriedadeOrigem { get; set; }
+        public string NomePropriedadeDestino { get; set; }
         public int PropriedadeDestinoId { get; set; }
         public string TipoMovimentacao { get; set; }
         public int QtdComVacinaBovino { get; set; }

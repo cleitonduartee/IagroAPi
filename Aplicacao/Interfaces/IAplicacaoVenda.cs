@@ -16,6 +16,6 @@ namespace Aplicacao.Interfaces
         Task CancelarVenda(string codigoMovimentacao);
         Task<List<HistoricoCompraVendaResponseDTO>> BuscarVendasPorProdutor(int idProdutor);
         Task<List<HistoricoCompraVendaResponseDTO>> BuscarComprasPorProdutor(int idProdutor);
-        Task<List<HistoricoTodosTipoResponseDTO>> BuscarVendasPorPropriedade(int idPropriedade);
+        Task<List<HistoricoCompraVendaResponseDTO>> BuscarVendasPorPropriedade(int idPropriedade);
     }
 }
