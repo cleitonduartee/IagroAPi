@@ -11,9 +11,5 @@ namespace Entidades.Entidades.Enuns
         AFTOSA = 0,
         BRUCELOSE_B19 = 1,
         BRUCELOSE_RB51 = 2
-    }
-    public enum Teste
-    {
-        Teste
-    }
+    }    
 }

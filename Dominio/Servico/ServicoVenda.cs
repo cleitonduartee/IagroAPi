@@ -55,7 +55,7 @@ namespace Dominio.Servico
             RealizaCreditoRebanhoDestino(rebanhoDestino, vendaInsertDto);
 
             rebanhoOrigem.DataUltimaVenda = DateTime.Now;
-            if (!rebanhoDestino.DataVacina.HasValue)
+            if (!rebanhoDestino.DataVacina.HasValue) // Ferifica se tem valor
                 rebanhoDestino.DataVacina = rebanhoOrigem.DataVacina;
 
             await AtualizaRebanhosNoBanco(rebanhoOrigem, rebanhoDestino);

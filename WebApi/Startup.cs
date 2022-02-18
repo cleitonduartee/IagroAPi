@@ -40,7 +40,7 @@ namespace WebApi
 
 
             //INTERFACE E REPOSITORIO
-            services.AddScoped<IMunicipio, RepositorioMunicipio>();
+            services.AddScoped<IMunicipio, RepositorioMunicipio>(); //Cria um instancia por solicitacao dentro do escopo
             services.AddScoped<IEndereco, RepositorioEndereco>();
             services.AddScoped<IProdutor, RepositorioProdutor>();
             services.AddScoped<IPropriedade, RepositorioPropriedade>();
